@@ -18,7 +18,7 @@ public class UNOCard {
     
     /** UNOCard Base Constructor
      * @param color     color of the card
-     * @param number    number of the card
+     * @param number    number of the
      */
     public UNOCard(int color, int number){
         if ((0 <= number && number <= REVERSE) && (BLUECARD <= color && color <= YELLOWCARD)) // color cards
@@ -72,7 +72,7 @@ public class UNOCard {
     }
     
     
-    /** cardToString method
+    /** compareCard method
      * @param secondcard: UNOCard
      * ADDITIONAL PARAMETER: the card needs to be initialize with proper values for UNOCards based upon the constructor
      * @return int
@@ -104,7 +104,7 @@ public class UNOCard {
     }
     
     
-    /** getCardColor method
+    /** getCardNumber method
      * ADDITIONAL PARAMETER: the card needs to be initialize with proper values for UNOCards based upon the constructor
      * @return int
      * DESCRIPTION: returns the number value of the card
