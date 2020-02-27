@@ -31,6 +31,28 @@ public class UNOCard {
             this.color = color;
             this.number = number;
         }
+        else{
+            this.color = -1;
+            this.number = -1;
+        }
+    }
+    
+    
+    /** isNullCard method
+     * @return boolean
+     * DESCRIPTION: checks to see if the card is NULL
+     */
+    public boolean isNullCard(){
+        return((this.number == -1 && this.color == -1));
+    }
+    
+    
+    /** setCardNull method
+     * DESCRIPTION: sets the null card to a what is defined a null card
+     */
+    public void setCardNull(){
+        this.color = -1;
+        this.number = -1;
     }
     
     
@@ -83,6 +105,7 @@ public class UNOCard {
      */
     public int compareCard(UNOCard secondcard){
         int result;
+        if(!this.isNullCard()){
         if (this.color < secondcard.color) {result = -1;}
         else if (this.color > secondcard.color) {result = 1;}
         else{
@@ -90,6 +113,8 @@ public class UNOCard {
             else if (this.number > secondcard.number) {result = 1;}
             else {result = 0;}
         }
+        }
+        else return 1;
         return result;
     }
     
