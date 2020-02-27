@@ -56,6 +56,10 @@ public class UNODeck {
                 }
             }
         }
+        else{
+            unocarddeck = new UNOCard[1];
+            unocarddeck[0] = new UNOCard(-1,-1);
+        }
     }
     
 
@@ -91,7 +95,7 @@ public class UNODeck {
      * DESCRIPTION: checks if deck is initialized
      */
     public boolean isNullDeck(){
-        return (this.unocarddeck == null);
+        return ((this.unocarddeck.length == 1 && this.unocarddeck[0].isNullCard()));
     }
     
     
