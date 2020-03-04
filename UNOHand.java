@@ -1,5 +1,5 @@
 /*
- * TITLE: Hand Class for Project 2 UNO Workout
+ * TITLE: Deck Class for Project 2 UNO Workout
  * AUTHOR: Anamol Acharya
  * FOR: CS 2365 Object Oriented Programming Section 001 Spring 2020
  */
@@ -48,7 +48,7 @@ public class UNOHand {
                 this.hand[i] = this.hand[i+1];
                 if(this.hand[i+1].isNullCard()) break;
             }
-            else this.hand[i].setCardNull();
+            else {this.hand[i]= new UNOCard();}
         }
         
     }
@@ -56,7 +56,7 @@ public class UNOHand {
     void discardHand(int index){
         for(int i = 0; i < 7; i++)
         {
-            this.hand[i].setCardNull();
+            this.hand[i]= new UNOCard();
         }
     }
     /**
