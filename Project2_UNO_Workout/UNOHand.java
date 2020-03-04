@@ -53,7 +53,7 @@ public class UNOHand {
         
     }
    
-    void discardHand(int index){
+    void discardHand(){
         for(int i = 0; i < 7; i++)
         {
             this.hand[i]= new UNOCard();
