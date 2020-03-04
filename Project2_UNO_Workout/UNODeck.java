@@ -201,10 +201,10 @@ public class UNODeck {
      * DESCRIPTION: removes and returns the top card of the deck
      */
     public UNOCard dealCard(){
-        UNOCard topcard = null;
+        UNOCard topcard = new UNOCard();
         if(!this.isNullDeck()){
             if (!this.isEmptyDeck()) {
-                topcard = this.unocarddeck[this.currenttopcard++];
+                topcard.copyCard(this.unocarddeck[this.currenttopcard++]);
                 this.numbercardsleftindeck--;
             }
             else {System.out.println("Deck is empty cannot draw card!");}
