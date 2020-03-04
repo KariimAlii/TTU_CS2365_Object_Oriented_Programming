@@ -38,6 +38,11 @@ public class UNOCard {
     }
     
     
+    public UNOCard(){
+        this(-1,-1);
+    }
+    
+    
     /** isNullCard method
      * @return boolean
      * DESCRIPTION: checks to see if the card is NULL
@@ -136,5 +141,10 @@ public class UNOCard {
      */
     public int getCardNumber(){
         return this.number;
+    }
+    
+    public void copyCard(UNOCard card){
+        this.color = card.color;
+        this.number = card.number;
     }
 }
