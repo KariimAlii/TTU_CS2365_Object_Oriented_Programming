@@ -4,7 +4,6 @@
  * FOR: CS 2365 Object Oriented Programming Section 001 Spring 2020
  */
 package unoworkout;
-import java.util.ArrayList;
 
 /**
  *  Hand of UNOCards, held by a particular player. A Hand object is
@@ -16,9 +15,7 @@ import java.util.ArrayList;
  */
 public class UNOHand {
 
-    private final ArrayList<UNOCard> cards;
-    private UNOCard player;
-    private final String playerName;
+    private UNOCard hand[];
    // private lastcardindex 
 
     /**
@@ -26,67 +23,91 @@ public class UNOHand {
      * the player name, passed as arguments. This implements a strategy
      * pattern whereby the constructor accepts various strategies that
      * implement the UnoPlayer interface.
-     * @param unoPlayerClassName
-     * @param playerName
      */
-    public UNOHand(String unoPlayerClassName, String playerName) {
-        try {
-            player = (UNOCard)
-                Class.forName(unoPlayerClassName).newInstance();
+    public UNOHand() {
+        hand = new UNOCard[7];
+        for(int i = 0; i < 7; i++){
+            hand[i] = new UNOCard();
         }
-        catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
-            System.out.println("Problem with " + unoPlayerClassName + ".");
-            System.exit(1);
-        }
-        this.playerName = playerName;
-        cards = new ArrayList<>();
+
     }
 
     /**
      * Add a card to the hand.
      */
-    void insertCard(UNOCard c) {
-        cards.add(c);
+    void insertCard(int index, UNOCard card) {
+        this.hand[index] = card;
     }
 
      /**
      * Remove a card to the hand.
      */
-    void removeCard(UNOCard c){
-        cards.remove(c);
+    void removeCard(int index){
+        for(int i = index; i < 7; i++){
+            if(i < 6) {
+                this.hand[i] = this.hand[i+1];
+                if(this.hand[i+1].isNullCard()) break;
+            }
+            else this.hand[i].setCardNull();
+        }
         
     }
    
+    void discardHand(int index){
+        for(int i = 0; i < 7; i++)
+        {
+            this.hand[i].setCardNull();
+        }
+    }
     /**
      * Return true only if this Hand has no cards, which should trigger a
      * winning condition.
      * @return 
      */
     public boolean isHandEmpty() {
-        return cards.isEmpty();
+        boolean returnvalue = true;
+        for(int i = 0; i < 7; i++){
+            if(!this.hand[i].isNullCard()) returnvalue = false;
+        }
+        return returnvalue;
     }
 
     /*
     Boolean to check if hand if full or not
     */
     public boolean isHandFull(){
-       return cards.size()==1;
+      boolean returnvalue = true;
+        for(int i = 0; i < 7; i++){
+            if(this.hand[i].isNullCard()) returnvalue = false;
+        }
+        return returnvalue;
     }
     
-     /**
-     * Return the number of cards in the hand.
-     * @return 
-     */
-    public int size() {
-        return cards.size();
-    }
+//     /**
+//     * Return the number of cards in the hand.
+//     * @return 
+//     */
+//    public int size() {
+//        return cards.size();
+//    }
 
     
     /**
    To sort the hand calling from the UNOCard class
      */
     void sortHand() {
-        
+        for(int i = 0; i < 6; i++){
+            int minIndex = i;
+            int j = i+1;
+            for(; j < 7; j++){
+                if(this.hand[j].compareCard(this.hand[minIndex]) < 0){
+                    minIndex = j;
+                }
+            }
+            UNOCard temp = this.hand[i];
+            this.hand[i] = this.hand[minIndex];
+            this.hand[minIndex] = temp;
+        }
     }
     /**
      * Return a string rendering of this Hand. See Card::toString() for
@@ -95,17 +116,20 @@ public class UNOHand {
      */
     public String handToString() {
         String returnString = "";
-        for (int i=0; i<cards.size(); i++) {
-            returnString += cards.get(i);
-            if (i<cards.size()-1) {
-                returnString += ",";
+        for (int i=0; i < 7; i++) {
+            returnString += this.hand[i].cardToString();
+            if (i<6 && !hand[i].isNullCard()) {
+                if(!hand[i + 1].isNullCard()){
+                    returnString += ", ";
+                }
             }
         }
         return returnString;
     }
 
-    
-    
-
-    
+    public UNOCard getCardAtIndex(int index){
+        UNOCard returnvalue = new UNOCard();
+        if (index < 7) returnvalue = this.hand[index];
+        return returnvalue;
+    }
 }
