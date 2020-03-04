@@ -1,5 +1,5 @@
 /*
- * TITLE: Deck Class for Project 2 UNO Workout
+ * TITLE: Hand Class for Project 2 UNO Workout
  * AUTHOR: Anamol Acharya
  * FOR: CS 2365 Object Oriented Programming Section 001 Spring 2020
  */
