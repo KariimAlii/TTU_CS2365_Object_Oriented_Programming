@@ -10,7 +10,7 @@ package unoworkout;
  * @author Stephen C. Devaney
  */
 public class UNOCard {
-    public final static int BLUECARD = 0, GREENCARD = 1, REDCARD = 2, YELLOWCARD = 3, BLACKCARD = 4; // constants for the card colors
+    public final static int BLUECARD = 0, YELLOWCARD = 1, REDCARD = 2, GREENCARD = 3, BLACKCARD = 4; // constants for the card colors
     public final static int SKIP = 10, DRAW2 = 11, REVERSE = 12, WILD = 13, WILDDRAW4 = 14; // constants for action cards
     private int color; // color of the card
     private int number; // number of the card
@@ -21,7 +21,7 @@ public class UNOCard {
      * @param number    number of the card
      */
     public UNOCard(int color, int number){
-        if ((0 <= number && number <= REVERSE) && (BLUECARD <= color && color <= YELLOWCARD)) // color cards
+        if ((0 <= number && number <= REVERSE) && (BLUECARD <= color && color <= GREENCARD)) // color cards
         {
             this.color = color;
             this.number = number;
