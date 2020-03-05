@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * TITLE: Card Class for Project 2 UNO Workout
+ * AUTHOR: Andrew Sena
+ * FOR: CS 2365 Object Oriented Programming Section 002 Spring 2020
  */
 package unoworkout;
 
@@ -301,19 +301,4 @@ public class Workout {
         }
         return output;
     }
-    
-    public static void main(String[] args) {
-        Workout workout = new Workout();
-        workout.drawHand();
-        System.out.println(workout.handToString());
-        System.out.println(workout.excerciseToString());
-        System.out.println(workout.skippedToString());
-        System.out.println(workout.leftInDeck());
-        System.out.println(workout.getBreakState());
-        System.out.println(workout.totalRepsToString());
-        System.out.println(workout.totalSkippedToString());
-        System.out.println(workout.biggestRepsEachExcercise());
-        System.out.println(workout.biggestSkippedEachExcercise());
-    }
-    
 }
