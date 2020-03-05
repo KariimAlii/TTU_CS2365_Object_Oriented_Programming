@@ -207,7 +207,6 @@ public class UNODeck {
                 topcard.copyCard(this.unocarddeck[this.currenttopcard++]);
                 this.numbercardsleftindeck--;
             }
-            else {System.out.println("Deck is empty cannot draw card!");}
         }
         else {System.out.println("No deck. Need to intialize deck first!");}
         return topcard;
