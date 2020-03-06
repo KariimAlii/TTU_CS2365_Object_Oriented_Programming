@@ -6,24 +6,25 @@
 package unoworkout;
 
 /**
- *  Hand of UNOCards, held by a particular player. A Hand object is
- * responsible for playing a Card-choosing a card to play-
- * when the player's turn comes up.
- * To do this, it implements the
- * strategy pattern by which this choice can be delegated to an arbitrary
- * implementer of the UnoPlayer class.
+ * It is responsible for playing a Card-choosing a card to play
+ * To do this, it implements the Hand class of this project. A Hand  is responsible for creating a hand using array from 
+ * the UNOCard class, sort the created hand according to the project instruction,
+ * insert/remove a card in a hand, check if the hand is empty/full, Return a string rendering of this Hand.
+ * This class interacts most of the time to UNOCards.java class for the operation.
+ 
  */
 public class UNOHand {
 
     private UNOCard hand[];
-   // private lastcardindex 
-
+   
     /**
-     * Declare a UNOHand object to be played by the UnoPlayer class, and
-     * the player name, passed as arguments. This implements a strategy
+     * Declare a UNOHand object to be played by the UNOHand class, and
+     * passed as arguments. This implements a strategy
      * pattern whereby the constructor accepts various strategies that
-     * implement the UnoPlayer interface.
-     */
+     * implement the UNOCards interface.
+     
+    Creating an array of 7 cards from the UNOCard using a for loop.
+    */
     public UNOHand() {
         hand = new UNOCard[7];
         for(int i = 0; i < 7; i++){
@@ -33,16 +34,18 @@ public class UNOHand {
     }
 
     /**
-     * Add a card to the hand.
+     *This method add a card in the hand
      */
-    void insertCard(int index, UNOCard card) {
+    public void insertCard(int index, UNOCard card) {
         this.hand[index] = card;
     }
 
      /**
-     * Remove a card to the hand.
+     * This method removes a card in the sorted hands. 
      */
-    void removeCard(int index){
+    public UNOCard removeCard(int index){
+        UNOCard temp = new UNOCard();
+        temp.copyCard(this.hand[index]);
         for(int i = index; i < 7; i++){
             if(i < 6) {
                 this.hand[i] = this.hand[i+1];
@@ -50,18 +53,21 @@ public class UNOHand {
             }
             else {this.hand[i]= new UNOCard();}
         }
-        
+        return temp;
     }
+    
+    
    
-    void discardHand(){
+    public void discardHand(){
         for(int i = 0; i < 7; i++)
         {
             this.hand[i]= new UNOCard();
         }
     }
     /**
-     * Return true only if this Hand has no cards, which should trigger a
+     * This method returns true only if this Hand has no cards, which should trigger a 
      * winning condition.
+     * For loop is performed to check if hand is empty of not.
      * @return 
      */
     public boolean isHandEmpty() {
@@ -73,7 +79,8 @@ public class UNOHand {
     }
 
     /*
-    Boolean to check if hand if full or not
+    This boolean method chechs if the hand is full or not. 
+    It performs a for loop to check if the  hand is null just to check is hand is full. 
     */
     public boolean isHandFull(){
       boolean returnvalue = true;
@@ -83,19 +90,16 @@ public class UNOHand {
         return returnvalue;
     }
     
-//     /**
-//     * Return the number of cards in the hand.
-//     * @return 
-//     */
-//    public int size() {
-//        return cards.size();
-//    }
+
 
     
     /**
    To sort the hand calling from the UNOCard class
-     */
-    void sortHand() {
+   * The use of selection sort is performed to sort the cards as the total number of cards
+   * is 7, I believe, the time complexity does not make a huge difference to look for other better sorting algorithm
+  
+   */
+    public void sortHand() {
         for(int i = 0; i < 6; i++){
             int minIndex = i;
             int j = i+1;
@@ -110,8 +114,8 @@ public class UNOHand {
         }
     }
     /**
-     * Return a string rendering of this Hand. See Card::toString() for
-     * notes about how individual cards are rendered.
+    *This method return a string the rendering of this hand and also note how individual cards are rendered. 
+    * A for loop is performed to return string if the hand is not null.
      * @return 
      */
     public String handToString() {
@@ -126,7 +130,9 @@ public class UNOHand {
         }
         return returnString;
     }
-
+/*
+    *This method gets the card from UNOCard class to return the index of the card.
+    */
     public UNOCard getCardAtIndex(int index){
         UNOCard returnvalue = new UNOCard();
         if (index < 7) returnvalue = this.hand[index];
