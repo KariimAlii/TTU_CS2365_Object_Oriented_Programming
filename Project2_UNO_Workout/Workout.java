@@ -1,14 +1,15 @@
 /*
- * TITLE: Card Class for Project 2 UNO Workout
+ * TITLE: Workout Class for Project 2 UNO Workout
  * AUTHOR: Andrew Sena
  * FOR: CS 2365 Object Oriented Programming Section 002 Spring 2020
+ * CLASS DESCRIPTION: class is used to run a workout using an deck or UNO cards
+ * TEST CASES: test cases for this class are held in the UNOWorkoutMain class
  */
 package unoworkout;
 
 
-/**
- *
- * @author raime
+/** A workout routine base off of an UNO Game
+ * @author Andrew Sena
  */
 public class Workout {
     private UNODeck deck;
@@ -19,9 +20,14 @@ public class Workout {
     private int biggestskipped[] = new int[4];
     private int skippedcount[] = new int[4];
     private int totalskipped[] = new int[4];
-    private boolean breakstate;
+    private int breakstate;
     
     
+    /** Workout base constructor
+     * @param decks
+     * @param removeaction
+     * @param shufflestate
+     */
     public Workout(int decks, boolean removeaction, boolean shufflestate)
     {
         int temp = decks;
@@ -30,24 +36,42 @@ public class Workout {
         this.deck = new UNODeck(temp,removeaction);
         this.deck.shuffleDeck(shufflestate);
         this.hand = new UNOHand();
-        breakstate = false;
+        breakstate = 0;
     }
     
+    
+        
+    /** Workout overloaded constructor
+     * removeaction is preset to false
+     * shufflestate is prest to false
+     * @param decks
+     */
     public Workout(int decks)
     {
         this(decks, false, false);
     }
     
+    
+    /** Workout overloaded constructor
+     * decks is preset to 1
+     * removeaction is preset to false
+     * shufflestate is prest to false
+     */
     public Workout()
     {
         this(1,false, false);
     }
     
+    /** drawHand method
+     *  DESCRIPTION: used to draw a whole hand
+     *  test case 1: empties hand and draws a new one
+     */
     public void drawHand()
     {
         boolean skip[] = new boolean[4];
         boolean reverse[] = new boolean[4];
         this.hand.discardHand();
+        this.breakstate = 0;
         for(int i = 0; i < 4; i++)
         {
             this.skippedcount[i] = 0;
@@ -67,7 +91,7 @@ public class Workout {
         {
             if(this.hand.getCardAtIndex(i).getCardNumber() == 0) 
             {
-                this.breakstate = true;
+                this.breakstate++;
             }
             else if (1 <= this.hand.getCardAtIndex(i).getCardNumber() && this.hand.getCardAtIndex(i).getCardNumber() <= 9)
             {
@@ -95,30 +119,20 @@ public class Workout {
         for(int i = 0; i < 4; i++){
             if(skip[i] == true){
                 this.skippedcount[i] = this.count[i];
-                this.count[i] = 0;
-                this.totalskipped[i] += this.skippedcount[i];
-                if (this.skippedcount[i] > this.biggestskipped[i])
-                {
+                if (this.count[i] > this.biggestskipped[i]){
                     this.biggestskipped[i] = this.count[i];
                 }
+                this.count[i] = 0;
+                this.totalskipped[i] += this.skippedcount[i];
             }
         }
         
         for(int i = 0; i < 4; i++){
             if(reverse[i] == true){
-                boolean foundfirst = false;
                 for(int j = 0; j < 7; j++){
                     if(this.hand.getCardAtIndex(j).getCardColor() == i){
-                        if(this.hand.getCardAtIndex(j).getCardNumber() != 12){
-                            this.deck.addCardToBottem(this.hand.getCardAtIndex(j));
-                        }
-                        else{
-                            if(foundfirst){
-                                this.deck.addCardToBottem(this.hand.getCardAtIndex(j));
-                            }
-                            else{
-                                foundfirst = true;
-                            }
+                        if(this.hand.getCardAtIndex(j).getCardNumber() != 12 && this.hand.getCardAtIndex(j).getCardNumber() != 0){
+                            this.deck.addCardToBottom(this.hand.getCardAtIndex(j));
                         }
                     }
                 }
@@ -133,11 +147,23 @@ public class Workout {
         }
     }
     
+    
+    /** handToString method
+     * DESCRIPTION: returns the whole hand to a string so it may be outputted
+     * test case 1: returns the hand
+     * @return returns the hand to a string
+     */
     public String handToString()
     {
         return this.hand.handToString();
     }
     
+    
+    /** excerciseToString method
+     * DESCRIPTION: returns the number of exercises to be preformed to a string so it may be outputted
+     * test case 1: returns the exercise as a string
+     * @return returns the exercise of the hand to a string
+     */
     public String excerciseToString()
     {
         String output = "Perform ";
@@ -166,6 +192,12 @@ public class Workout {
         return output;
     }
     
+    
+    /** skippedToString method
+     * DESCRIPTION: returns the number of exercises to be skipped to a string so it may be outputted
+     * test case 1: returns the exercise as a string
+     * @return returns the skipped exercise of the hand to a string
+     */
     public String skippedToString()
     {
         String output = "You skipped ";
@@ -183,25 +215,41 @@ public class Workout {
                     output += " Sit Ups, ";
                     break;
                 case 3:
-                    output += " Lunges.";
+                    output += " Lunges ";
                     break;
             }   
         }
+        output += "this round.";
         return output;
     }
     
+    /** leftInDeck Method
+     * DESCRIPTION: to get the number of cards currently in the deck
+     * test case 1: returns a value greater than or equal to 0
+     * @return an integer which is the number of cards in the deck
+     */
     public int leftInDeck()
     {
         return this.deck.numbersCardsLeftInDeck();
     }
     
-    public boolean getBreakState()
+    
+    /** getBreakState Method
+     * DESCRIPTION: to get the how long the user will get for a break
+     * test case 1: returns a value greater than or equal to 0
+     * @return an integer which is how long the user gets for a break
+     */
+    public int getBreakState()
     {
-        boolean temp = this.breakstate;
-        this.breakstate = false;
-        return temp;
+        return this.breakstate;
     }
     
+    
+    /** totalRepsToString Method
+     * DESCRIPTION: is used for end of workout stats
+     * test case 1: outputs value equal to or greater than 0 for each exercise
+     * @return string the total number of each exercises that were preformed
+     */
     public String totalRepsToString()
     {
         String output = "Your total reps of each exercise are ";
@@ -228,6 +276,11 @@ public class Workout {
         return output;
     }
     
+    /** totalSkippedToString Method
+     * DESCRIPTION: is used for end of workout stats
+     * test case 1: outputs value equal to or greater than 0 for each exercise
+     * @return string the total number of each exercises that were skipped
+     */
     public String totalSkippedToString()
     {
         String output = "Your total skipped reps are ";
@@ -252,6 +305,12 @@ public class Workout {
         return output;
     }
     
+    
+    /** biggestRepsEachExcercise Method
+     * DESCRIPTION: is used for end of workout stats
+     * test case 1: outputs value equal to or greater than 0 for each exercise
+     * @return string the biggest number of each exercises that were preformed
+     */
     public String biggestRepsEachExcercise()
     {
         String output = "Your largest number of reps in a single hand for every exercise is ";
@@ -278,6 +337,12 @@ public class Workout {
         return output;
     }
     
+    
+    /** biggestSkippedEachExcercise Method
+     * DESCRIPTION: is used for end of workout stats
+     * test case 1: outputs value equal to or greater than 0 for each exercise
+     * @return string the biggest number of each exercises that were skipped
+     */
     public String biggestSkippedEachExcercise()
     {
         String output = "Your largest number of reps skipped in a single hand for every exercise is ";
@@ -300,5 +365,5 @@ public class Workout {
             }   
         }
         return output;
-    }
+    }    
 }
