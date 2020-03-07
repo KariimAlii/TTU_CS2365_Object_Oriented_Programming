@@ -2,11 +2,13 @@
  * TITLE: Card Class for Project 2 UNO Workout
  * AUTHOR: Stephen C. Devaney
  * FOR: CS 2365 Object Oriented Programming Section 001 Spring 2020
+ * CLASS DESCRIPTION: class is used to create a card to be added to a deck or a 
+                      hand for an UNO game or workout.
+ * TEST CASES: test cases for this class are held in the workoutclassclient class
  */
 package unoworkout;
 
-/**
- *
+/** A card for an game or workout of UNO
  * @author Stephen C. Devaney
  */
 public class UNOCard {
@@ -17,6 +19,10 @@ public class UNOCard {
     
     
     /** UNOCard Base Constructor
+     * test case 1: proper color and number returns proper card
+     * test case 2: improper color and proper number returns group designated null card
+     * test case 3: proper color and improper number returns group designated null card
+     * test case 4: improper color and improper number returns group designated null card
      * @param color     color of the card
      * @param number    number of the card
      */
@@ -37,15 +43,21 @@ public class UNOCard {
         }
     }
     
-    
+    /** UNOCard overloaded Constructor
+     * color is preset to -1 which is going to be used for null
+     * number is preset to -1 which is going to be used for null
+     * test case 1: always returns -1, -1 when called
+     */
     public UNOCard(){
         this(-1,-1);
     }
     
     
     /** isNullCard method
-     * @return boolean
      * DESCRIPTION: checks to see if the card is NULL
+     * test case 1: card is group designated null returns true
+     * test case 2: card is not group designated null returns false
+     * @return boolean
      */
     public boolean isNullCard(){
         return((this.number == -1 && this.color == -1));
@@ -54,6 +66,7 @@ public class UNOCard {
     
     /** setCardNull method
      * DESCRIPTION: sets the null card to a what is defined a null card
+     * test case 1: always sets card to -1,-1 when called
      */
     public void setCardNull(){
         this.color = -1;
@@ -63,8 +76,10 @@ public class UNOCard {
     
     /** cardToString method
      * ADDITIONAL PARAMETER: the card needs to be initialize with proper values for UNOCards based upon the constructor
-     * @return String
      * DESCRIPTION: the method takes a card and outputs the proper wording for the card in a string
+     * test case 1: non null card returns the proper string
+     * test case 2: null card returns a null string
+     * @return String
      */
     public String cardToString(){
         String returnString = "";
@@ -100,24 +115,28 @@ public class UNOCard {
     
     
     /** compareCard method
-     * @param secondcard: UNOCard
+
      * ADDITIONAL PARAMETER: the card needs to be initialize with proper values for UNOCards based upon the constructor
-     * @return int
      * DESCRIPTION: compares this card with the second card 
      *                  if this card goes before the second card -1 is returned
      *                  if this card goes after the second card 1 is returned
      *                  if this card is equal to the second card 0 is returned
+     * test case 1: first card goes before second card returns -1
+     * test case 2: first card equals second card returns 0
+     * test case 3: first card goes after second card returns 1
+     * @param secondcard: UNOCard
+     * @return int
      */
     public int compareCard(UNOCard secondcard){
         int result;
         if(!this.isNullCard()){
-        if (this.color < secondcard.color) {result = -1;}
-        else if (this.color > secondcard.color) {result = 1;}
-        else{
-            if (this.number < secondcard.number) {result = -1;}
-            else if (this.number > secondcard.number) {result = 1;}
-            else {result = 0;}
-        }
+            if (this.color < secondcard.color) {result = -1;}
+            else if (this.color > secondcard.color) {result = 1;}
+            else{
+                if (this.number < secondcard.number) {result = -1;}
+                else if (this.number > secondcard.number) {result = 1;}
+                else {result = 0;}
+            }
         }
         else return 1;
         return result;
@@ -126,8 +145,10 @@ public class UNOCard {
     
     /** getCardColor method
      * ADDITIONAL PARAMETER: the card needs to be initialize with proper values for UNOCards based upon the constructor
-     * @return int
      * DESCRIPTION: returns the color value of the card
+     * test case 1: non null card returns the value of the color
+     * test case 2: null card returns -1
+     * @return int
      */
     public int getCardColor(){
         return this.color;
@@ -136,13 +157,22 @@ public class UNOCard {
     
     /** getCardNumber method
      * ADDITIONAL PARAMETER: the card needs to be initialize with proper values for UNOCards based upon the constructor
-     * @return int
      * DESCRIPTION: returns the number value of the card
+     * test case 1: non null card returns the value of the number
+     * test case 2: null card returns -1
+     * @return int
      */
     public int getCardNumber(){
         return this.number;
     }
     
+    /** copyCard method
+     * ADDITIONAL PARAMETER: both cards needs to be initialize with proper values for UNOCards based upon the constructor
+     * DESCRIPTION: copies a cards value onto another card best use in the hand.
+     * test case 1: non null card is copied exactly
+     * test case 2: null card is copied exactly
+     * @param card is the card to be copied from
+     */
     public void copyCard(UNOCard card){
         this.color = card.color;
         this.number = card.number;
