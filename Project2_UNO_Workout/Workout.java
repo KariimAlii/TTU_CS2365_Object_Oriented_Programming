@@ -81,8 +81,7 @@ public class Workout {
         }
         this.count[4] = 0;
         
-        for (int i = 0; i < 7; i++)
-        {
+        for (int i = 0; i < 7; i++){
             this.hand.insertCard(i, this.deck.dealCard());
         }
         this.hand.sortHand();
