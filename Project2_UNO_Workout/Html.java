@@ -50,8 +50,8 @@ public class Html {
                     "  </head>\n" +
                     " <body>\n" +
                     "<h1>UNO WORKOUT</h1>\n" +
-                    "<p><img src=\"https://github.com/sdevaneyTTU/projectimages/blob/master/unoworkouts.jpg?raw=true\" alt=\"UNO GAME\" width=\"900\" height=\"100\" style=\"float: center; margin: 0 0 10px 10px;\" /></p>\n" +
-                    "<p><img src=\"https://github.com/sdevaneyTTU/projectimages/blob/master/scatteredunocards.jpg?raw=true\" alt=\"UNO GAME\" width=\"400\" height=\"400\" style=\"float: right; margin: 0 0 10px 10px;\" /></p>\n" +
+                    "<p><img src=\"https://github.com/sdevaneyTTU/projectimages/blob/master/unoworkouts.jpg?raw=true\" alt=\"Workouts\" width=\"900\" height=\"100\" style=\"float: center; margin: 0 0 10px 10px;\" /></p>\n" +
+                    "<p><img src=\"https://github.com/sdevaneyTTU/projectimages/blob/master/scatteredunocards.jpg?raw=true\" alt=\"Scattered UNO Cards\" width=\"400\" height=\"400\" style=\"float: right; margin: 0 0 10px 10px;\" /></p>\n" +
                     
                     "<h2> GAME RESOLUTION</h2>\n");
         }
