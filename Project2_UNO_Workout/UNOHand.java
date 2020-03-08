@@ -64,7 +64,7 @@ public class UNOHand {
             temp.copyCard(this.hand[index]);
             for(int i = index; i < 7; i++){
                 if(i < 6) {
-                    this.hand[i] = this.hand[i+1];
+                    this.hand[i].copyCard(this.hand[i+1]);
                     if(this.hand[i+1].isNullCard()) break;
                 }
                 else {this.hand[i].copyCard(temp2);}
@@ -142,9 +142,10 @@ public class UNOHand {
                     minIndex = j;
                 }
             }
-            UNOCard temp = this.hand[i];
-            this.hand[i] = this.hand[minIndex];
-            this.hand[minIndex] = temp;
+            UNOCard temp = new UNOCard();
+            temp.copyCard(this.hand[i]);
+            this.hand[i].copyCard(this.hand[minIndex]);
+            this.hand[minIndex].copyCard(temp);
         }
     }
     
