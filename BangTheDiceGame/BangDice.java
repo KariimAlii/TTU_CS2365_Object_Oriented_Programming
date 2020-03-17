@@ -4,16 +4,21 @@
  * FOR: CS 2365 Object Oriented Programming Section 001 Spring 2020
  */
 package bangthedicegame;
+
+import java.util.Random;
+
 /**
  *
  * @author Stephen C. Devaney
  */
 public class BangDice {
     private final BangDie dice[]; // an array of Dice to hold all of the dice
+    private Random rand;
     /** BangDice Constructor
      * Declare a BangDice object to be used by the Game class.
      */
     public BangDice() {
+        rand = new Random(System.currentTimeMillis());
         dice = new BangDie[5];
         for(int i = 0; i < 5; i++){
             dice[i] = new BangDie();
@@ -22,6 +27,7 @@ public class BangDice {
     }
 
     
+    
     /** rollDieAtIndex Method
      * DESCRIPTION: This method rolls a die at the index given in a dice array
      * test case 1: randomize the die at the given index
@@ -29,8 +35,8 @@ public class BangDice {
      * @param index     index at which the card is to be inserted
      */
     public void rollDieAtIndex(int index) {
-        if(0<= index && index < 5) {this.dice[index].rollDie();}
-        else if(index == -1) {this.dice[4].rollDie();}
+        if(0<= index && index < 5) {this.dice[index].setDie(rand.nextInt(6)+1);}
+        else if(index == -1) {this.dice[4].setDie(rand.nextInt(6)+1);}
     }
     
     
@@ -40,31 +46,7 @@ public class BangDice {
      */
     public void rollDice() {
         for(int i = 0; i < 5; i++){
-            this.dice[i].rollDie();
-        }
-    }
-    
-    
-    /** sortDice Method
-     * DESCRIPTION: To sort the dice calling from the BangDie class. The use of 
-     * selection sort is performed to sort the dice. Since the total number of 
-     * dice is 5, the time complexity does not make a huge difference to look 
-     * for other better sorting algorithm
-     * test case 1: sorts the dice by symbol
-     */
-    public void sortDice() {
-        for(int i = 0; i < 4; i++){
-            int minIndex = i;
-            int j = i+1;
-            for(; j < 5; j++){
-                if(this.dice[j].compareDie(this.dice[minIndex]) < 0){
-                    minIndex = j;
-                }
-            }
-            BangDie temp = new BangDie();
-            temp.copyDie(this.dice[i]);
-            this.dice[i].copyDie(this.dice[minIndex]);
-            this.dice[minIndex].copyDie(temp);
+            this.dice[i].setDie(rand.nextInt(6)+1);
         }
     }
     
