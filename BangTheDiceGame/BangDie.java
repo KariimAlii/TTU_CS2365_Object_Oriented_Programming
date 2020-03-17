@@ -4,7 +4,6 @@
  * FOR: CS 2365 Object Oriented Programming Section 001 Spring 2020
  */
 package bangthedicegame;
-import java.util.Random;
 /**
  *
  * @author Stephen C. Devaney
@@ -57,26 +56,6 @@ public class BangDie {
     }
     
     
-    /** compareDie method
-     * DESCRIPTION: compares this die with the second die 
-     *                  if this die goes before the second die -1 is returned
-     *                  if this die goes after the second die 1 is returned
-     *                  if this die is equal to the second die 0 is returned
-     * test case 1: first die goes before second die returns -1
-     * test case 2: first die equals second die returns 0
-     * test case 3: first die goes after second die returns 1
-     * @param die: BangDie
-     * @return int
-     */
-    public int compareDie(BangDie die){
-        int result;
-        if (this.isEqual(die)) {result = 0;}
-        else if (this.symbol < die.symbol) {result = -1;}
-        else{result = 1;}
-        return result;
-    }
-    
-    
     /** isEqual method
      * DESCRIPTION: compares this die with the second die if this die is equal to the second die true is returned otherwise false is returned
      * test case 1: first die equals second die returns true
@@ -84,7 +63,7 @@ public class BangDie {
      * @param die: BangDie
      * @return boolean
      */
-    public boolean isEqual(BangDie die){
+    public boolean equals(BangDie die){
         return(this.symbol == die.symbol);
     }
     
@@ -119,25 +98,18 @@ public class BangDie {
     
 
     /** setDieSymbol method
-     * DESCRIPTION: rolls the die to a random symbol
+     * DESCRIPTION: sets symbol to the value given
      * test case 1: sets the value of the state to false and the symbol to a proper symbol
+     * test case 2: improper value is given default value is arrow
+     * @param symbol
      */
-    public void rollDie(){
-        Random rand = new Random(System.currentTimeMillis());
-        BangDie newdie = new BangDie();
-        int random = rand.nextInt(GATLING - ARROW + 1) + ARROW;
-        this.symbol = random;
+    public void setDie(int symbol){
+        if (ARROW <= symbol && symbol <= GATLING){
+            this.symbol = symbol;
+        }
+        else{
+            this.symbol = ARROW;
+        }
         this.processedState = false;
-    }
-    
-    
-    /** copyDie method
-     * DESCRIPTION: copies a dice value onto another die best use in the a dice class.
-     * test case 1: die is copied exactly
-     * @param die is the die to be copied from
-     */
-    public void copyDie(BangDie die){
-        this.symbol = die.symbol;
-        this.processedState = die.processedState;
     }
 }
