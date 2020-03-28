@@ -3,8 +3,7 @@
  * AUTHOR: Stephen C. Devaney
  * FOR: CS 2365 Object Oriented Programming Section 001 Spring 2020
  */
-package bangthedicegame;
-
+package dice;
 import java.util.Random;
 
 /**
@@ -13,7 +12,7 @@ import java.util.Random;
  */
 public class BangDice {
     private final BangDie dice[]; // an array of Dice to hold all of the dice
-    private Random rand;
+    private final Random rand;
     /** BangDice Constructor
      * Declare a BangDice object to be used by the Game class.
      */
@@ -28,32 +27,30 @@ public class BangDice {
 
     
     
-    /** rollDieAtIndex Method
+    /**
      * DESCRIPTION: This method rolls a die at the index given in a dice array
      * test case 1: randomize the die at the given index
      * test case 2: index is improper nothing happens
      * @param index     index at which the card is to be inserted
      */
     public void rollDieAtIndex(int index) {
-        if(0<= index && index < 5) {this.dice[index].setDie(rand.nextInt(6)+1);}
-        else if(index == -1) {this.dice[4].setDie(rand.nextInt(6)+1);}
+        if(0 <= index && index < dice.length) {this.dice[index].setDie(rand.nextInt(6)+1);}
+        else if(0 - dice.length <= index && index <=-1) {this.dice[dice.length - (0 - index)].setDie(rand.nextInt(6)+1);}
     }
     
     
-    /** rollDice Method
+    /**
      * DESCRIPTION: This method rolls a die at the index given in a dice array
      * test case 1: randomize all of the dice in a dice array
      */
     public void rollDice() {
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < dice.length; i++){
             this.dice[i].setDie(rand.nextInt(6)+1);
         }
     }
     
-    
-    /** diceToString Method 
-    * A for loop is performed to return string if the dice is not null.
-    * DESCRIPTION: This method return a string the rendering of this dice and also note how individual dice are rendered.
+    /**
+    * DESCRIPTION: This method returns a string the rendering of this dice and also note how individual dice are rendered. A for loop is performed to return string if the die.
     * test case 1: outputs the dice to string
     * @return the dice as a string
     */
@@ -66,5 +63,17 @@ public class BangDice {
             }
         }
         return returnString;
+    }
+    
+    /** DESCRIPTION: This method gets the value of the symbol at a specified index if the value is outside the range of the dice then 0 will be return if the value 
+     *               if the index is negative will do reverse array indexing.
+     * @param index: int
+     * @return returnvalue: int
+     */
+    public int getDieAtIndex(int index){
+        int returnvalue = 0;
+        if (0 <= index && index < dice.length) {returnvalue = dice[dice.length-1].getDieSymbol();}
+        else if (0 - dice.length <= index && index <=-1) {returnvalue = dice[dice.length - (0 - index)].getDieSymbol();}
+        return returnvalue;
     }
 }
