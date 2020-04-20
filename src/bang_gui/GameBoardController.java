@@ -6,6 +6,7 @@
 package bang_gui;
 
 import Game.BangGame;
+import Game.BangSetup;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -234,7 +235,8 @@ BangGame game;
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       game = new BangGame();
+       BangSetup setup = new BangSetup(8);
+       game = new BangGame(setup);
        Dice1_Hold.getItems().addAll("Hold", "Re-Roll");
        Dice2_Hold.getItems().addAll("Hold", "Re-Roll");
        Dice3_Hold.getItems().addAll("Hold", "Re-Roll");

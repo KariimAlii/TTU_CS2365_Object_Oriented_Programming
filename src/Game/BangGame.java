@@ -7,7 +7,8 @@ package Game;
 
 import dice.BangDice;
 import java.util.LinkedList;
-import player.*;
+import java.util.Random;
+import player.Player;
 
 /**
  *
@@ -20,9 +21,15 @@ public class BangGame {
     private int arrowpile;
     private Player sheriff;
     private Player curplayer;
+    private Player humanplayer;
     private BangDice dice;
     
-    public BangGame(){
+    public BangGame(BangSetup setup){
+        Random rand;
+        rand = new Random(System.currentTimeMillis());
+        startingnumberofplayers = currentnumberofplayers = setup.getNumberOfPlayers();
+        
+
         dice = new BangDice();
         arrowpile = 9;
     }

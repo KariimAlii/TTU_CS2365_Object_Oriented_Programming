@@ -71,7 +71,7 @@ public class BangStartUpController implements Initializable {
      * view
      */
     public void startGame(ActionEvent event) throws Exception{
-        BangGame game = new BangGame();
+        //BangGame game = new BangGame();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("GameBoard.fxml"));
         Parent root = loader.load();
