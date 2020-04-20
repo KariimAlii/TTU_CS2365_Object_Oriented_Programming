@@ -4,8 +4,10 @@
  * FOR: CS 2365 Object Oriented Programming Section 001 Spring 2020
  */
 package BangClientClass;
-import bangthedicegame.*;
+import dice.*;
+import character.*;
 import java.util.Random;
+import player.*;
 /**
  *
  * @author Stephen C. Devaney
@@ -37,6 +39,16 @@ public class BangTestingClient {
         System.out.println("Dice when starting: " + dice.diceToString());
         dice.rollDice();
         System.out.println("Dice when after rolling all: " + dice.diceToString());
+        dice.rollDice();
+        System.out.println("Dice when after rolling all: " + dice.diceToString());
+        dice.rollDice();
+        System.out.println("Dice when after rolling all: " + dice.diceToString());
+        dice.rollDice();
+        System.out.println("Dice when after rolling all: " + dice.diceToString());
+        dice.rollDice();
+        System.out.println("Dice when after rolling all: " + dice.diceToString());
+        dice.rollDice();
+        System.out.println("Dice when after rolling all: " + dice.diceToString());
         dice.rollDieAtIndex(3);
         System.out.println("Dice when after rolling index 3: " + dice.diceToString());
         System.out.print("Testing random number generator: ");
@@ -50,7 +62,6 @@ public class BangTestingClient {
     
         public static void main(String[] args) {
             BangTestingClient test = new BangTestingClient();
-            test.bangDieTest();
             test.bangDiceTest();
     }
 }

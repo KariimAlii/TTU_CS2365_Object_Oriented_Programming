@@ -5,11 +5,11 @@
  */
 package bang_gui;
 
+import Game.BangGame;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Random;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,13 +24,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
-
 /**
  * FXML Controller class
  *
  * @author Steven
  */
 public class GameBoardController implements Initializable {
+BangGame game;
+    
 /*
  *  This section of code is for setting up the handles to the central portion of the board.
  */
@@ -53,185 +54,20 @@ public class GameBoardController implements Initializable {
     /*
      *  Array for Dice face images.  Array element zero is just the bang logo, used for initialization.
      */
-    String [] Dice_face = {"/Images/bang .jpg","/Images/Bang-dice-1.jpg","/Images/Bang-dice-2.jpg","/Images/Bang-dice-3.jpg","/Images/Bang-dice-4.jpg",
+    String [] diefacefilenames = {"/Images/bang .jpg","/Images/Bang-dice-1.jpg","/Images/Bang-dice-2.jpg","/Images/Bang-dice-3.jpg","/Images/Bang-dice-4.jpg",
                            "/Images/Bang-dice-5.jpg", "Images/Bang-dice-6.jpg"};
+    Image diefaces[];
+    
     @FXML ImageView Die_1;
     @FXML ImageView Die_2;
     @FXML ImageView Die_3;
     @FXML ImageView Die_4;
     @FXML ImageView Die_5;
+    
     @FXML Button Roll;
-    /*
-     *  Example of randomizing dice and use of imageview boxes.  Replace code
-     *   with appropriate dice class items.  Interacts with Hold/Re-Roll button just as an example.  This is to link the roll dice button with code.
-     */
-    @FXML
-    void Roll_Dice(ActionEvent event) {
-        Random rand = new Random();
-        int new_rand = rand.nextInt(6)+1;
-        Image die_face = new Image(Dice_face[new_rand]);
-        Die_1.setImage(die_face);
-        if(new_rand == 2) {
-            Dice1_Hold.getSelectionModel().selectFirst();
-            Dice1_Hold.setDisable(true);
-    }
-        else{
-            Dice1_Hold.getSelectionModel().select("Re-Roll");
-        }
-        new_rand = rand.nextInt(6)+1;
-        die_face = new Image(Dice_face[new_rand]);
-        Die_2.setImage(die_face);
-        if(new_rand == 2) {
-            Dice2_Hold.getSelectionModel().selectFirst();
-            Dice2_Hold.setDisable(true);
-    }
-        else{
-            Dice2_Hold.getSelectionModel().select("Re-Roll");
-        }
-            
-        new_rand = rand.nextInt(6)+1;
-        die_face = new Image(Dice_face[new_rand]);
-        Die_3.setImage(die_face);
-        if(new_rand == 2) {
-            Dice3_Hold.getSelectionModel().selectFirst();
-            Dice3_Hold.setDisable(true);
-    }
-        else{
-            Dice3_Hold.getSelectionModel().select("Re-Roll");
-        }        
-        new_rand = rand.nextInt(6)+1;
-        die_face = new Image(Dice_face[new_rand]);
-        Die_4.setImage(die_face); 
-        if(new_rand == 2) {
-            Dice4_Hold.getSelectionModel().selectFirst();
-            Dice4_Hold.setDisable(true);
-    }
-        else{
-            Dice4_Hold.getSelectionModel().select("Re-Roll");
-        }        
-        new_rand = rand.nextInt(6)+1;
-        die_face = new Image(Dice_face[new_rand]);
-        Die_5.setImage(die_face);
-        if(new_rand == 2) {
-            Dice5_Hold.getSelectionModel().selectFirst();
-            Dice5_Hold.setDisable(true);
-    }
-        else{
-            Dice5_Hold.getSelectionModel().select("Re-Roll");
-        }
-        Roll.setDisable(true);
-
-    } 
     @FXML Button ReRoll;
-    /*
-     *  Example of randomizing dice and use of imageview boxes.  Replace code
-     *  with appropriate dice class items.  This is to link the Re-roll dice button with code.
-     *  Re-roll shows interaction with Hold.  Modify code to work with class abilities and reroll counts, max dynamite, etc.
-     */
-    @FXML
-    void ReRoll_Dice(ActionEvent event) {
-        Random rand = new Random();
-        int new_rand = rand.nextInt(6)+1;  
-        if (Dice1_Hold.getValue()=="Re-Roll"){
-            Image die_face = new Image(Dice_face[new_rand]);
-            Die_1.setImage(die_face);
-            if(new_rand == 2) {
-                Dice1_Hold.getSelectionModel().selectFirst();
-                Dice1_Hold.setDisable(true);
-            }
-            else{
-                Dice1_Hold.getSelectionModel().select("Re-Roll");
-            }
-        }
-        new_rand = rand.nextInt(6)+1;
-        if (Dice2_Hold.getValue()=="Re-Roll"){
-            Image die_face = new Image(Dice_face[new_rand]);
-            Die_2.setImage(die_face);
-            if(new_rand == 2) {
-                Dice2_Hold.getSelectionModel().selectFirst();
-                Dice2_Hold.setDisable(true);
-            }
-            else{
-                Dice2_Hold.getSelectionModel().select("Re-Roll");
-            }
-        }
-        new_rand = rand.nextInt(6)+1;
-        if (Dice3_Hold.getValue()=="Re-Roll"){
-            Image die_face = new Image(Dice_face[new_rand]);
-            Die_3.setImage(die_face);
-            if(new_rand == 2) {
-                Dice3_Hold.getSelectionModel().selectFirst();
-                Dice3_Hold.setDisable(true);
-            }
-            else{
-                Dice3_Hold.getSelectionModel().select("Re-Roll");
-            }
-        }
-        new_rand = rand.nextInt(6)+1;
-        if (Dice4_Hold.getValue()=="Re-Roll"){
-            Image die_face = new Image(Dice_face[new_rand]);
-            Die_4.setImage(die_face);
-            if(new_rand == 2) {
-                Dice4_Hold.getSelectionModel().selectFirst();
-                Dice4_Hold.setDisable(true);
-            }
-            else{
-                Dice4_Hold.getSelectionModel().select("Re-Roll");
-            }
-        }
-        new_rand = rand.nextInt(6)+1;
-        if (Dice5_Hold.getValue()=="Re-Roll"){
-            Image die_face = new Image(Dice_face[new_rand]);
-            Die_5.setImage(die_face);
-            if(new_rand == 2) {
-                Dice5_Hold.getSelectionModel().selectFirst();
-                Dice5_Hold.setDisable(true);
-            }
-            else{
-                Dice5_Hold.getSelectionModel().select("Re-Roll");
-            }
-        }              
-    }    
     @FXML Button Action;
-    @FXML
-    void TakeAction(ActionEvent event) {
-       Image die_face = new Image(Dice_face[0]);
-       Die_1.setImage(die_face);
-       Die_2.setImage(die_face);
-       Die_3.setImage(die_face);
-       Die_4.setImage(die_face);
-       Die_5.setImage(die_face);
-       Dice1_Hold.setDisable(false);
-       Dice1_Hold.getSelectionModel().select("Select");
-       Dice2_Hold.setDisable(false);
-       Dice2_Hold.getSelectionModel().select("Select");
-       Dice3_Hold.setDisable(false);
-       Dice3_Hold.getSelectionModel().select("Select");
-       Dice4_Hold.setDisable(false);
-       Dice4_Hold.getSelectionModel().select("Select");
-       Dice5_Hold.setDisable(false);
-       Dice5_Hold.getSelectionModel().select("Select");
-       Roll.setDisable(false);
-    }
-    /*
-     *  Array for character role images.
-     */
-    String[] Character_Roles = {"/Images/Sheriff1.jpg","/Images/Outlaw.jpg","/Images/Deputy.jpg","/Images/Renegade.jpg","/Images/bang-back-of-card.jpg"};
-    /*
-     *  Array for character names.  Could add "/Path/character.jpg" to the character class.  In the initialization, the following line:
-     *   Image char_name = new Image(Character_Names[0]); would change to:
-     *   Image char_name = new Image(BartCassidy.character_pic);    
-     */
-    String [] Character_Names = {"/Images/Bart Cassidy.jpg", "/Images/Black Jack.jpg", "/Images/Calamity Janet.jpg","/Images/El Gringo.jpg",
-        "/Images/Jesse Jones.jpg","/Images/Jourdonnais.jpg","Images/Kit Carlson.jpg","Images/Lucky Duke.jpg","/Images/Paul Regret.jpg","/Images/Pedro Ramirez.jpg",
-        "/Images/Rose Doolan.jpg","/Images/Sid Ketchum.jpg","/Images/Slab the Killer.jpg","/Images/Suzy Lafayette.jpg","/Images/Vulture Sam.jpg","/Images/Willy the Kid.jpg"};
-    /*
-     *  For the actual players...Fields are tagged as Pos1 (for the actual player) and increment clockwise to Pos2 through Pos8.
-     *  If fewer than 8 play, say only 4, it is possible to name Pos3 to Player 2, Pos5 to Player 3, and Pos7 to Player 4.  Could make the TitledPanes for the other positions
-     *  not visible.
-     *
-     *  As a side note...the individual @FXML declarations are required to be on individual lines.  The Scene Builder only recognizes the last element on the line
-     */
+    
     @FXML TitledPane Pos1_ID;
     @FXML TitledPane Pos2_ID;
     @FXML TitledPane Pos3_ID;
@@ -296,12 +132,109 @@ public class GameBoardController implements Initializable {
     @FXML ProgressBar Pos6_LP;
     @FXML ProgressBar Pos7_LP;
     @FXML ProgressBar Pos8_LP;
+    /*
+     *  Example of randomizing dice and use of imageview boxes.  Replace code
+     *   with appropriate dice class items.  Interacts with Hold/Re-Roll button just as an example.  This is to link the roll dice button with code.
+     */
+    @FXML
+    void Roll_Dice(ActionEvent event) {
+        game.getDice().rollDice();
+        updateDice();
+        Roll.setVisible(false);
+        ReRoll.setVisible(true);
+
+    } 
+
+    
+    /*
+     *  Example of randomizing dice and use of imageview boxes.  Replace code
+     *  with appropriate dice class items.  This is to link the Re-roll dice button with code.
+     *  Re-roll shows interaction with Hold.  Modify code to work with class abilities and reroll counts, max dynamite, etc.
+     */
+    @FXML
+    void ReRoll_Dice(ActionEvent event) {
+        if (Dice1_Hold.getValue()=="Re-Roll"){game.getDice().rollDieAtIndex(0);}
+        if (Dice2_Hold.getValue()=="Re-Roll"){game.getDice().rollDieAtIndex(1);}
+        if (Dice3_Hold.getValue()=="Re-Roll"){game.getDice().rollDieAtIndex(2);}
+        if (Dice4_Hold.getValue()=="Re-Roll"){game.getDice().rollDieAtIndex(3);}
+        if (Dice5_Hold.getValue()=="Re-Roll"){game.getDice().rollDieAtIndex(4);;}
+        updateDice();
+    }    
+
+    @FXML
+    void TakeAction(ActionEvent event) {
+       Dice1_Hold.setDisable(false);
+       Dice1_Hold.getSelectionModel().select("Select");
+       Dice2_Hold.setDisable(false);
+       Dice2_Hold.getSelectionModel().select("Select");
+       Dice3_Hold.setDisable(false);
+       Dice3_Hold.getSelectionModel().select("Select");
+       Dice4_Hold.setDisable(false);
+       Dice4_Hold.getSelectionModel().select("Select");
+       Dice5_Hold.setDisable(false);
+       Dice5_Hold.getSelectionModel().select("Select");
+       Roll.setVisible(true);
+       ReRoll.setVisible(false);
+    }
+    /*
+     *  Array for character role images.
+     */
+    String[] Character_Roles = {"/Images/Sheriff1.jpg","/Images/Outlaw.jpg","/Images/Deputy.jpg","/Images/Renegade.jpg","/Images/bang-back-of-card.jpg"};
+    /*
+     *  Array for character names.  Could add "/Path/character.jpg" to the character class.  In the initialization, the following line:
+     *   Image char_name = new Image(Character_Names[0]); would change to:
+     *   Image char_name = new Image(BartCassidy.character_pic);    
+     */
+    String [] Character_Names = {"/Images/Bart Cassidy.jpg", "/Images/Black Jack.jpg", "/Images/Calamity Janet.jpg","/Images/El Gringo.jpg",
+        "/Images/Jesse Jones.jpg","/Images/Jourdonnais.jpg","Images/Kit Carlson.jpg","Images/Lucky Duke.jpg","/Images/Paul Regret.jpg","/Images/Pedro Ramirez.jpg",
+        "/Images/Rose Doolan.jpg","/Images/Sid Ketchum.jpg","/Images/Slab the Killer.jpg","/Images/Suzy Lafayette.jpg","/Images/Vulture Sam.jpg","/Images/Willy the Kid.jpg"};
+    /*
+     *  For the actual players...Fields are tagged as Pos1 (for the actual player) and increment clockwise to Pos2 through Pos8.
+     *  If fewer than 8 play, say only 4, it is possible to name Pos3 to Player 2, Pos5 to Player 3, and Pos7 to Player 4.  Could make the TitledPanes for the other positions
+     *  not visible.
+     *
+     *  As a side note...the individual @FXML declarations are required to be on individual lines.  The Scene Builder only recognizes the last element on the line
+     */
+
+    /**
+     * updates the dice for the roll dice method
+     * @author Stephen Devaney
+     */
+    private void updateDice(){
+        Die_1.setImage(diefaces[game.getDice().getDieAtIndex(0)]);
+        Die_2.setImage(diefaces[game.getDice().getDieAtIndex(1)]);
+        Die_3.setImage(diefaces[game.getDice().getDieAtIndex(2)]);
+        Die_4.setImage(diefaces[game.getDice().getDieAtIndex(3)]);
+        Die_5.setImage(diefaces[game.getDice().getDieAtIndex(4)]);
+        
+        Dice1_Hold.setVisible(game.getDice().getRerollableAtIndex(0));
+        Dice2_Hold.setVisible(game.getDice().getRerollableAtIndex(1));
+        Dice3_Hold.setVisible(game.getDice().getRerollableAtIndex(2));
+        Dice4_Hold.setVisible(game.getDice().getRerollableAtIndex(3));
+        Dice5_Hold.setVisible(game.getDice().getRerollableAtIndex(4));
+        
+        if(!Dice1_Hold.isVisible()){Dice1_Hold.getSelectionModel().selectFirst();}
+        else {Dice1_Hold.getSelectionModel().select("Re-Roll");}
+        
+        if(!Dice2_Hold.isVisible()){Dice2_Hold.getSelectionModel().selectFirst();}
+        else {Dice2_Hold.getSelectionModel().select("Re-Roll");}
+        
+        if(!Dice3_Hold.isVisible()){Dice3_Hold.getSelectionModel().selectFirst();}
+        else {Dice3_Hold.getSelectionModel().select("Re-Roll");}
+        
+        if(!Dice4_Hold.isVisible()){Dice4_Hold.getSelectionModel().selectFirst();}
+        else {Dice4_Hold.getSelectionModel().select("Re-Roll");}
+        
+        if(!Dice5_Hold.isVisible()){Dice5_Hold.getSelectionModel().selectFirst();}
+        else {Dice5_Hold.getSelectionModel().select("Re-Roll");}
+    }
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
- 
+       game = new BangGame();
        Dice1_Hold.getItems().addAll("Hold", "Re-Roll");
        Dice2_Hold.getItems().addAll("Hold", "Re-Roll");
        Dice3_Hold.getItems().addAll("Hold", "Re-Roll");
@@ -421,23 +354,26 @@ public class GameBoardController implements Initializable {
        Pos8_Arrow.setProgress(0);
        Pos8_Max_LP.setText("8");
        Pos8_Cur_LP.setText("8");
-       Pos8_LP.setProgress(1);
+       
+       // progress bar info need from players
+       int curlife = 7;
+       int maxlife = 8;
+       double curlifedouble = curlife;
+       double maxlifedouble = maxlife;
+       Pos8_Max_LP.setText(Integer.toString(maxlife));
+       Pos8_Cur_LP.setText(Integer.toString(curlife));
+       Pos8_LP.setProgress(curlifedouble/maxlifedouble);
        Pos8_ID.setCollapsible(false);
+       
+
 
 //  If a position is not to be filled, set Pos8_ID.setVisible to false       
 //       Pos8_ID.setVisible(false);
-       
-       Image die_face = new Image(Dice_face[0]);
-       Die_1.setImage(die_face);
-       Die_2.setImage(die_face);
-       Die_3.setImage(die_face);
-       Die_4.setImage(die_face);
-       Die_5.setImage(die_face);
-
-
-// TODO
+       diefaces = new Image[7];
+       for(int i = 0; i < diefaces.length; i++){
+           diefaces[i] = new Image(diefacefilenames[i]);
+       }
+       updateDice();
     }  
-    
-    
 }
 

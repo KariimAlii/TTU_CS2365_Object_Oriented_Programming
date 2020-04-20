@@ -3,7 +3,7 @@
  * AUTHOR: Stephen C. Devaney
  * FOR: CS 2365 Object Oriented Programming Section 001 Spring 2020
  */
-package bangthedicegame;
+package dice;
 /**
  *
  * @author Stephen C. Devaney
@@ -12,6 +12,7 @@ public class BangDie {
     public final static int ARROW = 1, DYNAMITE = 2, BULLSEYE1 = 3, BULLSEYE2 = 4, BEER = 5, GATLING = 6; // constants for the die symbols
     private int symbol; // symbol of the die
     private boolean processedState;
+    private boolean rerollable;
     
     
     /** BangDie Base Constructor
@@ -19,7 +20,7 @@ public class BangDie {
      */
     public BangDie(){
         this.symbol = ARROW;
-        this.processedState = false;
+        this.processedState = false; 
     }
     
     
@@ -87,6 +88,9 @@ public class BangDie {
         return this.processedState;
     }
     
+    public boolean isRerollable(){
+        return this.rerollable;
+    }
     
     /** setDieState method
      * DESCRIPTION: process the die
@@ -106,10 +110,21 @@ public class BangDie {
     public void setDie(int symbol){
         if (ARROW <= symbol && symbol <= GATLING){
             this.symbol = symbol;
+            if (symbol == DYNAMITE){
+                this.rerollable = false;
+            }
+            else{
+                this.rerollable = true;
+            }
         }
         else{
             this.symbol = ARROW;
+            this.rerollable = true;
         }
         this.processedState = false;
+    }
+    
+    public void makeRerollable(){
+        this.rerollable = true;
     }
 }

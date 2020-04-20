@@ -13,5 +13,5 @@ enum Role {
     SHERIFF,
     RENEGADE,
     OUTLAW,
-    DEPUTY,
+    DEPUTY
 }

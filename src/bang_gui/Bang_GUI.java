@@ -9,7 +9,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -20,13 +19,12 @@ public class Bang_GUI extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Game Board.fxml"));
-        
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("BangStartUp.fxml"));
+        Parent root = loader.load();
         Scene scene = new Scene(root);
-        
         stage.setScene(scene);
         stage.setTitle("BANG - The Dice Game");
-        stage.getIcons().add(new Image("/Images/bang .jpg"));
         stage.show();
     }
 

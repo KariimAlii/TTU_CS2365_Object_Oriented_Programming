@@ -25,7 +25,9 @@ public class BangDice {
 
     }
 
-    
+    public int getNumberOfDice(){
+        return dice.length - 1;
+    }
     
     /**
      * DESCRIPTION: This method rolls a die at the index given in a dice array
@@ -65,6 +67,7 @@ public class BangDice {
         return returnString;
     }
     
+    
     /** DESCRIPTION: This method gets the value of the symbol at a specified index if the value is outside the range of the dice then 0 will be return if the value 
      *               if the index is negative will do reverse array indexing.
      * @param index: int
@@ -72,8 +75,20 @@ public class BangDice {
      */
     public int getDieAtIndex(int index){
         int returnvalue = 0;
-        if (0 <= index && index < dice.length) {returnvalue = dice[dice.length-1].getDieSymbol();}
+        if (0 <= index && index < dice.length) {returnvalue = dice[index].getDieSymbol();}
         else if (0 - dice.length <= index && index <=-1) {returnvalue = dice[dice.length - (0 - index)].getDieSymbol();}
         return returnvalue;
+    }
+    
+    public boolean getRerollableAtIndex(int index){
+        boolean returnvalue = true;
+        if (0 <= index && index < dice.length) {returnvalue = dice[index].isRerollable();}
+        else if (0 - dice.length <= index && index <=-1) {returnvalue = dice[dice.length - (0 - index)].isRerollable();}
+        return returnvalue;
+    }
+    
+    public void makeRerollableAtIndex(int index){
+        if (0 <= index && index < dice.length) {this.dice[index].makeRerollable();}
+        else if (0 - dice.length <= index && index <=-1) {dice[dice.length - (0 - index)].makeRerollable();}
     }
 }

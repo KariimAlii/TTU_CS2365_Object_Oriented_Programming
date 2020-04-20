@@ -71,17 +71,6 @@ public abstract class BangCharacter {
         return (this.curlifepoints <= 0);
     }
     
-    /**
-     * Method sets the characters values to 0 and returns the number of arrows the player held to the calling method
-     * @return
-     */
-    public void setDead(){
-        if(this.isDead()){
-            this.curlifepoints = 0;
-            this.maxlifepoints = 0;
-        }
-    }
-    
     
     /**
      *Method to decrease a characters current life points
