@@ -58,36 +58,37 @@ public class BangSetup {
         BangCharacter newCharacter;
         switch(characters[characterindex]){
             case 1:{
-                newCharacter = new BlackJack();
+                newCharacter = new JesseJones();
                 break;
             }
             case 2:{
-                newCharacter = new BlackJack();
+                newCharacter = new Jourdonnais();
                 break;
             }
             case 3:{
-                newCharacter = new BlackJack();
+                newCharacter = new LuckyDie();
                 break;
             }
             case 4:{
-                newCharacter = new BlackJack();
+                newCharacter = new PaulRegret();
                 break;
             }
             case 5:{
-                newCharacter = new BlackJack();
+                newCharacter = new PedroRamirez();
                 break;
             }
             case 6:{
-                newCharacter = new BlackJack();
+                newCharacter = new SidKetchum();
                 break;
             }
             case 7:{
-                newCharacter = new BlackJack();
+                newCharacter = new WillyTheKid();
                 break;
             }
             default:
                 newCharacter = new BlackJack();
         }
+        characterindex++;
         return newCharacter;
     }
 }

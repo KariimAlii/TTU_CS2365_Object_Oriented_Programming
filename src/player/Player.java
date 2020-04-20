@@ -21,10 +21,33 @@ public abstract class Player {
     private Player nextPlayer;
     private Player previousPlayer;
     
-    Player(PlayerType playertype, BangCharacter character, Role role){
+    Player(PlayerType playertype, BangCharacter character, char charrole){
         this.playertype = playertype;
         this.character = character;
-        this.role = role;
+        this.role = roleSetup(charrole);
+    }
+    
+    private Role roleSetup(char charrole){
+        Role returnvalue;
+        switch(charrole){
+            case 'S':{
+                returnvalue = Role.SHERIFF;
+                break;
+            }
+            case 'R':{
+                returnvalue = Role.RENEGADE;
+                break;
+            }
+            case 'D':{
+                returnvalue = Role.DEPUTY;
+                break;
+            }
+            default:{
+                returnvalue = Role.OUTLAW;
+                break;
+            }
+        }
+        return returnvalue;
     }
     
     public void rollDice(BangGame game){
@@ -108,19 +131,28 @@ public abstract class Player {
         return returnvalue;
     }
     
-    public Player[] getTargetsB1(){
-        Player targets[] = {this.getPreviousPlayer(), this.getNextPlayer()};
-        return targets;
+    public Player[] getTargetsB1(BangGame game){
+        Player curtargets[] = {this.getPreviousPlayer(), this.getNextPlayer()};
+        return curtargets;
     }
     
-    public Player[] getTargetsB2(){
-        Player targets[] = {this.getPreviousPlayer().getPreviousPlayer(), this.getNextPlayer().getNextPlayer()};
-        return targets;
+    public Player[] getTargetsB2(BangGame game){
+        Player curtargets[];
+        if(game.getCurNumPlayers() > 2) {
+            curtargets = new Player[2];
+            curtargets[0] = this.getPreviousPlayer().getPreviousPlayer();
+            curtargets[1] = this.getNextPlayer().getNextPlayer();
+        }
+        else{
+            curtargets = new Player[1];
+            curtargets[0] = this.getNextPlayer();
+        }
+        return curtargets;
     }
     
-    public abstract Player getSelectedB1();
+    public abstract Player getSelectedB1(BangGame game);
     
-    public abstract Player getSelectedB2();
+    public abstract Player getSelectedB2(BangGame game);
     
     public void shootTarget(Player target, BangGame game){
         target.takeDamage(game);

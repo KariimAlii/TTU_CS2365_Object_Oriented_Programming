@@ -8,7 +8,7 @@ package Game;
 import dice.BangDice;
 import java.util.LinkedList;
 import java.util.Random;
-import player.Player;
+import player.*;
 
 /**
  *
@@ -28,8 +28,10 @@ public class BangGame {
         Random rand;
         rand = new Random(System.currentTimeMillis());
         startingnumberofplayers = currentnumberofplayers = setup.getNumberOfPlayers();
-        
-
+        humanplayer = new HumanPlayer(setup.getCharacter(),setup.getRole());
+        for(int i = 1; i < startingnumberofplayers; i++){
+            
+        }
         dice = new BangDice();
         arrowpile = 9;
     }
