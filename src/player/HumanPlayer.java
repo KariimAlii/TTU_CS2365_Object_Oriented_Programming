@@ -19,6 +19,7 @@ public class HumanPlayer extends Player {
     }
     //TO DO Whole Class
     
+    @Override
     public Player getSelectedB1(BangGame game){
         BangCharacter temp2 = new BlackJack(); // Just here to get rid or temp errors this is not logic
         Player temp = new HumanPlayer(temp2,'s'); // Just here to get rid or temp errors this is not logic
@@ -26,6 +27,7 @@ public class HumanPlayer extends Player {
         // TO DO Whole Method
     }
     
+    @Override
     public Player getSelectedB2(BangGame game){
         BangCharacter temp2 = new BlackJack(); // Just here to get rid or temp errors this is not logic
         Player temp = new HumanPlayer(temp2,'s'); // Just here to get rid or temp errors this is not logic
