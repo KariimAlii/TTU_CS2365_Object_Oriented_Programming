@@ -98,42 +98,10 @@ public abstract class BangCharacter {
     }
     
     /**
-     * This Method checks to see if the character may take an arrow insead of losing a life point
-     * @return preset to false
-     */
-    public boolean canTakeArrowForDamage(){ // Bart Cassidy Only
-        return false;
-    }
-    
-    /**
      * This Method checks to see if the character may re-roll dynamite
      * @return preset to false
      */
     public boolean canRerollDynamite(){ // Black Jack Only
-        return false;
-    }
-    
-    /**
-     * This Method checks to see if the character has a different range value for bull's eye 1
-     * @return preset to 1
-     */
-    public int getB1Range(){ // Calmity Janet & Rose Doolan Only
-        return 1;
-    }
-    
-    /**
-     * This Method checks to see if the character has a different range value for bull's eye 2
-     * @return preset to 2
-     */
-    public int getB2Range(){ // Calmity Janet & Rose Doolan Only
-        return 2;
-    }
-    
-    /**
-     * This Method checks to see if the character makes a player take an arrow when he loses one or more life points
-     * @return preset to false
-     */
-    public boolean canShooterTakeArrow(){ // El Gringo Only
         return false;
     }
     
@@ -152,20 +120,12 @@ public abstract class BangCharacter {
     public boolean canReducedIndianAttack(){ // Jourdonnais Only
         return false;
     }
-    
-    /**
-     * This method checks to see if the character may discard one arrow from any player for each gatling gun that is rolled
-     * @return  preset to false
-     */
-    public boolean canDiscardArrowForGattling(){ // Kit Carlson Only
-        return false;
-    }
-    
+
     /**
      * This method checks to see if the character may make one extra re-roll
      * @return  preset to false
      */
-    public boolean canHaveExtraReroll(){ // Lucky Duke Only
+    public boolean canHaveExtraReroll(){ // Lucky Die Only
         return false;
     }
     
@@ -192,31 +152,7 @@ public abstract class BangCharacter {
     public boolean canGiveAnyPlayerLife(){ // Sid Ketchum Only
         return false;
     }
-    
-    /**
-     * This method checks to see if the character may double shots with a beer instead of healing
-     * @return  preset to false
-     */
-    public boolean canUseBeerToDoubleDamage(){ // Slab The Killer Only
-        return false;
-    }
-    
-    /**
-     * This method checks to see if the character can gain life at the end of there turn if they didn't roll any bull's eye 1 or bull's eye 2
-     * @return  preset to false
-     */
-    public boolean canGainLifeAtEnd(){ // Susy Lafayette Only
-        return false;
-    }
-    
-    /**
-     * This method checks to see if the character gains two life points each time another player is eliminated
-     * @return  preset to false
-     */
-    public boolean canGainLifeForDeadPlayers(){ // Vulture Sam only
-        return false;
-    }
-    
+
     /**
      * This method checks to see if the character only needs to gatling guns to set off the gatling
      * @return  preset to false
