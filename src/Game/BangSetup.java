@@ -7,6 +7,7 @@ package Game;
 
 import character.*;
 import java.util.Random;
+import player.Role;
 
 /**
  *
@@ -46,8 +47,26 @@ public class BangSetup {
         }    
     }
     
-    public char getRole(){
-        return roles[++roleindex];
+    public Role getRole(){
+        Role role;
+        switch(roles[roleindex]){
+            case 'S':{
+                role = Role.SHERIFF;
+                break;
+            }
+            case 'R':{
+                role = Role.RENEGADE;
+                break;
+            }
+            case 'D':{
+                role = Role.DEPUTY;
+                break;
+            }
+            default:
+                role = Role.OUTLAW;
+        }
+        roleindex++;
+        return role;
     }
     
     public int getNumberOfPlayers(){

@@ -16,7 +16,7 @@ import java.util.Random;
 public class RandomComputer extends Player {
     private final Random rand;
     
-    public RandomComputer(BangCharacter character, char role){
+    public RandomComputer(BangCharacter character, Role role){
         super(PlayerType.Computer, character, role); // This is constructor logic can keep this
         rand = new Random(System.currentTimeMillis());
     }

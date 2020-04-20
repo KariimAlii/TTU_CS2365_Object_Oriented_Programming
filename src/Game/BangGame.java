@@ -28,12 +28,34 @@ public class BangGame {
         Random rand;
         rand = new Random(System.currentTimeMillis());
         startingnumberofplayers = currentnumberofplayers = setup.getNumberOfPlayers();
-        humanplayer = new HumanPlayer(setup.getCharacter(),setup.getRole());
+        humanplayer = curplayer = new HumanPlayer(setup.getCharacter(),setup.getRole());
+        Role temp;
         for(int i = 1; i < startingnumberofplayers; i++){
-            
+            temp = setup.getRole();
+            if(temp == Role.SHERIFF){sheriff = new RandomComputer(setup.getCharacter(),temp);}
+            else if(temp == Role.RENEGADE){sheriff = new RandomComputer(setup.getCharacter(),temp);}
+            else if(temp == Role.DEPUTY){sheriff = new RandomComputer(setup.getCharacter(),temp);}
+            else {sheriff = new RandomComputer(setup.getCharacter(),temp);}
+            curplayer.setNextPlayer(sheriff);
+            sheriff.setPreviousPlayer(curplayer);
+            sheriff.setNextPlayer(humanplayer);
+            humanplayer.setPreviousPlayer(sheriff);
         }
+        setSheriff();
+        sheriff.setSheriff();
         dice = new BangDice();
         arrowpile = 9;
+    }
+    
+    private void setSheriff(){
+        if(humanplayer.getRole() == Role.SHERIFF) this.curplayer = this.sheriff = humanplayer;
+        else{
+            Player temp = humanplayer.getNextPlayer();
+            while (temp.getRole() != Role.SHERIFF && temp != humanplayer){
+                temp = temp.getNextPlayer();
+            }
+           this.curplayer = this.sheriff = temp;
+        }
     }
     
     public BangDice getDice(){

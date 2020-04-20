@@ -21,33 +21,26 @@ public abstract class Player {
     private Player nextPlayer;
     private Player previousPlayer;
     
-    Player(PlayerType playertype, BangCharacter character, char charrole){
+    Player(PlayerType playertype, BangCharacter character, Role setuprole){
         this.playertype = playertype;
         this.character = character;
-        this.role = roleSetup(charrole);
+        this.role = setuprole;
     }
     
-    private Role roleSetup(char charrole){
-        Role returnvalue;
-        switch(charrole){
-            case 'S':{
-                returnvalue = Role.SHERIFF;
-                break;
-            }
-            case 'R':{
-                returnvalue = Role.RENEGADE;
-                break;
-            }
-            case 'D':{
-                returnvalue = Role.DEPUTY;
-                break;
-            }
-            default:{
-                returnvalue = Role.OUTLAW;
-                break;
-            }
-        }
-        return returnvalue;
+    public Role getRole(){
+        return this.role;
+    }
+    
+    public void setNextPlayer(Player player){
+        this.nextPlayer = player;
+    }
+    
+    public void setSheriff(){
+        this.character.setSheriff();
+    }
+    
+    public void setPreviousPlayer(Player player){
+        this.previousPlayer = player;
     }
     
     public void rollDice(BangGame game){
