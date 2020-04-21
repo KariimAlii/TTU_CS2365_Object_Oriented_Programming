@@ -14,6 +14,7 @@ public class PedroRamirez extends BangCharacter{
     private static final String SPECIAL = "Each time you lose a life point, you may discard\n" +
                                           "one of your arrows. (You still lose the life point\n" +
                                           " when you use this ability.)";
+    private static final String IMAGEFILENAME = "/Images/Pedro Ramirez.jpg";
     
     /**
      * Constructor for Pedro Ramirez calls the super constructor from BangCharacter Class
@@ -39,6 +40,11 @@ public class PedroRamirez extends BangCharacter{
     @Override
     public String getSpecial(){
         return SPECIAL;
+    }
+    
+    @Override
+    public String getImageFileName(){
+        return IMAGEFILENAME;
     }
     
     /**

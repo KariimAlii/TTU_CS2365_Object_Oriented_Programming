@@ -14,6 +14,7 @@ public class WillyTheKid extends BangCharacter{
     private static final String SPECIAL = "You only need to use the Gatling Gun. You can\n" +
                                           "activate the Gatling Gun only once per turn,\n" +
                                           "even if you roll more than two results.";
+    private static final String IMAGEFILENAME = "/Images/Willy the Kid.jpg";
     
     /**
      * Constructor for Willy The Kid calls the super constructor from BangCharacter Class
@@ -39,6 +40,11 @@ public class WillyTheKid extends BangCharacter{
     @Override
     public String getSpecial(){
         return SPECIAL;
+    }
+    
+    @Override
+    public String getImageFileName(){
+        return IMAGEFILENAME;
     }
     
     /**

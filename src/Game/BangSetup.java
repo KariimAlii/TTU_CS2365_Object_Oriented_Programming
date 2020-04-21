@@ -22,6 +22,7 @@ public class BangSetup {
     private Random rand;
     
     public BangSetup(int numberplayers){
+        rand = new Random(System.currentTimeMillis());
         numberofplayers = numberplayers;
         shuffleRoles();
         shuffleCharacters();

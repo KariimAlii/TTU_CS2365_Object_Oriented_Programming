@@ -19,56 +19,64 @@ public class BangGame {
     private int currentnumberofplayers;
     private int numberofbadguys;
     private int arrowpile;
+    Player[] players;
     private Player sheriff;
     private Player curplayer;
-    private Player humanplayer;
     private BangDice dice;
     
     public BangGame(BangSetup setup){
         Random rand;
         rand = new Random(System.currentTimeMillis());
         startingnumberofplayers = currentnumberofplayers = setup.getNumberOfPlayers();
-        humanplayer = curplayer = new HumanPlayer(setup.getCharacter(),setup.getRole());
+        players = new Player[startingnumberofplayers];
+        sheriff = curplayer = new HumanPlayer(setup.getCharacter(),setup.getRole());
+        players[0] = curplayer;
         Role temp;
+        Player tempplayer;
         for(int i = 1; i < startingnumberofplayers; i++){
             temp = setup.getRole();
-            if(temp == Role.SHERIFF){sheriff = new RandomComputer(setup.getCharacter(),temp);}
-            else if(temp == Role.RENEGADE){sheriff = new RandomComputer(setup.getCharacter(),temp);}
-            else if(temp == Role.DEPUTY){sheriff = new RandomComputer(setup.getCharacter(),temp);}
-            else {sheriff = new RandomComputer(setup.getCharacter(),temp);}
-            curplayer.setNextPlayer(sheriff);
-            sheriff.setPreviousPlayer(curplayer);
-            sheriff.setNextPlayer(humanplayer);
-            humanplayer.setPreviousPlayer(sheriff);
+            if(temp == Role.SHERIFF){tempplayer = new RandomComputer(setup.getCharacter(),temp);}
+            else if(temp == Role.RENEGADE){tempplayer = new RandomComputer(setup.getCharacter(),temp);}
+            else if(temp == Role.DEPUTY){tempplayer = new RandomComputer(setup.getCharacter(),temp);}
+            else {tempplayer = new RandomComputer(setup.getCharacter(),temp);}
+            players[i] = tempplayer;
+            curplayer.setNextPlayer(tempplayer);
+            tempplayer.setPreviousPlayer(curplayer);
+            tempplayer.setNextPlayer(sheriff);
+            sheriff.setPreviousPlayer(tempplayer);
         }
         setSheriff();
-        sheriff.setSheriff();
         dice = new BangDice();
         arrowpile = 9;
     }
     
     private void setSheriff(){
-        if(humanplayer.getRole() == Role.SHERIFF) this.curplayer = this.sheriff = humanplayer;
+        if(this.sheriff.getRole() == Role.SHERIFF) this.curplayer = this.sheriff;
         else{
-            Player temp = humanplayer.getNextPlayer();
-            while (temp.getRole() != Role.SHERIFF && temp != humanplayer){
+            Player temp = this.sheriff.getNextPlayer();
+            while (temp.getRole() != Role.SHERIFF && temp != this.sheriff){
                 temp = temp.getNextPlayer();
             }
            this.curplayer = this.sheriff = temp;
         }
+        this.sheriff.setSheriff();
     }
     
     public BangDice getDice(){
-        return dice;
+        return this.dice;
     }
     
     public int getCurNumPlayers(){
-        return currentnumberofplayers;
+        return this.currentnumberofplayers;
+    }
+    
+    public int getStartingNumPlayers(){
+        return this.startingnumberofplayers;
     }
     
     public void takeArrow(){
-        arrowpile--;
-        if (arrowpile == 0){indianAttack();}
+        this.arrowpile--;
+        if (this.arrowpile == 0){indianAttack();}
     }
     
     public void returnArrows(int arrows){
@@ -85,11 +93,15 @@ public class BangGame {
     }
     
     private void shootGatlingGun(){
-        arrowpile = this.curplayer.individualGatlingGunShoot();
+        this.arrowpile = this.curplayer.individualGatlingGunShoot();
         Player temp = this.curplayer.getNextPlayer();
         while(temp != this.curplayer){
             temp.individualGatlingGunShot();
             temp.getNextPlayer();
         }
+    }
+    
+    public Player getPlayerAtIndex(int index){
+        return players[index];
     }
 }

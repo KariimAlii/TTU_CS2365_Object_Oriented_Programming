@@ -7,6 +7,7 @@ package player;
 
 import Game.BangGame;
 import character.BangCharacter;
+import javafx.scene.image.Image;
 
 /**
  *
@@ -29,6 +30,15 @@ public abstract class Player {
     
     public Role getRole(){
         return this.role;
+    }
+    
+    public int getRoleindex(){
+        int returnvalue = 0;
+        if(this.role == Role.SHERIFF){returnvalue = 1;}
+        else if (this.role == Role.RENEGADE && this.isPlayerDead()){returnvalue = 2;}
+        else if (this.role == Role.OUTLAW && this.isPlayerDead()){returnvalue = 3;}
+        else if (this.role == Role.DEPUTY && this.isPlayerDead()){returnvalue = 4;}
+        return returnvalue;
     }
     
     public void setNextPlayer(Player player){
@@ -63,6 +73,10 @@ public abstract class Player {
     
     public String getcharactername(){
         return character.getName();
+    }
+    
+    public Image getCharacterImage(){
+        return character.getImage();
     }
     
     public int getCurLife(){

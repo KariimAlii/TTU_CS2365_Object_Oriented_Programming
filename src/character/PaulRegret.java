@@ -12,6 +12,7 @@ package character;
 public class PaulRegret extends BangCharacter{
     private static final String NAME = "PAUL REGRET";
     private static final String SPECIAL = "You never lose life points to the Gatling Gun.";
+    private static final String IMAGEFILENAME = "/Images/Paul Regret.jpg";
 
     /**
      * Constructor for Paul Regret calls the super constructor from BangCharacter Class
@@ -37,6 +38,11 @@ public class PaulRegret extends BangCharacter{
     @Override
     public String getSpecial(){
         return SPECIAL;
+    }
+    
+    @Override
+    public String getImageFileName(){
+        return IMAGEFILENAME;
     }
     
     /**

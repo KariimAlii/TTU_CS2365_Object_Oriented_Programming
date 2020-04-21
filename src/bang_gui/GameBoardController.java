@@ -5,8 +5,7 @@
  */
 package bang_gui;
 
-import Game.BangGame;
-import Game.BangSetup;
+import Game.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +22,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import player.*;
 
 
 /**
@@ -32,6 +32,7 @@ import javafx.scene.image.ImageView;
  */
 public class GameBoardController implements Initializable {
 BangGame game;
+int playerindexes[];
     
 /*
  *  This section of code is for setting up the handles to the central portion of the board.
@@ -58,6 +59,13 @@ BangGame game;
     String [] diefacefilenames = {"/Images/bang .jpg","/Images/Bang-dice-1.jpg","/Images/Bang-dice-2.jpg","/Images/Bang-dice-3.jpg","/Images/Bang-dice-4.jpg",
                            "/Images/Bang-dice-5.jpg", "Images/Bang-dice-6.jpg"};
     Image diefaces[];
+    
+    /*
+     *  Array for character role images.
+     */
+    String[] Character_Roles = {"/Images/bang-back-of-card.jpg","/Images/Sheriff1.jpg","/Images/Renegade.jpg","/Images/Deputy.jpg","/Images/Outlaw.jpg"};
+    Image rolecards[];
+    
     
     @FXML ImageView Die_1;
     @FXML ImageView Die_2;
@@ -178,18 +186,6 @@ BangGame game;
        ReRoll.setVisible(false);
     }
     /*
-     *  Array for character role images.
-     */
-    String[] Character_Roles = {"/Images/Sheriff1.jpg","/Images/Outlaw.jpg","/Images/Deputy.jpg","/Images/Renegade.jpg","/Images/bang-back-of-card.jpg"};
-    /*
-     *  Array for character names.  Could add "/Path/character.jpg" to the character class.  In the initialization, the following line:
-     *   Image char_name = new Image(Character_Names[0]); would change to:
-     *   Image char_name = new Image(BartCassidy.character_pic);    
-     */
-    String [] Character_Names = {"/Images/Bart Cassidy.jpg", "/Images/Black Jack.jpg", "/Images/Calamity Janet.jpg","/Images/El Gringo.jpg",
-        "/Images/Jesse Jones.jpg","/Images/Jourdonnais.jpg","Images/Kit Carlson.jpg","Images/Lucky Duke.jpg","/Images/Paul Regret.jpg","/Images/Pedro Ramirez.jpg",
-        "/Images/Rose Doolan.jpg","/Images/Sid Ketchum.jpg","/Images/Slab the Killer.jpg","/Images/Suzy Lafayette.jpg","/Images/Vulture Sam.jpg","/Images/Willy the Kid.jpg"};
-    /*
      *  For the actual players...Fields are tagged as Pos1 (for the actual player) and increment clockwise to Pos2 through Pos8.
      *  If fewer than 8 play, say only 4, it is possible to name Pos3 to Player 2, Pos5 to Player 3, and Pos7 to Player 4.  Could make the TitledPanes for the other positions
      *  not visible.
@@ -230,6 +226,165 @@ BangGame game;
         else {Dice5_Hold.getSelectionModel().select("Re-Roll");}
     }
     
+    private void setupPlayers(){
+        playerindexes = new int[8];
+        if(game.getStartingNumPlayers() == 4){
+            Pos2_ID.setVisible(false);
+            Pos4_ID.setVisible(false);
+            Pos6_ID.setVisible(false);
+            Pos8_ID.setVisible(false);
+            playerindexes[0] = 0;
+            playerindexes[1] = 0;
+            playerindexes[2] = 1;
+            playerindexes[3] = 0;
+            playerindexes[4] = 2;
+            playerindexes[5] = 0;
+            playerindexes[6] = 3;
+            playerindexes[7] = 0;
+        }
+        else if(game.getStartingNumPlayers() == 5){
+            Pos4_ID.setVisible(false);
+            Pos6_ID.setVisible(false);
+            Pos8_ID.setVisible(false);
+            playerindexes[0] = 0;
+            playerindexes[1] = 1;
+            playerindexes[2] = 2;
+            playerindexes[3] = 0;
+            playerindexes[4] = 3;
+            playerindexes[5] = 0;
+            playerindexes[6] = 4;
+            playerindexes[7] = 0;
+        }
+        else if(game.getStartingNumPlayers() == 6){
+            Pos6_ID.setVisible(false);
+            Pos8_ID.setVisible(false);
+            playerindexes[0] = 0;
+            playerindexes[1] = 1;
+            playerindexes[2] = 2;
+            playerindexes[3] = 3;
+            playerindexes[4] = 4;
+            playerindexes[5] = 0;
+            playerindexes[6] = 5;
+            playerindexes[7] = 0;
+        }
+        else if(game.getStartingNumPlayers() == 7){
+            Pos8_ID.setVisible(false);
+            playerindexes[0] = 0;
+            playerindexes[1] = 1;
+            playerindexes[2] = 2;
+            playerindexes[3] = 3;
+            playerindexes[4] = 4;
+            playerindexes[5] = 5;
+            playerindexes[6] = 6;
+            playerindexes[7] = 0;
+        }
+        else{
+            playerindexes[0] = 0;
+            playerindexes[1] = 1;
+            playerindexes[2] = 2;
+            playerindexes[3] = 3;
+            playerindexes[4] = 4;
+            playerindexes[5] = 5;
+            playerindexes[6] = 6;
+            playerindexes[7] = 8;
+        }
+        Pos1_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[0]).getRoleindex()]);
+        Pos1_Name.setImage(game.getPlayerAtIndex(playerindexes[0]).getCharacterImage());
+        Pos1_ID.setText("You: " + game.getPlayerAtIndex(playerindexes[0]).getcharactername());
+        Pos1_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getArrows()));
+        Pos1_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getCurLife()));
+        Pos1_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getMaxLife()));
+        Pos1_LP.setProgress(game.getPlayerAtIndex(playerindexes[0]).getLifeProgress());
+        Pos1_ID.setCollapsible(false);
+        //  Indicates active player 
+        Pos1_ID.setStyle("-fx-border-color: red");
+        
+        Pos2_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[1]).getRoleindex()]);
+        Pos2_Name.setImage(game.getPlayerAtIndex(playerindexes[1]).getCharacterImage());
+        Pos2_ID.setText("Computer Player " + Integer.toString(playerindexes[1]) + game.getPlayerAtIndex(playerindexes[1]).getcharactername());
+        Pos2_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[1]).getArrows()));
+        Pos2_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[1]).getCurLife()));
+        Pos2_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[1]).getMaxLife()));
+        Pos2_LP.setProgress(game.getPlayerAtIndex(playerindexes[1]).getLifeProgress());
+        Pos2_ID.setCollapsible(false);
+        //  Indicates active player 
+        Pos2_ID.setStyle("-fx-border-color: transparent");
+        
+        Pos3_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[2]).getRoleindex()]);
+        Pos3_Name.setImage(game.getPlayerAtIndex(playerindexes[2]).getCharacterImage());
+        Pos3_ID.setText("Computer Player " + Integer.toString(playerindexes[2]) + game.getPlayerAtIndex(playerindexes[2]).getcharactername());
+        Pos3_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[2]).getArrows()));
+        Pos3_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[2]).getCurLife()));
+        Pos3_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[2]).getMaxLife()));
+        Pos3_LP.setProgress(game.getPlayerAtIndex(playerindexes[2]).getLifeProgress());
+        Pos3_ID.setCollapsible(false);
+        //  Indicates active player 
+        Pos3_ID.setStyle("-fx-border-color: transparent");
+        
+        Pos4_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[3]).getRoleindex()]);
+        Pos4_Name.setImage(game.getPlayerAtIndex(playerindexes[3]).getCharacterImage());
+        Pos4_ID.setText("Computer Player " + Integer.toString(playerindexes[3]) + game.getPlayerAtIndex(playerindexes[3]).getcharactername());
+        Pos4_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[3]).getArrows()));
+        Pos4_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[3]).getCurLife()));
+        Pos4_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[3]).getMaxLife()));
+        Pos4_LP.setProgress(game.getPlayerAtIndex(playerindexes[3]).getLifeProgress());
+        Pos4_ID.setCollapsible(false);
+        //  Indicates active player 
+        Pos4_ID.setStyle("-fx-border-color: transparent");
+        
+        Pos5_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[4]).getRoleindex()]);
+        Pos5_Name.setImage(game.getPlayerAtIndex(playerindexes[4]).getCharacterImage());
+        Pos5_ID.setText("Computer Player " + Integer.toString(playerindexes[4]) + game.getPlayerAtIndex(playerindexes[4]).getcharactername());
+        Pos5_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[4]).getArrows()));
+        Pos5_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[4]).getCurLife()));
+        Pos5_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[4]).getMaxLife()));
+        Pos5_LP.setProgress(game.getPlayerAtIndex(playerindexes[4]).getLifeProgress());
+        Pos5_ID.setCollapsible(false);
+        //  Indicates active player 
+        Pos5_ID.setStyle("-fx-border-color: transparent");
+        
+        Pos6_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[5]).getRoleindex()]);
+        Pos6_Name.setImage(game.getPlayerAtIndex(playerindexes[5]).getCharacterImage());
+        Pos6_ID.setText("Computer Player " + Integer.toString(playerindexes[5]) + game.getPlayerAtIndex(playerindexes[5]).getcharactername());
+        Pos6_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[5]).getArrows()));
+        Pos6_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[5]).getCurLife()));
+        Pos6_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[5]).getMaxLife()));
+        Pos6_LP.setProgress(game.getPlayerAtIndex(playerindexes[5]).getLifeProgress());
+        Pos6_ID.setCollapsible(false);
+        //  Indicates active player 
+        Pos6_ID.setStyle("-fx-border-color: transparent");
+        
+        Pos7_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[6]).getRoleindex()]);
+        Pos7_Name.setImage(game.getPlayerAtIndex(playerindexes[6]).getCharacterImage());
+        Pos7_ID.setText("Computer Player " + Integer.toString(playerindexes[6]) + game.getPlayerAtIndex(playerindexes[6]).getcharactername());
+        Pos7_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[6]).getArrows()));
+        Pos7_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[6]).getCurLife()));
+        Pos7_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[6]).getMaxLife()));
+        Pos7_LP.setProgress(game.getPlayerAtIndex(playerindexes[6]).getLifeProgress());
+        Pos7_ID.setCollapsible(false);
+        //  Indicates active player 
+        Pos7_ID.setStyle("-fx-border-color: transparent");
+        
+        Pos8_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[7]).getRoleindex()]);
+        Pos8_Name.setImage(game.getPlayerAtIndex(playerindexes[7]).getCharacterImage());
+        Pos8_ID.setText("Computer Player " + Integer.toString(playerindexes[7]) + game.getPlayerAtIndex(playerindexes[7]).getcharactername());
+        Pos8_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[7]).getArrows()));
+        Pos8_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[7]).getCurLife()));
+        Pos8_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[7]).getMaxLife()));
+        Pos8_LP.setProgress(game.getPlayerAtIndex(playerindexes[7]).getLifeProgress());
+        Pos8_ID.setCollapsible(false);
+        //  Indicates active player 
+        Pos8_ID.setStyle("-fx-border-color: transparent");
+    }
+    
+    public void updatePlayers(){
+        if(game.getStartingNumPlayers() == 4){;}
+        else if(game.getStartingNumPlayers() == 5){;}
+        else if(game.getStartingNumPlayers() == 6){;}
+        else if(game.getStartingNumPlayers() == 7){;}
+        else if(game.getStartingNumPlayers() == 8){;}
+    }
+    
     /**
      * Initializes the controller class.
      */
@@ -243,138 +398,18 @@ BangGame game;
        Dice4_Hold.getItems().addAll("Hold", "Re-Roll");
        Dice5_Hold.getItems().addAll("Hold", "Re-Roll");
        
-       Image role = new Image(Character_Roles[1]);
-       Pos1_Role.setImage(role);
-       Image char_name = new Image(Character_Names[0]);
-       Pos1_Name.setImage(char_name);
-       Pos1_ID.setText("Player 1");
-       //  Indicates active player 
-       Pos1_ID.setStyle("-fx-border-color: red");
-       Pos1_Cur_Arrow.setText("1");
-       //  If current and max arrows (max arrows = 9) are written to labels, the following would calculate the progress bar
-       double A_Value = Double.parseDouble(Pos1_Cur_Arrow.getText())/9.0;
-       Pos1_Arrow.setProgress(A_Value);
-       Pos1_Max_LP.setText("8");
-       Pos1_Cur_LP.setText("7");
-       //  If current and max life points are written to labels, the following would calculate the progress bar.
-       double LP_Value = Double.parseDouble(Pos1_Cur_LP.getText())/Double.parseDouble(Pos1_Max_LP.getText());
-       Pos1_LP.setProgress(LP_Value);
-       Pos1_ID.setCollapsible(false);
-       
-       role = new Image(Character_Roles[3]);
-       Pos2_Role.setImage(role);
-       char_name = new Image(Character_Names[1]);
-       Pos2_Name.setImage(char_name);
-       Pos2_ID.setText("Player 2");
-       //  Indicates active player 
-       Pos2_ID.setStyle("-fx-border-color: transparent");
-       Pos2_Cur_Arrow.setText("0");
-       Pos2_Arrow.setProgress(0);
-       Pos2_Max_LP.setText("8");
-       Pos2_Cur_LP.setText("8");
-       Pos2_LP.setProgress(1);
-       Pos2_ID.setCollapsible(false);
-
-       role = new Image(Character_Roles[0]);
-       Pos3_Role.setImage(role);
-       char_name = new Image(Character_Names[2]);
-       Pos3_Name.setImage(char_name);
-       Pos3_ID.setText("Player 3");
-       //  Indicates active player 
-       Pos3_ID.setStyle("-fx-border-color: transparent");
-       Pos3_Cur_Arrow.setText("0");
-       Pos3_Arrow.setProgress(0);
-       Pos3_Max_LP.setText("10");
-       Pos3_Cur_LP.setText("10");
-       Pos3_LP.setProgress(1);
-       Pos3_ID.setCollapsible(false);
-
-       role = new Image(Character_Roles[1]);
-       Pos4_Role.setImage(role);
-       char_name = new Image(Character_Names[3]);
-       Pos4_Name.setImage(char_name);
-       Pos4_ID.setText("Player 4");
-       //  Indicates active player 
-       Pos4_ID.setStyle("-fx-border-color: transparent");
-       Pos4_Cur_Arrow.setText("0");
-       Pos4_Arrow.setProgress(0);
-       Pos4_Max_LP.setText("7");
-       Pos4_Cur_LP.setText("7");
-       Pos4_LP.setProgress(1);
-       Pos4_ID.setCollapsible(false);
-
-       role = new Image(Character_Roles[1]);
-       Pos5_Role.setImage(role);
-       char_name = new Image(Character_Names[4]);
-       Pos5_Name.setImage(char_name);
-       Pos5_ID.setText("Player 5");
-       //  Indicates active player 
-       Pos5_ID.setStyle("-fx-border-color: transparent");
-       Pos5_Cur_Arrow.setText("0");
-       Pos5_Arrow.setProgress(0);
-       Pos5_Max_LP.setText("9");
-       Pos5_Cur_LP.setText("9");
-       Pos5_LP.setProgress(1);
-       Pos5_ID.setCollapsible(false);
-
-       role = new Image(Character_Roles[3]);
-       Pos6_Role.setImage(role);
-       char_name = new Image(Character_Names[5]);
-       Pos6_Name.setImage(char_name);
-       Pos6_ID.setText("Player 6");
-       //  Indicates active player 
-       Pos6_ID.setStyle("-fx-border-color: transparent");
-       Pos6_Cur_Arrow.setText("0");
-       Pos6_Arrow.setProgress(0);
-       Pos6_Max_LP.setText("7");
-       Pos6_Cur_LP.setText("7");
-       Pos6_LP.setProgress(1);
-       Pos6_ID.setCollapsible(false);
-
-       role = new Image(Character_Roles[2]);
-       Pos7_Role.setImage(role);
-       char_name = new Image(Character_Names[6]);
-       Pos7_Name.setImage(char_name);
-       Pos7_ID.setText("Player 7");
-       //  Indicates active player 
-       Pos7_ID.setStyle("-fx-border-color: transparent");
-       Pos7_Cur_Arrow.setText("0");
-       Pos7_Arrow.setProgress(0);
-       Pos7_Max_LP.setText("7");
-       Pos7_Cur_LP.setText("7");
-       Pos7_LP.setProgress(1);
-       Pos7_ID.setCollapsible(false);
-
-       role = new Image(Character_Roles[2]);
-       Pos8_Role.setImage(role);
-       char_name = new Image(Character_Names[7]);
-       Pos8_Name.setImage(char_name);
-       Pos8_ID.setText("Player 8");
-       //  Indicates active player 
-       Pos8_ID.setStyle("-fx-border-color: transparent");
-       Pos8_Cur_Arrow.setText("0");
-       Pos8_Arrow.setProgress(0);
-       Pos8_Max_LP.setText("8");
-       Pos8_Cur_LP.setText("8");
-       
-       // progress bar info need from players
-       int curlife = 7;
-       int maxlife = 8;
-       double curlifedouble = curlife;
-       double maxlifedouble = maxlife;
-       Pos8_Max_LP.setText(Integer.toString(maxlife));
-       Pos8_Cur_LP.setText(Integer.toString(curlife));
-       Pos8_LP.setProgress(curlifedouble/maxlifedouble);
-       Pos8_ID.setCollapsible(false);
-       
-
-
-//  If a position is not to be filled, set Pos8_ID.setVisible to false       
-//       Pos8_ID.setVisible(false);
        diefaces = new Image[7];
        for(int i = 0; i < diefaces.length; i++){
            diefaces[i] = new Image(diefacefilenames[i]);
        }
+       
+       rolecards = new Image[5];
+       for(int i = 0; i < rolecards.length; i++){
+           rolecards[i] = new Image(Character_Roles[i]);
+       }
+       
+       setupPlayers();
+       
        updateDice();
     }  
 }

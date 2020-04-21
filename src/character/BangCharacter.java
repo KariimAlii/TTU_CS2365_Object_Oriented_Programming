@@ -5,6 +5,8 @@
  */
 package character;
 
+import javafx.scene.image.Image;
+
 /**
  * This Class is an abstract class used to implement a character for bang the dice
  * game.
@@ -22,6 +24,12 @@ public abstract class BangCharacter {
     public BangCharacter(int life){
         curlifepoints = maxlifepoints = life;
     }
+    
+    public Image getImage(){
+        return new Image(getImageFileName());
+    }
+    
+    public abstract String getImageFileName();
     
     /**
      * Abstract Method to get the name of the character, defined in individual character classes.
