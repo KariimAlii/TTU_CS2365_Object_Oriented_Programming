@@ -15,6 +15,7 @@ public class BlackJack extends BangCharacter {
                                           "If you roll three or more Dynamite at once (or in\n" +
                                           "total if you didn’t re-roll them), follow the usual\n" +
                                           "rules (your turn ends, etc.).";
+    private static final String IMAGEFILENAME = "/Images/Black Jack.jpg";
     
     /**
      * Constructor for Black Jack calls the super constructor from BangCharacter Class
@@ -40,6 +41,11 @@ public class BlackJack extends BangCharacter {
     @Override
     public String getSpecial(){
         return SPECIAL;
+    }
+    
+    @Override
+    public String getImageFileName(){
+        return IMAGEFILENAME;
     }
     
     /**

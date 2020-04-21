@@ -14,6 +14,7 @@ public class JesseJones extends BangCharacter{
     private static final String SPECIAL = "If you have four life points or less, you gain two if you\n" +
                                           "use a beer for yourself. For example, if you have four life\n" +
                                           "points and use two beers, you get four life points.";
+    private static final String IMAGEFILENAME = "/Images/Jesse Jones.jpg";
     
     /**
      * Constructor for Jesse Jones calls the super constructor from BangCharacter Class
@@ -39,6 +40,11 @@ public class JesseJones extends BangCharacter{
     @Override
     public String getSpecial(){
         return SPECIAL;
+    }
+    
+    @Override
+    public String getImageFileName(){
+        return IMAGEFILENAME;
     }
     
     /**

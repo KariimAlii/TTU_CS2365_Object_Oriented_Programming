@@ -9,7 +9,7 @@ package player;
  * enum type for the character roles
  * @author Stephen C. Devaney
  */
-enum Role {
+public enum Role {
     SHERIFF,
     RENEGADE,
     OUTLAW,
