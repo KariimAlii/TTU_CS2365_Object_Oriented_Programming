@@ -286,7 +286,7 @@ int playerindexes[];
             playerindexes[4] = 4;
             playerindexes[5] = 5;
             playerindexes[6] = 6;
-            playerindexes[7] = 8;
+            playerindexes[7] = 7;
         }
         Pos1_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[0]).getRoleindex()]);
         Pos1_Name.setImage(game.getPlayerAtIndex(playerindexes[0]).getCharacterImage());
@@ -301,7 +301,7 @@ int playerindexes[];
         
         Pos2_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[1]).getRoleindex()]);
         Pos2_Name.setImage(game.getPlayerAtIndex(playerindexes[1]).getCharacterImage());
-        Pos2_ID.setText("Computer Player " + Integer.toString(playerindexes[1]) + game.getPlayerAtIndex(playerindexes[1]).getcharactername());
+        Pos2_ID.setText("Computer Player " + Integer.toString(playerindexes[1]) + ": " + game.getPlayerAtIndex(playerindexes[1]).getcharactername());
         Pos2_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[1]).getArrows()));
         Pos2_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[1]).getCurLife()));
         Pos2_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[1]).getMaxLife()));
@@ -312,7 +312,7 @@ int playerindexes[];
         
         Pos3_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[2]).getRoleindex()]);
         Pos3_Name.setImage(game.getPlayerAtIndex(playerindexes[2]).getCharacterImage());
-        Pos3_ID.setText("Computer Player " + Integer.toString(playerindexes[2]) + game.getPlayerAtIndex(playerindexes[2]).getcharactername());
+        Pos3_ID.setText("Computer Player " + Integer.toString(playerindexes[2]) + ": " + game.getPlayerAtIndex(playerindexes[2]).getcharactername());
         Pos3_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[2]).getArrows()));
         Pos3_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[2]).getCurLife()));
         Pos3_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[2]).getMaxLife()));
@@ -323,7 +323,7 @@ int playerindexes[];
         
         Pos4_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[3]).getRoleindex()]);
         Pos4_Name.setImage(game.getPlayerAtIndex(playerindexes[3]).getCharacterImage());
-        Pos4_ID.setText("Computer Player " + Integer.toString(playerindexes[3]) + game.getPlayerAtIndex(playerindexes[3]).getcharactername());
+        Pos4_ID.setText("Computer Player " + Integer.toString(playerindexes[3]) + ": " + game.getPlayerAtIndex(playerindexes[3]).getcharactername());
         Pos4_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[3]).getArrows()));
         Pos4_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[3]).getCurLife()));
         Pos4_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[3]).getMaxLife()));
@@ -334,7 +334,7 @@ int playerindexes[];
         
         Pos5_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[4]).getRoleindex()]);
         Pos5_Name.setImage(game.getPlayerAtIndex(playerindexes[4]).getCharacterImage());
-        Pos5_ID.setText("Computer Player " + Integer.toString(playerindexes[4]) + game.getPlayerAtIndex(playerindexes[4]).getcharactername());
+        Pos5_ID.setText("Computer Player " + Integer.toString(playerindexes[4]) + ": " + game.getPlayerAtIndex(playerindexes[4]).getcharactername());
         Pos5_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[4]).getArrows()));
         Pos5_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[4]).getCurLife()));
         Pos5_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[4]).getMaxLife()));
@@ -345,7 +345,7 @@ int playerindexes[];
         
         Pos6_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[5]).getRoleindex()]);
         Pos6_Name.setImage(game.getPlayerAtIndex(playerindexes[5]).getCharacterImage());
-        Pos6_ID.setText("Computer Player " + Integer.toString(playerindexes[5]) + game.getPlayerAtIndex(playerindexes[5]).getcharactername());
+        Pos6_ID.setText("Computer Player " + Integer.toString(playerindexes[5]) + ": " + game.getPlayerAtIndex(playerindexes[5]).getcharactername());
         Pos6_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[5]).getArrows()));
         Pos6_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[5]).getCurLife()));
         Pos6_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[5]).getMaxLife()));
@@ -356,7 +356,7 @@ int playerindexes[];
         
         Pos7_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[6]).getRoleindex()]);
         Pos7_Name.setImage(game.getPlayerAtIndex(playerindexes[6]).getCharacterImage());
-        Pos7_ID.setText("Computer Player " + Integer.toString(playerindexes[6]) + game.getPlayerAtIndex(playerindexes[6]).getcharactername());
+        Pos7_ID.setText("Computer Player " + Integer.toString(playerindexes[6]) + ": " + game.getPlayerAtIndex(playerindexes[6]).getcharactername());
         Pos7_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[6]).getArrows()));
         Pos7_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[6]).getCurLife()));
         Pos7_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[6]).getMaxLife()));
@@ -367,7 +367,7 @@ int playerindexes[];
         
         Pos8_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[7]).getRoleindex()]);
         Pos8_Name.setImage(game.getPlayerAtIndex(playerindexes[7]).getCharacterImage());
-        Pos8_ID.setText("Computer Player " + Integer.toString(playerindexes[7]) + game.getPlayerAtIndex(playerindexes[7]).getcharactername());
+        Pos8_ID.setText("Computer Player " + Integer.toString(playerindexes[7]) + ": " + game.getPlayerAtIndex(playerindexes[7]).getcharactername());
         Pos8_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[7]).getArrows()));
         Pos8_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[7]).getCurLife()));
         Pos8_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[7]).getMaxLife()));

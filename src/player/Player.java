@@ -26,6 +26,7 @@ public abstract class Player {
         this.playertype = playertype;
         this.character = character;
         this.role = setuprole;
+        if (this.role == Role.SHERIFF){character.setSheriff();}
     }
     
     public Role getRole(){
@@ -45,9 +46,6 @@ public abstract class Player {
         this.nextPlayer = player;
     }
     
-    public void setSheriff(){
-        this.character.setSheriff();
-    }
     
     public void setPreviousPlayer(Player player){
         this.previousPlayer = player;

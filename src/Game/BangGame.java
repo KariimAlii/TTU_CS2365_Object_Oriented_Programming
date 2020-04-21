@@ -29,37 +29,29 @@ public class BangGame {
         rand = new Random(System.currentTimeMillis());
         startingnumberofplayers = currentnumberofplayers = setup.getNumberOfPlayers();
         players = new Player[startingnumberofplayers];
-        sheriff = curplayer = new HumanPlayer(setup.getCharacter(),setup.getRole());
+        Player templayer2 = curplayer = new HumanPlayer(setup.getCharacter(),setup.getRole());
         players[0] = curplayer;
         Role temp;
         Player tempplayer;
         for(int i = 1; i < startingnumberofplayers; i++){
             temp = setup.getRole();
-            if(temp == Role.SHERIFF){tempplayer = new RandomComputer(setup.getCharacter(),temp);}
+            if(temp == Role.SHERIFF){
+                tempplayer = new RandomComputer(setup.getCharacter(),temp);
+                this.sheriff = tempplayer;
+            }
             else if(temp == Role.RENEGADE){tempplayer = new RandomComputer(setup.getCharacter(),temp);}
             else if(temp == Role.DEPUTY){tempplayer = new RandomComputer(setup.getCharacter(),temp);}
             else {tempplayer = new RandomComputer(setup.getCharacter(),temp);}
+            //check this iw working properly
             players[i] = tempplayer;
             curplayer.setNextPlayer(tempplayer);
             tempplayer.setPreviousPlayer(curplayer);
-            tempplayer.setNextPlayer(sheriff);
-            sheriff.setPreviousPlayer(tempplayer);
+            tempplayer.setNextPlayer(templayer2);
+            templayer2.setPreviousPlayer(tempplayer);
         }
-        setSheriff();
+        System.out.println("The Sheriff is: " + this.sheriff.getcharactername());
         dice = new BangDice();
         arrowpile = 9;
-    }
-    
-    private void setSheriff(){
-        if(this.sheriff.getRole() == Role.SHERIFF) this.curplayer = this.sheriff;
-        else{
-            Player temp = this.sheriff.getNextPlayer();
-            while (temp.getRole() != Role.SHERIFF && temp != this.sheriff){
-                temp = temp.getNextPlayer();
-            }
-           this.curplayer = this.sheriff = temp;
-        }
-        this.sheriff.setSheriff();
     }
     
     public BangDice getDice(){
