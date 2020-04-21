@@ -86,7 +86,7 @@ public class BangSetup {
                 break;
             }
             case 3:{
-                newCharacter = new LuckyDie();
+                newCharacter = new LuckyDuke();
                 break;
             }
             case 4:{

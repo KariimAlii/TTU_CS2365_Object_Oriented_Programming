@@ -9,8 +9,8 @@ package character;
  *
  * @author Stephen C. Devaney
  */
-public class LuckyDie extends BangCharacter{
-    private static final String NAME = "LUCKY DIE";
+public class LuckyDuke extends BangCharacter{
+    private static final String NAME = "LUCKY DUKE";
     private static final String SPECIAL = "You may make one extra re-roll. (You may roll the \n" +
                                           "dice a total of four times on your turn.)";
     private static final String IMAGEFILENAME = "Images/Lucky Duke.jpg";
@@ -18,7 +18,7 @@ public class LuckyDie extends BangCharacter{
     /**
      * Constructor for Lucky Die calls the super constructor from BangCharacter Class
      */
-    public LuckyDie(){
+    public LuckyDuke(){
         super(8);
     }
     

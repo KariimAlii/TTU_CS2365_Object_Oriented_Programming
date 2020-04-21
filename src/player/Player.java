@@ -36,9 +36,9 @@ public abstract class Player {
     public int getRoleindex(){
         int returnvalue = 0;
         if(this.role == Role.SHERIFF){returnvalue = 1;}
-        else if (this.role == Role.RENEGADE && this.isPlayerDead()){returnvalue = 2;}
-        else if (this.role == Role.OUTLAW && this.isPlayerDead()){returnvalue = 3;}
-        else if (this.role == Role.DEPUTY && this.isPlayerDead()){returnvalue = 4;}
+        else if (this.role == Role.RENEGADE && (this.isPlayerDead() || this.playertype == PlayerType.Human)){returnvalue = 2;}
+        else if (this.role == Role.OUTLAW && (this.isPlayerDead() || this.playertype == PlayerType.Human)){returnvalue = 3;}
+        else if (this.role == Role.DEPUTY && (this.isPlayerDead() || this.playertype == PlayerType.Human)){returnvalue = 4;}
         return returnvalue;
     }
     
