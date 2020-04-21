@@ -141,6 +141,11 @@ int playerindexes[];
     @FXML ProgressBar Pos6_LP;
     @FXML ProgressBar Pos7_LP;
     @FXML ProgressBar Pos8_LP;
+    
+    public void controllerSetup(BangGame game){
+        this.game = game;
+    }
+    
     /*
      *  Example of randomizing dice and use of imageview boxes.  Replace code
      *   with appropriate dice class items.  Interacts with Hold/Re-Roll button just as an example.  This is to link the roll dice button with code.
@@ -390,8 +395,6 @@ int playerindexes[];
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       BangSetup setup = new BangSetup(7);
-       game = new BangGame(setup);
        Dice1_Hold.getItems().addAll("Hold", "Re-Roll");
        Dice2_Hold.getItems().addAll("Hold", "Re-Roll");
        Dice3_Hold.getItems().addAll("Hold", "Re-Roll");

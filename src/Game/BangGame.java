@@ -49,7 +49,6 @@ public class BangGame {
             tempplayer.setNextPlayer(templayer2);
             templayer2.setPreviousPlayer(tempplayer);
         }
-        System.out.println("The Sheriff is: " + this.sheriff.getcharactername());
         dice = new BangDice();
         arrowpile = 9;
     }

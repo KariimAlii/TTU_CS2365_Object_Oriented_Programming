@@ -32,7 +32,6 @@ public class BangSetup {
         char temp;
         for(int i = 0; i < numberofplayers; i++){
             int randomnumb = rand.nextInt(numberofplayers);
-            System.out.println("random number generator: " + randomnumb);
             temp = roles[i];
             roles[i] = roles[randomnumb];
             roles[randomnumb] = temp;
@@ -68,7 +67,6 @@ public class BangSetup {
                 role = Role.OUTLAW;
         }
         roleindex++;
-        System.out.println("Roles: " + role);
         return role;
     }
     
