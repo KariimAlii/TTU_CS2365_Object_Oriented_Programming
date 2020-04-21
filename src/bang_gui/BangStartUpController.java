@@ -5,7 +5,7 @@
  */
 package bang_gui;
 
-import Game.BangGame;
+import Game.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -71,10 +71,13 @@ public class BangStartUpController implements Initializable {
      * view
      */
     public void startGame(ActionEvent event) throws Exception{
-        //BangGame game = new BangGame();
+        BangSetup setup = new BangSetup(getNumberOfPlayers());
+        BangGame game = new BangGame(setup);
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("GameBoard.fxml"));
         Parent root = loader.load();
+        GameBoardController controller = loader.getController();
+        controller.controllerSetup(game);
         Scene scene = new Scene(root);
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
@@ -86,11 +89,11 @@ public class BangStartUpController implements Initializable {
     
     private int getNumberOfPlayers(){
         int returnvalue = 0;
-        if (radiobutton3.isSelected()) returnvalue = 3;
-        else if (radiobutton4.isSelected()) returnvalue = 4;
-        else if (radiobutton5.isSelected()) returnvalue = 5;
-        else if (radiobutton6.isSelected()) returnvalue = 6;
-        else if (radiobutton7.isSelected()) returnvalue = 7;
+        if (radiobutton3.isSelected()) returnvalue = 4;
+        else if (radiobutton4.isSelected()) returnvalue = 5;
+        else if (radiobutton5.isSelected()) returnvalue = 6;
+        else if (radiobutton6.isSelected()) returnvalue = 7;
+        else if (radiobutton7.isSelected()) returnvalue = 8;
         return returnvalue;
     }
 }
