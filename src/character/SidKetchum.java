@@ -13,6 +13,7 @@ public class SidKetchum extends BangCharacter{
     private static final String NAME = "SID KETCHUM";
     private static final String SPECIAL = "At the beginning of your turn, any player of your\n" +
                                           "choice gains one life point. (You may also choose yourself.)";
+    private static final String IMAGEFILENAME = "/Images/Sid Ketchum.jpg";
     
     /**
      * Constructor for Sid Ketchum calls the super constructor from BangCharacter Class
@@ -38,6 +39,11 @@ public class SidKetchum extends BangCharacter{
     @Override
     public String getSpecial(){
         return SPECIAL;
+    }
+    
+    @Override
+    public String getImageFileName(){
+        return IMAGEFILENAME;
     }
     
     /**

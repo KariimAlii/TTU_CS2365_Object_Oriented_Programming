@@ -13,6 +13,7 @@ public class LuckyDie extends BangCharacter{
     private static final String NAME = "LUCKY DIE";
     private static final String SPECIAL = "You may make one extra re-roll. (You may roll the \n" +
                                           "dice a total of four times on your turn.)";
+    private static final String IMAGEFILENAME = "Images/Lucky Duke.jpg";
     
     /**
      * Constructor for Lucky Die calls the super constructor from BangCharacter Class
@@ -38,6 +39,11 @@ public class LuckyDie extends BangCharacter{
     @Override
     public String getSpecial(){
         return SPECIAL;
+    }
+    
+    @Override
+    public String getImageFileName(){
+        return IMAGEFILENAME;
     }
     
     /**

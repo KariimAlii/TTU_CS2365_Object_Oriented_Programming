@@ -7,6 +7,7 @@ package player;
 
 import Game.BangGame;
 import character.BangCharacter;
+import javafx.scene.image.Image;
 
 /**
  *
@@ -21,10 +22,33 @@ public abstract class Player {
     private Player nextPlayer;
     private Player previousPlayer;
     
-    Player(PlayerType playertype, BangCharacter character, Role role){
+    Player(PlayerType playertype, BangCharacter character, Role setuprole){
         this.playertype = playertype;
         this.character = character;
-        this.role = role;
+        this.role = setuprole;
+        if (this.role == Role.SHERIFF){character.setSheriff();}
+    }
+    
+    public Role getRole(){
+        return this.role;
+    }
+    
+    public int getRoleindex(){
+        int returnvalue = 0;
+        if(this.role == Role.SHERIFF){returnvalue = 1;}
+        else if (this.role == Role.RENEGADE && this.isPlayerDead()){returnvalue = 2;}
+        else if (this.role == Role.OUTLAW && this.isPlayerDead()){returnvalue = 3;}
+        else if (this.role == Role.DEPUTY && this.isPlayerDead()){returnvalue = 4;}
+        return returnvalue;
+    }
+    
+    public void setNextPlayer(Player player){
+        this.nextPlayer = player;
+    }
+    
+    
+    public void setPreviousPlayer(Player player){
+        this.previousPlayer = player;
     }
     
     public void rollDice(BangGame game){
@@ -47,6 +71,10 @@ public abstract class Player {
     
     public String getcharactername(){
         return character.getName();
+    }
+    
+    public Image getCharacterImage(){
+        return character.getImage();
     }
     
     public int getCurLife(){
@@ -108,19 +136,28 @@ public abstract class Player {
         return returnvalue;
     }
     
-    public Player[] getTargetsB1(){
-        Player targets[] = {this.getPreviousPlayer(), this.getNextPlayer()};
-        return targets;
+    public Player[] getTargetsB1(BangGame game){
+        Player curtargets[] = {this.getPreviousPlayer(), this.getNextPlayer()};
+        return curtargets;
     }
     
-    public Player[] getTargetsB2(){
-        Player targets[] = {this.getPreviousPlayer().getPreviousPlayer(), this.getNextPlayer().getNextPlayer()};
-        return targets;
+    public Player[] getTargetsB2(BangGame game){
+        Player curtargets[];
+        if(game.getCurNumPlayers() > 2) {
+            curtargets = new Player[2];
+            curtargets[0] = this.getPreviousPlayer().getPreviousPlayer();
+            curtargets[1] = this.getNextPlayer().getNextPlayer();
+        }
+        else{
+            curtargets = new Player[1];
+            curtargets[0] = this.getNextPlayer();
+        }
+        return curtargets;
     }
     
-    public abstract Player getSelectedB1();
+    public abstract Player getSelectedB1(BangGame game);
     
-    public abstract Player getSelectedB2();
+    public abstract Player getSelectedB2(BangGame game);
     
     public void shootTarget(Player target, BangGame game){
         target.takeDamage(game);
