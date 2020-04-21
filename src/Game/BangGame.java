@@ -29,7 +29,7 @@ public class BangGame {
         rand = new Random(System.currentTimeMillis());
         startingnumberofplayers = currentnumberofplayers = setup.getNumberOfPlayers();
         players = new Player[startingnumberofplayers];
-        Player templayer2 = curplayer = new HumanPlayer(setup.getCharacter(),setup.getRole());
+        Player templayer2 = this.sheriff = this.curplayer = new HumanPlayer(setup.getCharacter(),setup.getRole());
         players[0] = curplayer;
         Role temp;
         Player tempplayer;

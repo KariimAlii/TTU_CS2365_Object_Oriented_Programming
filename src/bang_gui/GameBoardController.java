@@ -390,7 +390,7 @@ int playerindexes[];
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       BangSetup setup = new BangSetup(8);
+       BangSetup setup = new BangSetup(7);
        game = new BangGame(setup);
        Dice1_Hold.getItems().addAll("Hold", "Re-Roll");
        Dice2_Hold.getItems().addAll("Hold", "Re-Roll");
