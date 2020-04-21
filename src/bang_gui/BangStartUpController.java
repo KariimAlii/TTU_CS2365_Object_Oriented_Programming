@@ -72,28 +72,31 @@ public class BangStartUpController implements Initializable {
      */
     public void startGame(ActionEvent event) throws Exception{
         BangSetup setup = new BangSetup(getNumberOfPlayers());
-        BangGame game = new BangGame(setup);
+        
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("GameBoard.fxml"));
         Parent root = loader.load();
-        GameBoardController controller = loader.getController();
-        controller.controllerSetup(game);
+        
         Scene scene = new Scene(root);
+        
+        GameBoardController controller = loader.getController();
+        controller.controllerSetup(setup);
+        
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
-        stage.setTitle("BANG - The Dice Game");
         stage.getIcons().add(new Image("/Images/bang .jpg"));
         stage.setResizable(false);
         stage.show();
     }
     
     private int getNumberOfPlayers(){
-        int returnvalue = 0;
+        int returnvalue = 4;
         if (radiobutton3.isSelected()) returnvalue = 4;
         else if (radiobutton4.isSelected()) returnvalue = 5;
         else if (radiobutton5.isSelected()) returnvalue = 6;
         else if (radiobutton6.isSelected()) returnvalue = 7;
         else if (radiobutton7.isSelected()) returnvalue = 8;
+        System.out.println("Number of Starting Players: " + returnvalue);
         return returnvalue;
     }
 }

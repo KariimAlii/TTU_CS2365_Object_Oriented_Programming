@@ -206,12 +206,12 @@
                            <children>
                               <VBox prefHeight="56.0" prefWidth="77.0">
                                  <children>
-                                    <Label text="Arrows">
+                                    <Label text="Life">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
                                     </Label>
-                                    <Label text="Life">
+                                    <Label text="Arrows">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -223,12 +223,12 @@
                               </VBox>
                               <VBox prefHeight="90.0" prefWidth="36.0">
                                  <children>
-                                    <Label fx:id="Pos4_Cur_Arrow" text="1">
+                                    <Label fx:id="Pos4_Cur_LP" minWidth="30.0" text="10">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="Pos4_Cur_LP" text="8">
+                                    <Label fx:id="Pos4_Cur_Arrow" minWidth="30.0" text="1">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -238,13 +238,8 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
                               </VBox>
-                              <VBox prefHeight="66.0" prefWidth="240.0">
+                              <VBox prefHeight="40.0" prefWidth="240.0">
                                  <children>
-                                    <ProgressBar fx:id="Pos4_Arrow" prefHeight="28.0" prefWidth="244.0" progress="0.11">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </ProgressBar>
                                     <ProgressBar fx:id="Pos4_LP" prefHeight="28.0" prefWidth="247.0" progress="1.0">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -257,12 +252,7 @@
                               </VBox>
                               <VBox prefHeight="90.0" prefWidth="35.0">
                                  <children>
-                                    <Label text="9">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label fx:id="Pos4_Max_LP" text="8">
+                                    <Label fx:id="Pos4_Max_LP" minWidth="30.0" text="10">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -312,12 +302,12 @@
                            <children>
                               <VBox prefHeight="56.0" prefWidth="77.0">
                                  <children>
-                                    <Label text="Arrows">
+                                    <Label text="Life">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
                                     </Label>
-                                    <Label text="Life">
+                                    <Label text="Arrows">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -329,12 +319,12 @@
                               </VBox>
                               <VBox prefHeight="90.0" prefWidth="36.0">
                                  <children>
-                                    <Label fx:id="Pos5_Cur_Arrow" text="0">
+                                    <Label fx:id="Pos5_Cur_LP" minWidth="30.0" text="10">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="Pos5_Cur_LP" text="8">
+                                    <Label fx:id="Pos5_Cur_Arrow" minWidth="30.0" text="0">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -346,12 +336,7 @@
                               </VBox>
                               <VBox prefHeight="66.0" prefWidth="240.0">
                                  <children>
-                                    <ProgressBar fx:id="Pos5_Arrow" prefHeight="28.0" prefWidth="244.0" progress="0.0">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </ProgressBar>
-                                    <ProgressBar fx:id="Pos5_LP" prefHeight="28.0" prefWidth="247.0" progress="0.91">
+                                    <ProgressBar fx:id="Pos5_LP" prefHeight="28.0" prefWidth="247.0" progress="1.0">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -363,12 +348,7 @@
                               </VBox>
                               <VBox prefHeight="90.0" prefWidth="35.0">
                                  <children>
-                                    <Label text="9">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label fx:id="Pos5_Max_LP" text="8">
+                                    <Label fx:id="Pos5_Max_LP" minWidth="30.0" text="10">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -421,12 +401,12 @@
                            <children>
                               <VBox prefHeight="56.0" prefWidth="77.0">
                                  <children>
-                                    <Label text="Arrows">
+                                    <Label text="Life">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
                                     </Label>
-                                    <Label text="Life">
+                                    <Label text="Arrows">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -438,12 +418,12 @@
                               </VBox>
                               <VBox prefHeight="90.0" prefWidth="36.0">
                                  <children>
-                                    <Label fx:id="Pos6_Cur_Arrow" text="0">
+                                    <Label fx:id="Pos6_Cur_LP" minWidth="30.0" text="10">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="Pos6_Cur_LP" text="8">
+                                    <Label fx:id="Pos6_Cur_Arrow" text="0">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -455,12 +435,7 @@
                               </VBox>
                               <VBox prefHeight="66.0" prefWidth="240.0">
                                  <children>
-                                    <ProgressBar fx:id="Pos6_Arrow" prefHeight="28.0" prefWidth="244.0" progress="0.0">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </ProgressBar>
-                                    <ProgressBar fx:id="Pos6_LP" prefHeight="28.0" prefWidth="247.0" progress="0.91">
+                                    <ProgressBar fx:id="Pos6_LP" prefHeight="28.0" prefWidth="247.0" progress="1.0">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -472,12 +447,7 @@
                               </VBox>
                               <VBox prefHeight="90.0" prefWidth="35.0">
                                  <children>
-                                    <Label text="9">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label fx:id="Pos6_Max_LP" text="8">
+                                    <Label fx:id="Pos6_Max_LP" minWidth="30.0" text="10">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -527,12 +497,12 @@
                            <children>
                               <VBox prefHeight="56.0" prefWidth="77.0">
                                  <children>
-                                    <Label text="Arrows">
+                                    <Label text="Life">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
                                     </Label>
-                                    <Label text="Life">
+                                    <Label text="Arrows">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -544,12 +514,12 @@
                               </VBox>
                               <VBox prefHeight="76.0" prefWidth="42.0">
                                  <children>
-                                    <Label fx:id="Pos3_Cur_Arrow" text="0">
+                                    <Label fx:id="Pos3_Cur_LP" minWidth="30.0" text="10">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="Pos3_Cur_LP" prefHeight="31.0" prefWidth="45.0" text="8">
+                                    <Label fx:id="Pos3_Cur_Arrow" minWidth="30.0" text="0">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -561,12 +531,7 @@
                               </VBox>
                               <VBox prefHeight="66.0" prefWidth="240.0">
                                  <children>
-                                    <ProgressBar fx:id="Pos3_Arrow" prefHeight="28.0" prefWidth="244.0" progress="0.0">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </ProgressBar>
-                                    <ProgressBar fx:id="Pos3_LP" prefHeight="28.0" prefWidth="247.0" progress="0.91">
+                                    <ProgressBar fx:id="Pos3_LP" prefHeight="28.0" prefWidth="244.0" progress="1.0">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -578,12 +543,7 @@
                               </VBox>
                               <VBox prefHeight="76.0" prefWidth="39.0">
                                  <children>
-                                    <Label text="9">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label fx:id="Pos3_Max_LP" prefHeight="31.0" prefWidth="29.0" text="8">
+                                    <Label fx:id="Pos3_Max_LP" minWidth="30.0" text="10">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -633,12 +593,12 @@
                            <children>
                               <VBox prefHeight="56.0" prefWidth="77.0">
                                  <children>
-                                    <Label text="Arrows">
+                                    <Label text="Life">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
                                     </Label>
-                                    <Label text="Life">
+                                    <Label text="Arrows">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -650,12 +610,12 @@
                               </VBox>
                               <VBox prefHeight="90.0" prefWidth="36.0">
                                  <children>
-                                    <Label fx:id="Pos7_Cur_Arrow" text="0">
+                                    <Label fx:id="Pos7_Cur_LP" minWidth="30.0" text="10">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="Pos7_Cur_LP" text="8">
+                                    <Label fx:id="Pos7_Cur_Arrow" text="0">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -667,12 +627,7 @@
                               </VBox>
                               <VBox prefHeight="66.0" prefWidth="240.0">
                                  <children>
-                                    <ProgressBar fx:id="Pos7_Arrow" prefHeight="28.0" prefWidth="244.0" progress="0.0">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </ProgressBar>
-                                    <ProgressBar fx:id="Pos7_LP" prefHeight="28.0" prefWidth="247.0" progress="0.91">
+                                    <ProgressBar fx:id="Pos7_LP" prefHeight="28.0" prefWidth="247.0" progress="1.0">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -684,12 +639,7 @@
                               </VBox>
                               <VBox prefHeight="90.0" prefWidth="35.0">
                                  <children>
-                                    <Label text="9">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label fx:id="Pos7_Max_LP" text="8">
+                                    <Label fx:id="Pos7_Max_LP" minWidth="30.0" text="10">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -739,12 +689,12 @@
                            <children>
                               <VBox prefHeight="56.0" prefWidth="77.0">
                                  <children>
-                                    <Label text="Arrows">
+                                    <Label text="Life">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
                                     </Label>
-                                    <Label text="Life">
+                                    <Label text="Arrows">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -756,12 +706,12 @@
                               </VBox>
                               <VBox prefHeight="90.0" prefWidth="36.0">
                                  <children>
-                                    <Label fx:id="Pos2_Cur_Arrow" text="0">
+                                    <Label fx:id="Pos2_Cur_LP" minWidth="30.0" text="10">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="Pos2_Cur_LP" text="8">
+                                    <Label fx:id="Pos2_Cur_Arrow" minWidth="30.0" text="0">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -773,11 +723,6 @@
                               </VBox>
                               <VBox prefHeight="66.0" prefWidth="240.0">
                                  <children>
-                                    <ProgressBar fx:id="Pos2_Arrow" prefHeight="28.0" prefWidth="244.0" progress="0.0">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </ProgressBar>
                                     <ProgressBar fx:id="Pos2_LP" prefHeight="28.0" prefWidth="247.0" progress="1.0">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -790,12 +735,7 @@
                               </VBox>
                               <VBox prefHeight="90.0" prefWidth="35.0">
                                  <children>
-                                    <Label text="9">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label fx:id="Pos2_Max_LP" text="8">
+                                    <Label fx:id="Pos2_Max_LP" minWidth="30.0" text="10">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -845,12 +785,12 @@
                            <children>
                               <VBox prefHeight="56.0" prefWidth="77.0">
                                  <children>
-                                    <Label text="Arrows">
+                                    <Label text="Life">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
                                     </Label>
-                                    <Label text="Life">
+                                    <Label text="Arrows">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -862,12 +802,12 @@
                               </VBox>
                               <VBox prefHeight="90.0" prefWidth="36.0">
                                  <children>
-                                    <Label fx:id="Pos1_Cur_Arrow" text="0">
+                                    <Label fx:id="Pos1_Cur_LP" minWidth="30.0" text="10">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="Pos1_Cur_LP" text="9">
+                                    <Label fx:id="Pos1_Cur_Arrow" minWidth="30.0" text="0">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -879,11 +819,6 @@
                               </VBox>
                               <VBox prefHeight="66.0" prefWidth="240.0">
                                  <children>
-                                    <ProgressBar fx:id="Pos1_Arrow" prefHeight="28.0" prefWidth="244.0" progress="0.0">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </ProgressBar>
                                     <ProgressBar fx:id="Pos1_LP" prefHeight="28.0" prefWidth="247.0" progress="1.0">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -896,12 +831,7 @@
                               </VBox>
                               <VBox prefHeight="90.0" prefWidth="35.0">
                                  <children>
-                                    <Label text="9">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label fx:id="Pos1_Max_LP" text="9">
+                                    <Label fx:id="Pos1_Max_LP" minWidth="30.0" text="10">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -954,12 +884,12 @@
                            <children>
                               <VBox prefHeight="56.0" prefWidth="77.0">
                                  <children>
-                                    <Label text="Arrows">
+                                    <Label text="Life">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
                                     </Label>
-                                    <Label text="Life">
+                                    <Label text="Arrows">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -971,12 +901,12 @@
                               </VBox>
                               <VBox prefHeight="90.0" prefWidth="36.0">
                                  <children>
-                                    <Label fx:id="Pos8_Cur_Arrow" text="2">
+                                    <Label fx:id="Pos8_Cur_LP" minWidth="30.0" text="10">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="Pos8_Cur_LP" text="7">
+                                    <Label fx:id="Pos8_Cur_Arrow" text="0">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -988,12 +918,7 @@
                               </VBox>
                               <VBox prefHeight="66.0" prefWidth="240.0">
                                  <children>
-                                    <ProgressBar fx:id="Pos8_Arrow" prefHeight="28.0" prefWidth="244.0" progress="0.22">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </ProgressBar>
-                                    <ProgressBar fx:id="Pos8_LP" prefHeight="28.0" prefWidth="247.0" progress="0.875">
+                                    <ProgressBar fx:id="Pos8_LP" prefHeight="28.0" prefWidth="247.0" progress="1.0">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
@@ -1005,12 +930,7 @@
                               </VBox>
                               <VBox prefHeight="90.0" prefWidth="35.0">
                                  <children>
-                                    <Label text="9">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label fx:id="Pos8_Max_LP" text="8">
+                                    <Label fx:id="Pos8_Max_LP" minWidth="30.0" text="10">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
