@@ -142,8 +142,27 @@ int playerindexes[];
     @FXML ProgressBar Pos7_LP;
     @FXML ProgressBar Pos8_LP;
     
-    public void controllerSetup(BangGame game){
-        this.game = game;
+    public void controllerSetup(BangSetup passedsetup){
+        game = new BangGame(passedsetup);
+        Dice1_Hold.getItems().addAll("Hold", "Re-Roll");
+        Dice2_Hold.getItems().addAll("Hold", "Re-Roll");
+        Dice3_Hold.getItems().addAll("Hold", "Re-Roll");
+        Dice4_Hold.getItems().addAll("Hold", "Re-Roll");
+        Dice5_Hold.getItems().addAll("Hold", "Re-Roll");
+        
+        diefaces = new Image[7];
+        for(int i = 0; i < diefaces.length; i++){
+           diefaces[i] = new Image(diefacefilenames[i]);
+        }
+       
+        rolecards = new Image[5];
+        for(int i = 0; i < rolecards.length; i++){
+           rolecards[i] = new Image(Character_Roles[i]);
+        }
+        
+        setupPlayers();
+       
+        updateDice();
     }
     
     /*
@@ -395,25 +414,6 @@ int playerindexes[];
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       Dice1_Hold.getItems().addAll("Hold", "Re-Roll");
-       Dice2_Hold.getItems().addAll("Hold", "Re-Roll");
-       Dice3_Hold.getItems().addAll("Hold", "Re-Roll");
-       Dice4_Hold.getItems().addAll("Hold", "Re-Roll");
-       Dice5_Hold.getItems().addAll("Hold", "Re-Roll");
-       
-       diefaces = new Image[7];
-       for(int i = 0; i < diefaces.length; i++){
-           diefaces[i] = new Image(diefacefilenames[i]);
-       }
-       
-       rolecards = new Image[5];
-       for(int i = 0; i < rolecards.length; i++){
-           rolecards[i] = new Image(Character_Roles[i]);
-       }
-       
-       setupPlayers();
-       
-       updateDice();
     }  
 }
 
