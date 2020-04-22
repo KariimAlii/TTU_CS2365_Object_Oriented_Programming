@@ -68,23 +68,25 @@ public abstract class Player {
     public void rollDice(BangGame game){
         game.getDice().rollDice();
         if(this.character.canRerollDynamite()){
-            for(int i = 0; i <= game.getDice().getNumberOfDice(); i++){
+            for(int i = 0; i < game.getDice().getNumberOfDice(); i++){
                 if(game.getDice().getDieAtIndex(i) == 2){
                     game.getDice().makeRerollableAtIndex(i);
                 }
             }
         }
+        processArrows(game);
     }
     
     public void rollDieAtIndex(BangGame game, int index){
         game.getDice().rollDieAtIndex(index);
         if(this.character.canRerollDynamite()){
-            for(int i = 0; i <= game.getDice().getNumberOfDice(); i++){
+            for(int i = 0; i < game.getDice().getNumberOfDice(); i++){
                 if(game.getDice().getDieAtIndex(i) == 2){
                     game.getDice().makeRerollableAtIndex(i);
                 }
             }
         }
+        processArrows(game);
     }
     
     public int getRerollCount(){
@@ -161,6 +163,15 @@ public abstract class Player {
         return returnvalue;
     }
     
+    private void processArrows(BangGame game){
+        for (int i = 0; i < game.getDice().getNumberOfDice();i++){
+            if(game.getDice().getDieAtIndex(i) == 1 && !game.getDice().isProcessedDieAtIndex(i)){
+                this.takeArrow(game);
+                game.getDice().processDieAtIndex(i);
+            }
+        }
+    }
+    
     public Player[] getTargetsB1(BangGame game){
         Player curtargets[] = {this.getPreviousPlayer(), this.getNextPlayer()};
         return curtargets;
@@ -230,7 +241,7 @@ public abstract class Player {
     
     public boolean canContinueReroll(){
         boolean returnvalue = false;
-        if(this.rerollcount > 0) returnvalue = true;
+        if(this.rerollcount > 0 && !this.isPlayerDead()) returnvalue = true;
         return returnvalue;
     }
 }

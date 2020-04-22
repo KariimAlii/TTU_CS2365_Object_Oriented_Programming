@@ -102,6 +102,7 @@ int playerindexes[];
     @FXML ImageView Pos6_Name;
     @FXML ImageView Pos7_Name;
     @FXML ImageView Pos8_Name;
+    @FXML Label arrowpile;
     @FXML Label Pos1_Cur_Arrow;
     @FXML Label Pos2_Cur_Arrow;
     @FXML Label Pos3_Cur_Arrow;
@@ -173,6 +174,7 @@ int playerindexes[];
         else{
             this.ReRoll.setVisible(false);
         }
+        updatePlayers();
     } 
 
     
@@ -196,6 +198,7 @@ int playerindexes[];
         else{
             this.ReRoll.setVisible(false);
         }
+        updatePlayers();
     }    
 
     @FXML
@@ -210,10 +213,11 @@ int playerindexes[];
        Dice4_Hold.getSelectionModel().select("Select");
        Dice5_Hold.setDisable(false);
        Dice5_Hold.getSelectionModel().select("Select");
-       
+       updatePlayers();
        Roll.setVisible(true);
        ReRoll.setVisible(false);
        startNextTurn();
+       
     }
     /*
      *  For the actual players...Fields are tagged as Pos1 (for the actual player) and increment clockwise to Pos2 through Pos8.
@@ -384,8 +388,8 @@ int playerindexes[];
         Pos1_Name.setImage(game.getPlayerAtIndex(playerindexes[0]).getCharacterImage());
         Pos1_ID.setText("You: " + game.getPlayerAtIndex(playerindexes[0]).getcharactername());
         Pos1_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getArrows()));
-        Pos1_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getCurLife()));
-        Pos1_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getMaxLife()));
+        Pos1_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getCurLife()));
+        Pos1_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getMaxLife()));
         Pos1_LP.setProgress(game.getPlayerAtIndex(playerindexes[0]).getLifeProgress());
         Pos1_ID.setCollapsible(false);
         
@@ -393,8 +397,8 @@ int playerindexes[];
         Pos2_Name.setImage(game.getPlayerAtIndex(playerindexes[1]).getCharacterImage());
         Pos2_ID.setText("Computer Player " + Integer.toString(playerindexes[1]) + ": " + game.getPlayerAtIndex(playerindexes[1]).getcharactername());
         Pos2_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[1]).getArrows()));
-        Pos2_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[1]).getCurLife()));
-        Pos2_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[1]).getMaxLife()));
+        Pos2_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[1]).getCurLife()));
+        Pos2_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[1]).getMaxLife()));
         Pos2_LP.setProgress(game.getPlayerAtIndex(playerindexes[1]).getLifeProgress());
         Pos2_ID.setCollapsible(false);
         
@@ -402,8 +406,8 @@ int playerindexes[];
         Pos3_Name.setImage(game.getPlayerAtIndex(playerindexes[2]).getCharacterImage());
         Pos3_ID.setText("Computer Player " + Integer.toString(playerindexes[2]) + ": " + game.getPlayerAtIndex(playerindexes[2]).getcharactername());
         Pos3_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[2]).getArrows()));
-        Pos3_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[2]).getCurLife()));
-        Pos3_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[2]).getMaxLife()));
+        Pos3_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[2]).getCurLife()));
+        Pos3_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[2]).getMaxLife()));
         Pos3_LP.setProgress(game.getPlayerAtIndex(playerindexes[2]).getLifeProgress());
         Pos3_ID.setCollapsible(false);
         
@@ -411,8 +415,8 @@ int playerindexes[];
         Pos4_Name.setImage(game.getPlayerAtIndex(playerindexes[3]).getCharacterImage());
         Pos4_ID.setText("Computer Player " + Integer.toString(playerindexes[3]) + ": " + game.getPlayerAtIndex(playerindexes[3]).getcharactername());
         Pos4_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[3]).getArrows()));
-        Pos4_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[3]).getCurLife()));
-        Pos4_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[3]).getMaxLife()));
+        Pos4_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[3]).getCurLife()));
+        Pos4_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[3]).getMaxLife()));
         Pos4_LP.setProgress(game.getPlayerAtIndex(playerindexes[3]).getLifeProgress());
         Pos4_ID.setCollapsible(false);
         
@@ -420,8 +424,8 @@ int playerindexes[];
         Pos5_Name.setImage(game.getPlayerAtIndex(playerindexes[4]).getCharacterImage());
         Pos5_ID.setText("Computer Player " + Integer.toString(playerindexes[4]) + ": " + game.getPlayerAtIndex(playerindexes[4]).getcharactername());
         Pos5_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[4]).getArrows()));
-        Pos5_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[4]).getCurLife()));
-        Pos5_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[4]).getMaxLife()));
+        Pos5_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[4]).getCurLife()));
+        Pos5_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[4]).getMaxLife()));
         Pos5_LP.setProgress(game.getPlayerAtIndex(playerindexes[4]).getLifeProgress());
         Pos5_ID.setCollapsible(false);
         
@@ -429,8 +433,8 @@ int playerindexes[];
         Pos6_Name.setImage(game.getPlayerAtIndex(playerindexes[5]).getCharacterImage());
         Pos6_ID.setText("Computer Player " + Integer.toString(playerindexes[5]) + ": " + game.getPlayerAtIndex(playerindexes[5]).getcharactername());
         Pos6_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[5]).getArrows()));
-        Pos6_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[5]).getCurLife()));
-        Pos6_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[5]).getMaxLife()));
+        Pos6_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[5]).getCurLife()));
+        Pos6_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[5]).getMaxLife()));
         Pos6_LP.setProgress(game.getPlayerAtIndex(playerindexes[5]).getLifeProgress());
         Pos6_ID.setCollapsible(false);
         
@@ -438,8 +442,8 @@ int playerindexes[];
         Pos7_Name.setImage(game.getPlayerAtIndex(playerindexes[6]).getCharacterImage());
         Pos7_ID.setText("Computer Player " + Integer.toString(playerindexes[6]) + ": " + game.getPlayerAtIndex(playerindexes[6]).getcharactername());
         Pos7_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[6]).getArrows()));
-        Pos7_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[6]).getCurLife()));
-        Pos7_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[6]).getMaxLife()));
+        Pos7_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[6]).getCurLife()));
+        Pos7_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[6]).getMaxLife()));
         Pos7_LP.setProgress(game.getPlayerAtIndex(playerindexes[6]).getLifeProgress());
         Pos7_ID.setCollapsible(false);
         
@@ -447,8 +451,8 @@ int playerindexes[];
         Pos8_Name.setImage(game.getPlayerAtIndex(playerindexes[7]).getCharacterImage());
         Pos8_ID.setText("Computer Player " + Integer.toString(playerindexes[7]) + ": " + game.getPlayerAtIndex(playerindexes[7]).getcharactername());
         Pos8_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[7]).getArrows()));
-        Pos8_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[7]).getCurLife()));
-        Pos8_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[7]).getMaxLife()));
+        Pos8_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[7]).getCurLife()));
+        Pos8_Max_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[7]).getMaxLife()));
         Pos8_LP.setProgress(game.getPlayerAtIndex(playerindexes[7]).getLifeProgress());
         Pos8_ID.setCollapsible(false);
         this.curplayer = game.getCurPlayer();
@@ -459,43 +463,45 @@ int playerindexes[];
     public void updatePlayers(){
         Pos1_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[0]).getRoleindex()]);
         Pos1_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getArrows()));
-        Pos1_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getMaxLife()));
+        Pos1_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getCurLife()));
         Pos1_LP.setProgress(game.getPlayerAtIndex(playerindexes[0]).getLifeProgress());
         
-        Pos2_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[0]).getRoleindex()]);
-        Pos2_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getArrows()));
-        Pos2_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getMaxLife()));
-        Pos2_LP.setProgress(game.getPlayerAtIndex(playerindexes[0]).getLifeProgress());
+        Pos2_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[1]).getRoleindex()]);
+        Pos2_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[1]).getArrows()));
+        Pos2_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[1]).getCurLife()));
+        Pos2_LP.setProgress(game.getPlayerAtIndex(playerindexes[1]).getLifeProgress());
         
-        Pos3_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[0]).getRoleindex()]);
-        Pos3_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getArrows()));
-        Pos3_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getMaxLife()));
-        Pos3_LP.setProgress(game.getPlayerAtIndex(playerindexes[0]).getLifeProgress());
+        Pos3_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[2]).getRoleindex()]);
+        Pos3_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[2]).getArrows()));
+        Pos3_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[2]).getCurLife()));
+        Pos3_LP.setProgress(game.getPlayerAtIndex(playerindexes[2]).getLifeProgress());
         
-        Pos4_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[0]).getRoleindex()]);
-        Pos4_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getArrows()));
-        Pos4_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getMaxLife()));
-        Pos4_LP.setProgress(game.getPlayerAtIndex(playerindexes[0]).getLifeProgress());
+        Pos4_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[3]).getRoleindex()]);
+        Pos4_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[3]).getArrows()));
+        Pos4_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[3]).getCurLife()));
+        Pos4_LP.setProgress(game.getPlayerAtIndex(playerindexes[3]).getLifeProgress());
         
-        Pos5_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[0]).getRoleindex()]);
-        Pos5_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getArrows()));
-        Pos5_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getMaxLife()));
-        Pos5_LP.setProgress(game.getPlayerAtIndex(playerindexes[0]).getLifeProgress());
+        Pos5_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[4]).getRoleindex()]);
+        Pos5_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[4]).getArrows()));
+        Pos5_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[4]).getCurLife()));
+        Pos5_LP.setProgress(game.getPlayerAtIndex(playerindexes[4]).getLifeProgress());
         
-        Pos6_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[0]).getRoleindex()]);
-        Pos6_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getArrows()));
-        Pos6_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getMaxLife()));
-        Pos6_LP.setProgress(game.getPlayerAtIndex(playerindexes[0]).getLifeProgress());
+        Pos6_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[5]).getRoleindex()]);
+        Pos6_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[5]).getArrows()));
+        Pos6_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[5]).getCurLife()));
+        Pos6_LP.setProgress(game.getPlayerAtIndex(playerindexes[5]).getLifeProgress());
         
-        Pos7_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[0]).getRoleindex()]);
-        Pos7_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getArrows()));
-        Pos7_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getMaxLife()));
-        Pos7_LP.setProgress(game.getPlayerAtIndex(playerindexes[0]).getLifeProgress());
+        Pos7_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[6]).getRoleindex()]);
+        Pos7_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[6]).getArrows()));
+        Pos7_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[6]).getCurLife()));
+        Pos7_LP.setProgress(game.getPlayerAtIndex(playerindexes[6]).getLifeProgress());
         
-        Pos8_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[0]).getRoleindex()]);
-        Pos8_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getArrows()));
-        Pos8_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getMaxLife()));
-        Pos8_LP.setProgress(game.getPlayerAtIndex(playerindexes[0]).getLifeProgress());
+        Pos8_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[7]).getRoleindex()]);
+        Pos8_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[7]).getArrows()));
+        Pos8_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[7]).getCurLife()));
+        Pos8_LP.setProgress(game.getPlayerAtIndex(playerindexes[7]).getLifeProgress());
+        
+        arrowpile.setText(Integer.toString(game.getArrowPile()));
     }
     
     /**

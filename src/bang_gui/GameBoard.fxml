@@ -184,6 +184,18 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Button>
+                  <Pane prefHeight="41.0" prefWidth="7.0" />
+                  <Label prefHeight="56.0" prefWidth="81.0" text="Arrow Pile:">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <Pane prefHeight="41.0" prefWidth="0.0" />
+                  <Label fx:id="arrowpile" minWidth="30.0" prefHeight="45.0" prefWidth="30.0" text="9">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Label>
                </children>
             </HBox>
          </children>

@@ -26,7 +26,7 @@ public class BangDice {
     }
 
     public int getNumberOfDice(){
-        return dice.length - 1;
+        return dice.length;
     }
     
     /**
@@ -90,5 +90,17 @@ public class BangDice {
     public void makeRerollableAtIndex(int index){
         if (0 <= index && index < dice.length) {this.dice[index].makeRerollable();}
         else if (0 - dice.length <= index && index <=-1) {dice[dice.length - (0 - index)].makeRerollable();}
+    }
+    
+    public void processDieAtIndex(int index){
+        if (0 <= index && index < dice.length) {this.dice[index].processDie();}
+        else if (0 - dice.length <= index && index <=-1) {dice[dice.length - (0 - index)].processDie();}
+    }
+    
+    public boolean isProcessedDieAtIndex(int index){
+        boolean returnvalue = false;
+        if (0 <= index && index < dice.length) {returnvalue = this.dice[index].getDieState();}
+        else if (0 - dice.length <= index && index <=-1) {returnvalue = dice[dice.length - (0 - index)].getDieState();}
+        return returnvalue;
     }
 }

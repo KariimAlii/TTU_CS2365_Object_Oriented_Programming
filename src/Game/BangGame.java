@@ -59,6 +59,10 @@ public class BangGame {
         return this.dice;
     }
     
+    public int getArrowPile(){
+        return this.arrowpile;
+    }
+    
     public int getCurNumPlayers(){
         return this.currentnumberofplayers;
     }
@@ -77,11 +81,11 @@ public class BangGame {
     }
     
     private void indianAttack(){
-        this.curplayer.individualIndianAttack();
+        this.arrowpile += this.curplayer.individualIndianAttack();
         Player temp = this.curplayer.getNextPlayer();
         while(temp != this.curplayer){
-            temp.individualIndianAttack();
-            temp.getNextPlayer();
+            this.arrowpile += temp.individualIndianAttack();
+            temp = temp.getNextPlayer();
         }
     }
     
