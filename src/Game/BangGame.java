@@ -19,7 +19,7 @@ public class BangGame {
     private int currentnumberofplayers;
     private int numberofbadguys;
     private int arrowpile;
-    Player[] players;
+    private Player[] players;
     private Player sheriff;
     private Player curplayer;
     private BangDice dice;
@@ -95,4 +95,24 @@ public class BangGame {
     public Player getPlayerAtIndex(int index){
         return players[index];
     }
+    
+    public int getCurPlayerIndex(){
+        int returnvalue = 0;
+        for(int i = 0; i < this.players.length; i++){
+            if(this.curplayer == this.players[i]) {
+                returnvalue = i;
+                break;
+            }
+        }
+        return returnvalue;
+    }
+    
+    public Player getCurPlayer(){
+        return this.curplayer;
+    }
+    
+    public Player getSheriff(){
+        return this.sheriff;
+    }
+    
 }
