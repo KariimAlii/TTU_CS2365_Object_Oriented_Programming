@@ -123,5 +123,6 @@ public class BangGame {
     
     public void endTurn(){
         this.curplayer = this.curplayer.getNextPlayer();
-    }
+        this.curplayer.startTurn();
+   }
 }

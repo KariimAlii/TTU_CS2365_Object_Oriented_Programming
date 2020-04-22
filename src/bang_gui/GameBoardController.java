@@ -64,7 +64,7 @@ int playerindexes[];
     /*
      *  Array for character role images.
      */
-    String[] Character_Roles = {"/Images/bang-back-of-card.jpg","/Images/Sheriff1.jpg","/Images/Renegade.jpg","/Images/Deputy.jpg","/Images/Outlaw.jpg"};
+    String[] Character_Roles = {"/Images/bang-back-of-card.jpg","/Images/Sheriff1.jpg","/Images/Renegade.jpg","/Images/Outlaw.jpg", "/Images/Deputy.jpg"};
     Image rolecards[];
     
     
@@ -173,6 +173,17 @@ int playerindexes[];
         }
         else{
             this.ReRoll.setVisible(false);
+            Dice1_Hold.setVisible(false);
+            Dice2_Hold.setVisible(false);
+            Dice3_Hold.setVisible(false);
+            Dice4_Hold.setVisible(false);
+            Dice5_Hold.setVisible(false);
+            
+            Dice1_Hold.getSelectionModel().selectFirst();
+            Dice2_Hold.getSelectionModel().selectFirst();
+            Dice3_Hold.getSelectionModel().selectFirst();
+            Dice4_Hold.getSelectionModel().selectFirst();
+            Dice5_Hold.getSelectionModel().selectFirst();
         }
         updatePlayers();
     } 
@@ -197,6 +208,17 @@ int playerindexes[];
         }
         else{
             this.ReRoll.setVisible(false);
+            Dice1_Hold.setVisible(false);
+            Dice2_Hold.setVisible(false);
+            Dice3_Hold.setVisible(false);
+            Dice4_Hold.setVisible(false);
+            Dice5_Hold.setVisible(false);
+            
+            Dice1_Hold.getSelectionModel().selectFirst();
+            Dice2_Hold.getSelectionModel().selectFirst();
+            Dice3_Hold.getSelectionModel().selectFirst();
+            Dice4_Hold.getSelectionModel().selectFirst();
+            Dice5_Hold.getSelectionModel().selectFirst();
         }
         updatePlayers();
     }    
@@ -263,8 +285,8 @@ int playerindexes[];
     private void startNextTurn(){
         this.curplayer.endTurn(game);
         this.curplayer = game.getCurPlayer();
-        this.curplayer.startTurn();
         updateActivePlayer();
+        this.updatePlayers();
     }
     
     private void updateActivePlayer(){
@@ -456,7 +478,6 @@ int playerindexes[];
         Pos8_LP.setProgress(game.getPlayerAtIndex(playerindexes[7]).getLifeProgress());
         Pos8_ID.setCollapsible(false);
         this.curplayer = game.getCurPlayer();
-        this.curplayer.startTurn();
         updateActivePlayer();
     }
     
@@ -465,41 +486,49 @@ int playerindexes[];
         Pos1_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getArrows()));
         Pos1_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getCurLife()));
         Pos1_LP.setProgress(game.getPlayerAtIndex(playerindexes[0]).getLifeProgress());
+        if(game.getPlayerAtIndex(playerindexes[0]).isPlayerDead()) {Pos1_ID.setText("You Are Dead");}
         
         Pos2_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[1]).getRoleindex()]);
         Pos2_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[1]).getArrows()));
         Pos2_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[1]).getCurLife()));
         Pos2_LP.setProgress(game.getPlayerAtIndex(playerindexes[1]).getLifeProgress());
+        if(game.getPlayerAtIndex(playerindexes[1]).isPlayerDead()) {Pos2_ID.setText("Computer Player " + Integer.toString(playerindexes[1]) + " Is Dead");}
         
         Pos3_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[2]).getRoleindex()]);
         Pos3_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[2]).getArrows()));
         Pos3_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[2]).getCurLife()));
         Pos3_LP.setProgress(game.getPlayerAtIndex(playerindexes[2]).getLifeProgress());
+        if(game.getPlayerAtIndex(playerindexes[2]).isPlayerDead()) {Pos3_ID.setText("Computer Player " + Integer.toString(playerindexes[2]) + " Is Dead");}
         
         Pos4_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[3]).getRoleindex()]);
         Pos4_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[3]).getArrows()));
         Pos4_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[3]).getCurLife()));
         Pos4_LP.setProgress(game.getPlayerAtIndex(playerindexes[3]).getLifeProgress());
+        if(game.getPlayerAtIndex(playerindexes[3]).isPlayerDead()) {Pos4_ID.setText("Computer Player " + Integer.toString(playerindexes[3]) + " Is Dead");}
         
         Pos5_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[4]).getRoleindex()]);
         Pos5_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[4]).getArrows()));
         Pos5_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[4]).getCurLife()));
         Pos5_LP.setProgress(game.getPlayerAtIndex(playerindexes[4]).getLifeProgress());
+        if(game.getPlayerAtIndex(playerindexes[4]).isPlayerDead()) {Pos5_ID.setText("Computer Player " + Integer.toString(playerindexes[4]) + " Is Dead");}
         
         Pos6_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[5]).getRoleindex()]);
         Pos6_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[5]).getArrows()));
         Pos6_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[5]).getCurLife()));
         Pos6_LP.setProgress(game.getPlayerAtIndex(playerindexes[5]).getLifeProgress());
+        if(game.getPlayerAtIndex(playerindexes[5]).isPlayerDead()) {Pos6_ID.setText("Computer Player " + Integer.toString(playerindexes[5]) + " Is Dead");}
         
         Pos7_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[6]).getRoleindex()]);
         Pos7_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[6]).getArrows()));
         Pos7_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[6]).getCurLife()));
         Pos7_LP.setProgress(game.getPlayerAtIndex(playerindexes[6]).getLifeProgress());
+        if(game.getPlayerAtIndex(playerindexes[6]).isPlayerDead()) {Pos7_ID.setText("Computer Player " + Integer.toString(playerindexes[6]) + " Is Dead");}
         
         Pos8_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[7]).getRoleindex()]);
         Pos8_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[7]).getArrows()));
         Pos8_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[7]).getCurLife()));
         Pos8_LP.setProgress(game.getPlayerAtIndex(playerindexes[7]).getLifeProgress());
+        if(game.getPlayerAtIndex(playerindexes[7]).isPlayerDead()) {Pos8_ID.setText("Computer Player " + Integer.toString(playerindexes[7]) + " Is Dead");}
         
         arrowpile.setText(Integer.toString(game.getArrowPile()));
     }
