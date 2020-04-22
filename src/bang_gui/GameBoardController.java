@@ -32,6 +32,7 @@ import player.*;
  */
 public class GameBoardController implements Initializable {
 BangGame game;
+Player curplayer;
 int playerindexes[];
     
 /*
@@ -154,7 +155,7 @@ int playerindexes[];
         
         setupPlayers();
        
-        updateDice();
+        updateDice(false);
     }
     
     /*
@@ -163,11 +164,15 @@ int playerindexes[];
      */
     @FXML
     void Roll_Dice(ActionEvent event) {
-        game.getDice().rollDice();
-        updateDice();
+        curplayer.rollDice(game);
         Roll.setVisible(false);
-        ReRoll.setVisible(true);
-
+        updateDice(false);
+        if(this.curplayer.canContinueReroll()){
+            this.ReRoll.setVisible(true);
+        }
+        else{
+            this.ReRoll.setVisible(false);
+        }
     } 
 
     
@@ -178,12 +183,19 @@ int playerindexes[];
      */
     @FXML
     void ReRoll_Dice(ActionEvent event) {
-        if (Dice1_Hold.getValue()=="Re-Roll"){game.getDice().rollDieAtIndex(0);}
-        if (Dice2_Hold.getValue()=="Re-Roll"){game.getDice().rollDieAtIndex(1);}
-        if (Dice3_Hold.getValue()=="Re-Roll"){game.getDice().rollDieAtIndex(2);}
-        if (Dice4_Hold.getValue()=="Re-Roll"){game.getDice().rollDieAtIndex(3);}
-        if (Dice5_Hold.getValue()=="Re-Roll"){game.getDice().rollDieAtIndex(4);;}
-        updateDice();
+        if (Dice1_Hold.getValue()=="Re-Roll"){curplayer.rollDieAtIndex(game,0);}
+        if (Dice2_Hold.getValue()=="Re-Roll"){curplayer.rollDieAtIndex(game,1);}
+        if (Dice3_Hold.getValue()=="Re-Roll"){curplayer.rollDieAtIndex(game,2);}
+        if (Dice4_Hold.getValue()=="Re-Roll"){curplayer.rollDieAtIndex(game,3);}
+        if (Dice5_Hold.getValue()=="Re-Roll"){curplayer.rollDieAtIndex(game,4);}
+        this.curplayer.decreaseRerollCount();
+        updateDice(true);
+        if(this.curplayer.canContinueReroll()){
+            this.ReRoll.setVisible(true);
+        }
+        else{
+            this.ReRoll.setVisible(false);
+        }
     }    
 
     @FXML
@@ -198,8 +210,10 @@ int playerindexes[];
        Dice4_Hold.getSelectionModel().select("Select");
        Dice5_Hold.setDisable(false);
        Dice5_Hold.getSelectionModel().select("Select");
+       
        Roll.setVisible(true);
        ReRoll.setVisible(false);
+       startNextTurn();
     }
     /*
      *  For the actual players...Fields are tagged as Pos1 (for the actual player) and increment clockwise to Pos2 through Pos8.
@@ -213,7 +227,7 @@ int playerindexes[];
      * updates the dice for the roll dice method
      * @author Stephen Devaney
      */
-    private void updateDice(){
+    private void updateDice(boolean reroll){
         Die_1.setImage(diefaces[game.getDice().getDieAtIndex(0)]);
         Die_2.setImage(diefaces[game.getDice().getDieAtIndex(1)]);
         Die_3.setImage(diefaces[game.getDice().getDieAtIndex(2)]);
@@ -227,19 +241,26 @@ int playerindexes[];
         Dice5_Hold.setVisible(game.getDice().getRerollableAtIndex(4));
         
         if(!Dice1_Hold.isVisible()){Dice1_Hold.getSelectionModel().selectFirst();}
-        else {Dice1_Hold.getSelectionModel().select("Re-Roll");}
+        else if (!reroll) {Dice1_Hold.getSelectionModel().select("Re-Roll");}
         
         if(!Dice2_Hold.isVisible()){Dice2_Hold.getSelectionModel().selectFirst();}
-        else {Dice2_Hold.getSelectionModel().select("Re-Roll");}
+        else if (!reroll) {Dice2_Hold.getSelectionModel().select("Re-Roll");}
         
         if(!Dice3_Hold.isVisible()){Dice3_Hold.getSelectionModel().selectFirst();}
-        else {Dice3_Hold.getSelectionModel().select("Re-Roll");}
+        else if (!reroll) {Dice3_Hold.getSelectionModel().select("Re-Roll");}
         
         if(!Dice4_Hold.isVisible()){Dice4_Hold.getSelectionModel().selectFirst();}
-        else {Dice4_Hold.getSelectionModel().select("Re-Roll");}
+        else if (!reroll) {Dice4_Hold.getSelectionModel().select("Re-Roll");}
         
         if(!Dice5_Hold.isVisible()){Dice5_Hold.getSelectionModel().selectFirst();}
-        else {Dice5_Hold.getSelectionModel().select("Re-Roll");}
+        else if (!reroll) {Dice5_Hold.getSelectionModel().select("Re-Roll");}
+    }
+    
+    private void startNextTurn(){
+        this.curplayer.endTurn(game);
+        this.curplayer = game.getCurPlayer();
+        this.curplayer.startTurn();
+        updateActivePlayer();
     }
     
     private void updateActivePlayer(){
@@ -430,7 +451,8 @@ int playerindexes[];
         Pos8_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[7]).getMaxLife()));
         Pos8_LP.setProgress(game.getPlayerAtIndex(playerindexes[7]).getLifeProgress());
         Pos8_ID.setCollapsible(false);
-        
+        this.curplayer = game.getCurPlayer();
+        this.curplayer.startTurn();
         updateActivePlayer();
     }
     

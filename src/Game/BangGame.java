@@ -48,7 +48,9 @@ public class BangGame {
             tempplayer.setPreviousPlayer(curplayer);
             tempplayer.setNextPlayer(templayer2);
             templayer2.setPreviousPlayer(tempplayer);
+            curplayer = curplayer.getNextPlayer();
         }
+        curplayer = sheriff;
         dice = new BangDice();
         arrowpile = 9;
     }
@@ -115,4 +117,7 @@ public class BangGame {
         return this.sheriff;
     }
     
+    public void endTurn(){
+        this.curplayer = this.curplayer.getNextPlayer();
+    }
 }

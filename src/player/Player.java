@@ -31,16 +31,20 @@ public abstract class Player {
     }
     
     public void startTurn(){
-        if (this.character.canHaveExtraReroll()) {this.rerollcount = 4;}
-        else {this.rerollcount = 3;}
+        if (this.character.canHaveExtraReroll()) {this.rerollcount = 3;}
+        else {this.rerollcount = 2;}
     }
     
     public void endTurn(BangGame game){
-        
+        game.endTurn();
     }
     
     public Role getRole(){
         return this.role;
+    }
+    
+    public void decreaseRerollCount(){
+        this.rerollcount--;
     }
     
     public int getRoleindex(){
@@ -63,6 +67,17 @@ public abstract class Player {
     
     public void rollDice(BangGame game){
         game.getDice().rollDice();
+        if(this.character.canRerollDynamite()){
+            for(int i = 0; i <= game.getDice().getNumberOfDice(); i++){
+                if(game.getDice().getDieAtIndex(i) == 2){
+                    game.getDice().makeRerollableAtIndex(i);
+                }
+            }
+        }
+    }
+    
+    public void rollDieAtIndex(BangGame game, int index){
+        game.getDice().rollDieAtIndex(index);
         if(this.character.canRerollDynamite()){
             for(int i = 0; i <= game.getDice().getNumberOfDice(); i++){
                 if(game.getDice().getDieAtIndex(i) == 2){
@@ -210,6 +225,12 @@ public abstract class Player {
     public int individualGatlingGunShoot(){
         int returnvalue = this.arrows;
         this.arrows = 0;
+        return returnvalue;
+    }
+    
+    public boolean canContinueReroll(){
+        boolean returnvalue = false;
+        if(this.rerollcount > 0) returnvalue = true;
         return returnvalue;
     }
 }
