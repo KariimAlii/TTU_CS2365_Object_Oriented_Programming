@@ -16,6 +16,7 @@ import javafx.scene.image.Image;
 public abstract class Player {
     private PlayerType playertype;
     private BangCharacter character;
+    private int rerollcount;
     private Role role;
     private int arrows;
     private Target pointsystem[];
@@ -27,6 +28,15 @@ public abstract class Player {
         this.character = character;
         this.role = setuprole;
         if (this.role == Role.SHERIFF){character.setSheriff();}
+    }
+    
+    public void startTurn(){
+        if (this.character.canHaveExtraReroll()) {this.rerollcount = 4;}
+        else {this.rerollcount = 3;}
+    }
+    
+    public void endTurn(BangGame game){
+        
     }
     
     public Role getRole(){
