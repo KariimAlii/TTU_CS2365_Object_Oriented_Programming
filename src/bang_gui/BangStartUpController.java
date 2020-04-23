@@ -85,7 +85,6 @@ public class BangStartUpController implements Initializable {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.getIcons().add(new Image("/Images/bang .jpg"));
-        stage.setResizable(false);
         stage.show();
     }
     
