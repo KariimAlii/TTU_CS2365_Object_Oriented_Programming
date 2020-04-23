@@ -33,22 +33,20 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin>
                               </ImageView>
-                              <ComboBox fx:id="Dice1_Hold" prefHeight="36.0" prefWidth="150.0" promptText="Select">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                 <VBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </VBox.margin>
-                              </ComboBox>
-                              <ComboBox fx:id="Dice1_Target" prefHeight="36.0" prefWidth="150.0" promptText="Target">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                 <VBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </VBox.margin>
-                              </ComboBox>
+                              <StackPane prefHeight="36.0" prefWidth="110.0">
+                                 <children>
+                                    <ComboBox fx:id="Dice1_Hold" minHeight="36.0" prefHeight="49.0" prefWidth="110.0" promptText="Select" visible="false">
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </ComboBox>
+                                    <ComboBox fx:id="Dice1_Target" prefHeight="36.0" prefWidth="150.0" promptText="Target" visible="false">
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </ComboBox>
+                                 </children>
+                              </StackPane>
                            </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0">
@@ -58,22 +56,20 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin>
                               </ImageView>
-                              <ComboBox fx:id="Dice2_Hold" prefHeight="36.0" prefWidth="150.0" promptText="Select">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                 <VBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </VBox.margin>
-                              </ComboBox>
-                              <ComboBox fx:id="Dice2_Target" prefHeight="36.0" prefWidth="150.0" promptText="Target">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                 <VBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </VBox.margin>
-                              </ComboBox>
+                              <StackPane prefHeight="36.0" prefWidth="110.0">
+                                 <children>
+                                    <ComboBox fx:id="Dice2_Hold" minHeight="36.0" prefHeight="40.0" prefWidth="110.0" promptText="Select" visible="false">
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </ComboBox>
+                                    <ComboBox fx:id="Dice2_Target" prefHeight="36.0" prefWidth="150.0" promptText="Target" visible="false">
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </ComboBox>
+                                 </children>
+                              </StackPane>
                            </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0">
@@ -83,22 +79,20 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin>
                               </ImageView>
-                              <ComboBox fx:id="Dice3_Hold" prefHeight="36.0" prefWidth="150.0" promptText="Select">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                 <VBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </VBox.margin>
-                              </ComboBox>
-                              <ComboBox fx:id="Dice3_Target" prefHeight="36.0" prefWidth="150.0" promptText="Target">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                 <VBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </VBox.margin>
-                              </ComboBox>
+                              <StackPane prefHeight="36.0" prefWidth="110.0">
+                                 <children>
+                                    <ComboBox fx:id="Dice3_Hold" prefHeight="48.0" prefWidth="110.0" promptText="Select" visible="false">
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </ComboBox>
+                                    <ComboBox fx:id="Dice3_Target" prefHeight="36.0" prefWidth="150.0" promptText="Target" visible="false">
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </ComboBox>
+                                 </children>
+                              </StackPane>
                            </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0">
@@ -108,22 +102,20 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin>
                               </ImageView>
-                              <ComboBox fx:id="Dice4_Hold" prefHeight="36.0" prefWidth="150.0" promptText="Select">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                 <VBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </VBox.margin>
-                              </ComboBox>
-                              <ComboBox fx:id="Dice4_Target" prefHeight="36.0" prefWidth="150.0" promptText="Target">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                 <VBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </VBox.margin>
-                              </ComboBox>
+                              <StackPane prefHeight="36.0" prefWidth="110.0">
+                                 <children>
+                                    <ComboBox fx:id="Dice4_Hold" prefHeight="36.0" prefWidth="150.0" promptText="Select" visible="false">
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </ComboBox>
+                                    <ComboBox fx:id="Dice4_Target" prefHeight="36.0" prefWidth="150.0" promptText="Target" visible="false">
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </ComboBox>
+                                 </children>
+                              </StackPane>
                            </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0">
@@ -133,22 +125,20 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin>
                               </ImageView>
-                              <ComboBox fx:id="Dice5_Hold" prefHeight="36.0" prefWidth="150.0" promptText="Select">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                 <VBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </VBox.margin>
-                              </ComboBox>
-                              <ComboBox fx:id="Dice5_Target" prefHeight="36.0" prefWidth="150.0" promptText="Target">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                 <VBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </VBox.margin>
-                              </ComboBox>
+                              <StackPane prefHeight="36.0" prefWidth="110.0">
+                                 <children>
+                                    <ComboBox fx:id="Dice5_Hold" prefHeight="36.0" prefWidth="150.0" promptText="Select" visible="false">
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </ComboBox>
+                                    <ComboBox fx:id="Dice5_Target" prefHeight="36.0" prefWidth="150.0" promptText="Target" visible="false">
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </ComboBox>
+                                 </children>
+                              </StackPane>
                            </children>
                         </VBox>
                      </children>
@@ -174,16 +164,39 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Button>
+                        <Button fx:id="Action" mnemonicParsing="false" onAction="#TakeAction" prefWidth="100.0" text="Action" visible="false">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </Button>
+                        <Button fx:id="EndTurn" mnemonicParsing="false" onAction="#EndTurn" prefHeight="27.0" prefWidth="100.0" text="End Turn" visible="false">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </Button>
                      </children>
                   </StackPane>
-                  <Button fx:id="Action" mnemonicParsing="false" onAction="#TakeAction" prefWidth="100.0" text="Action">
+                  <Pane prefHeight="41.0" prefWidth="7.0" />
+                  <StackPane prefHeight="41.0" prefWidth="110.0">
+                     <children>
+                        <Button fx:id="SkipReRoll" mnemonicParsing="false" onAction="#SkipReroll" prefWidth="100.0" text="Skip Re-Roll" visible="false">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </Button>
+                     </children>
+                  </StackPane>
+                  <Label prefHeight="56.0" prefWidth="81.0" text="Arrow Pile:">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
-                     <HBox.margin>
+                  </Label>
+                  <Pane prefHeight="41.0" prefWidth="0.0" />
+                  <Label fx:id="arrowpile" minWidth="30.0" prefHeight="45.0" prefWidth="30.0" text="9">
+                     <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Button>
+                     </padding>
+                  </Label>
                </children>
             </HBox>
          </children>

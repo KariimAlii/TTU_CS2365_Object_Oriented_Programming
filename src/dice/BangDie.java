@@ -13,6 +13,7 @@ public class BangDie {
     private int symbol; // symbol of the die
     private boolean processedState;
     private boolean rerollable;
+    private boolean requireschooseableaction;
     
     
     /** BangDie Base Constructor
@@ -21,6 +22,8 @@ public class BangDie {
     public BangDie(){
         this.symbol = ARROW;
         this.processedState = false; 
+        this.rerollable = true;
+        this.requireschooseableaction = false;
     }
     
     
@@ -100,6 +103,10 @@ public class BangDie {
         this.processedState = true;
     }
     
+    public boolean doesRequireChooseableAction(){
+        return this.requireschooseableaction;
+    }
+    
 
     /** setDieSymbol method
      * DESCRIPTION: sets symbol to the value given
@@ -112,14 +119,21 @@ public class BangDie {
             this.symbol = symbol;
             if (symbol == DYNAMITE){
                 this.rerollable = false;
+                this.requireschooseableaction = false;
+            }
+            else if(symbol == BULLSEYE1 || symbol == BULLSEYE2 || symbol == BEER){
+                this.rerollable = true;
+                this.requireschooseableaction = true;
             }
             else{
                 this.rerollable = true;
+                this.requireschooseableaction = false;
             }
         }
         else{
             this.symbol = ARROW;
             this.rerollable = true;
+            this.requireschooseableaction = false;
         }
         this.processedState = false;
     }
