@@ -19,7 +19,7 @@ public class BangGame {
     private int currentnumberofplayers;
     private int numberofbadguys;
     private int arrowpile;
-    Player[] players;
+    private Player[] players;
     private Player sheriff;
     private Player curplayer;
     private BangDice dice;
@@ -48,13 +48,19 @@ public class BangGame {
             tempplayer.setPreviousPlayer(curplayer);
             tempplayer.setNextPlayer(templayer2);
             templayer2.setPreviousPlayer(tempplayer);
+            curplayer = curplayer.getNextPlayer();
         }
+        curplayer = sheriff;
         dice = new BangDice();
         arrowpile = 9;
     }
     
     public BangDice getDice(){
         return this.dice;
+    }
+    
+    public int getArrowPile(){
+        return this.arrowpile;
     }
     
     public int getCurNumPlayers(){
@@ -75,11 +81,11 @@ public class BangGame {
     }
     
     private void indianAttack(){
-        this.curplayer.individualIndianAttack();
+        this.arrowpile += this.curplayer.individualIndianAttack();
         Player temp = this.curplayer.getNextPlayer();
         while(temp != this.curplayer){
-            temp.individualIndianAttack();
-            temp.getNextPlayer();
+            this.arrowpile += temp.individualIndianAttack();
+            temp = temp.getNextPlayer();
         }
     }
     
@@ -95,4 +101,28 @@ public class BangGame {
     public Player getPlayerAtIndex(int index){
         return players[index];
     }
+    
+    public int getCurPlayerIndex(){
+        int returnvalue = 0;
+        for(int i = 0; i < this.players.length; i++){
+            if(this.curplayer == this.players[i]) {
+                returnvalue = i;
+                break;
+            }
+        }
+        return returnvalue;
+    }
+    
+    public Player getCurPlayer(){
+        return this.curplayer;
+    }
+    
+    public Player getSheriff(){
+        return this.sheriff;
+    }
+    
+    public void endTurn(){
+        this.curplayer = this.curplayer.getNextPlayer();
+        this.curplayer.startTurn();
+   }
 }

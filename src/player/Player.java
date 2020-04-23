@@ -7,6 +7,7 @@ package player;
 
 import Game.BangGame;
 import character.BangCharacter;
+import static dice.BangDie.*;
 import javafx.scene.image.Image;
 
 /**
@@ -16,8 +17,11 @@ import javafx.scene.image.Image;
 public abstract class Player {
     private PlayerType playertype;
     private BangCharacter character;
+    private int rerollcount;
     private Role role;
     private int arrows;
+    private int dynamitecount;
+    private boolean dynamiteexploded;
     private Target pointsystem[];
     private Player nextPlayer;
     private Player previousPlayer;
@@ -27,18 +31,40 @@ public abstract class Player {
         this.character = character;
         this.role = setuprole;
         if (this.role == Role.SHERIFF){character.setSheriff();}
+        this.dynamitecount = 0;
+        dynamiteexploded = false;
+        if (this.character.canHaveExtraReroll()) {this.rerollcount = 3;}
+        else {this.rerollcount = 2;}
+    }
+    
+    public void startTurn(){
+        if (this.character.canGiveAnyPlayerLife()){
+            this.gainHealth();
+        }
+        if (this.character.canHaveExtraReroll()) {this.rerollcount = 3;}
+        else {this.rerollcount = 2;}
+        this.dynamitecount = 0;
+        dynamiteexploded = false;
+    }
+    
+    public void endTurn(BangGame game){
+        game.endTurn();
     }
     
     public Role getRole(){
         return this.role;
     }
     
+    public void decreaseRerollCount(){
+        this.rerollcount--;
+    }
+    
     public int getRoleindex(){
         int returnvalue = 0;
         if(this.role == Role.SHERIFF){returnvalue = 1;}
-        else if (this.role == Role.RENEGADE && this.isPlayerDead()){returnvalue = 2;}
-        else if (this.role == Role.OUTLAW && this.isPlayerDead()){returnvalue = 3;}
-        else if (this.role == Role.DEPUTY && this.isPlayerDead()){returnvalue = 4;}
+        else if (this.role == Role.RENEGADE && (this.isPlayerDead() || this.playertype == PlayerType.Human)){returnvalue = 2;}
+        else if (this.role == Role.OUTLAW && (this.isPlayerDead() || this.playertype == PlayerType.Human)){returnvalue = 3;}
+        else if (this.role == Role.DEPUTY && (this.isPlayerDead() || this.playertype == PlayerType.Human)){returnvalue = 4;}
         return returnvalue;
     }
     
@@ -54,12 +80,28 @@ public abstract class Player {
     public void rollDice(BangGame game){
         game.getDice().rollDice();
         if(this.character.canRerollDynamite()){
-            for(int i = 0; i <= game.getDice().getNumberOfDice(); i++){
-                if(game.getDice().getDieAtIndex(i) == 2){
+            for(int i = 0; i < game.getDice().getNumberOfDice(); i++){
+                if(game.getDice().getDieAtIndex(i) == DYNAMITE){
                     game.getDice().makeRerollableAtIndex(i);
                 }
             }
         }
+        processArrowsOrDynamite(game);
+    }
+    
+    public void rollDieAtIndex(BangGame game, int index){
+        if(game.getDice().getDieAtIndex(index) == DYNAMITE){
+            this.dynamitecount--;
+        }
+        game.getDice().rollDieAtIndex(index);
+        if(this.character.canRerollDynamite()){
+            for(int i = 0; i < game.getDice().getNumberOfDice(); i++){
+                if(game.getDice().getDieAtIndex(i) == DYNAMITE){
+                    game.getDice().makeRerollableAtIndex(i);
+                }
+            }
+        }
+        processArrowsOrDynamite(game);
     }
     
     public int getRerollCount(){
@@ -120,9 +162,11 @@ public abstract class Player {
         return arrows;
     }
     
-    public void takeArrow(BangGame game){
-        this.arrows++;
-        game.takeArrow();
+    private void takeArrow(BangGame game){
+            if(!this.character.isDead()){
+            this.arrows++;
+            game.takeArrow();
+        }
     }
     
     public int individualIndianAttack(){
@@ -134,6 +178,28 @@ public abstract class Player {
             this.character.takeDamage();
         }
         return returnvalue;
+    }
+    
+    private void processArrowsOrDynamite(BangGame game){
+        for (int i = 0; i < game.getDice().getNumberOfDice();i++){
+            if(game.getDice().getDieAtIndex(i) == ARROW && !game.getDice().isProcessedDieAtIndex(i)){
+                this.takeArrow(game);
+                game.getDice().processDieAtIndex(i);
+            }
+            else if (game.getDice().getDieAtIndex(i) == DYNAMITE && !game.getDice().isProcessedDieAtIndex(i)){
+                this.dynamitecount++;
+                game.getDice().processDieAtIndex(i);
+            }
+        }
+        checkDynamiteExplodes(game);
+    }
+    
+    private void checkDynamiteExplodes(BangGame game){
+        if(this.dynamitecount >= 3 && !dynamiteexploded){
+            this.rerollcount = 0;
+            this.takeDamage(game);
+            dynamiteexploded = true;
+        }
     }
     
     public Player[] getTargetsB1(BangGame game){
@@ -180,11 +246,8 @@ public abstract class Player {
         return this;
     }
     
-    public void giveBeer(Player target, BangGame game){
+    private void giveBeer(Player target, BangGame game){
         target.takeBeer();
-        if(target == this && this.character.canLowLifeDoubleBeer() && this.character.gainLife() <= 4){
-            target.takeBeer();
-        }
     }
     
     public void takeBeer(){
@@ -200,6 +263,12 @@ public abstract class Player {
     public int individualGatlingGunShoot(){
         int returnvalue = this.arrows;
         this.arrows = 0;
+        return returnvalue;
+    }
+    
+    public boolean canContinueReroll(){
+        boolean returnvalue = false;
+        if(this.rerollcount > 0 && !this.isPlayerDead()) returnvalue = true;
         return returnvalue;
     }
 }
