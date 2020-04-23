@@ -103,4 +103,11 @@ public class BangDice {
         else if (0 - dice.length <= index && index <=-1) {returnvalue = dice[dice.length - (0 - index)].getDieState();}
         return returnvalue;
     }
+    
+    public boolean doesRequireChooseableActionAtIndex(int index){
+        boolean returnvalue = false;
+        if (0 <= index && index < dice.length) {returnvalue = this.dice[index].doesRequireChooseableAction();}
+        else if (0 - dice.length <= index && index <=-1) {returnvalue = dice[dice.length - (0 - index)].doesRequireChooseableAction();}
+        return returnvalue;
+    }
 }

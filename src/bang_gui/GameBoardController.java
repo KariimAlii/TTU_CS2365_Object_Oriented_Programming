@@ -77,6 +77,8 @@ int playerindexes[];
     @FXML Button Roll;
     @FXML Button ReRoll;
     @FXML Button Action;
+    @FXML Button SkipReRoll;
+    @FXML Button EndTurn;
     
     @FXML TitledPane Pos1_ID;
     @FXML TitledPane Pos2_ID;
@@ -170,9 +172,11 @@ int playerindexes[];
         updateDice(false);
         if(this.curplayer.canContinueReroll()){
             this.ReRoll.setVisible(true);
+            this.SkipReRoll.setVisible(true);
         }
         else{
             this.ReRoll.setVisible(false);
+            this.SkipReRoll.setVisible(false);
             Dice1_Hold.setVisible(false);
             Dice2_Hold.setVisible(false);
             Dice3_Hold.setVisible(false);
@@ -184,6 +188,8 @@ int playerindexes[];
             Dice3_Hold.getSelectionModel().selectFirst();
             Dice4_Hold.getSelectionModel().selectFirst();
             Dice5_Hold.getSelectionModel().selectFirst();
+            
+            setupAction();
         }
         updatePlayers();
     } 
@@ -205,9 +211,11 @@ int playerindexes[];
         updateDice(true);
         if(this.curplayer.canContinueReroll()){
             this.ReRoll.setVisible(true);
+            this.SkipReRoll.setVisible(true);
         }
         else{
             this.ReRoll.setVisible(false);
+            this.SkipReRoll.setVisible(false);
             Dice1_Hold.setVisible(false);
             Dice2_Hold.setVisible(false);
             Dice3_Hold.setVisible(false);
@@ -219,26 +227,24 @@ int playerindexes[];
             Dice3_Hold.getSelectionModel().selectFirst();
             Dice4_Hold.getSelectionModel().selectFirst();
             Dice5_Hold.getSelectionModel().selectFirst();
+            setupAction();
         }
         updatePlayers();
     }    
 
     @FXML
     void TakeAction(ActionEvent event) {
-       Dice1_Hold.setDisable(false);
-       Dice1_Hold.getSelectionModel().select("Select");
-       Dice2_Hold.setDisable(false);
-       Dice2_Hold.getSelectionModel().select("Select");
-       Dice3_Hold.setDisable(false);
-       Dice3_Hold.getSelectionModel().select("Select");
-       Dice4_Hold.setDisable(false);
-       Dice4_Hold.getSelectionModel().select("Select");
-       Dice5_Hold.setDisable(false);
-       Dice5_Hold.getSelectionModel().select("Select");
+       Dice1_Target.setVisible(false);
+       Dice2_Target.setVisible(false);
+       Dice3_Target.setVisible(false);
+       Dice4_Target.setVisible(false);
+       Dice5_Target.setVisible(false);
        updatePlayers();
-       Roll.setVisible(true);
+       Action.setVisible(false);
+       EndTurn.setVisible(true);
+       Roll.setVisible(false);
        ReRoll.setVisible(false);
-       startNextTurn();
+       
        
     }
     /*
@@ -248,6 +254,34 @@ int playerindexes[];
      *
      *  As a side note...the individual @FXML declarations are required to be on individual lines.  The Scene Builder only recognizes the last element on the line
      */
+    
+    @FXML
+    void SkipReroll(ActionEvent event){
+        this.Roll.setVisible(false);
+        this.ReRoll.setVisible(false);
+        this.SkipReRoll.setVisible(false);
+        Dice1_Hold.setVisible(false);
+        Dice2_Hold.setVisible(false);
+        Dice3_Hold.setVisible(false);
+        Dice4_Hold.setVisible(false);
+        Dice5_Hold.setVisible(false);
+            
+        Dice1_Hold.getSelectionModel().selectFirst();
+        Dice2_Hold.getSelectionModel().selectFirst();
+        Dice3_Hold.getSelectionModel().selectFirst();
+        Dice4_Hold.getSelectionModel().selectFirst();
+        Dice5_Hold.getSelectionModel().selectFirst();
+        setupAction();
+    }
+    
+    @FXML
+    void EndTurn(ActionEvent event){
+       Action.setVisible(false);
+       EndTurn.setVisible(false);
+       Roll.setVisible(true);
+       ReRoll.setVisible(false);
+       startNextTurn();
+    }
 
     /**
      * updates the dice for the roll dice method
@@ -280,6 +314,32 @@ int playerindexes[];
         
         if(!Dice5_Hold.isVisible()){Dice5_Hold.getSelectionModel().selectFirst();}
         else if (!reroll) {Dice5_Hold.getSelectionModel().select("Re-Roll");}
+    }
+    
+    private void setupAction(){  
+        if(game.getDice().doesRequireChooseableActionAtIndex(0)){
+            Dice1_Target.setVisible(true);
+            Action.setVisible(true);
+        }
+        if(game.getDice().doesRequireChooseableActionAtIndex(1)){
+            Dice2_Target.setVisible(true);
+            Action.setVisible(true);
+        }
+        if(game.getDice().doesRequireChooseableActionAtIndex(2)){
+            Dice3_Target.setVisible(true);
+            Action.setVisible(true);
+        }
+        if(game.getDice().doesRequireChooseableActionAtIndex(3)){
+            Dice4_Target.setVisible(true);
+            Action.setVisible(true);
+        }
+        if(game.getDice().doesRequireChooseableActionAtIndex(4)){
+            Dice5_Target.setVisible(true);
+            Action.setVisible(true);
+        }
+        if(!Action.isVisible()){
+            EndTurn.setVisible(true);
+        }
     }
     
     private void startNextTurn(){
