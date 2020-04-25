@@ -7,11 +7,8 @@ package bang_gui;
 
 import Game.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import static javafx.collections.FXCollections.observableArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,9 +16,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import player.*;
 
 
@@ -31,9 +31,23 @@ import player.*;
  * @author Steven
  */
 public class GameBoardController implements Initializable {
-BangGame game;
-Player curplayer;
-int playerindexes[];
+    private BangGame game;
+    private Player curplayer;
+    private int playerindexes[];
+    private Player b1targets[];
+    private Player b2targets[];
+    private Player beertargets[];
+    
+    @FXML private HBox HumanPlayer;
+    
+    @FXML private HBox ComputerPlayer;
+    @FXML private TextArea computeroutput;
+    
+    @FXML private TitledPane gameover;
+    @FXML private Label SandDwincond;
+    @FXML private Label Swincond;
+    @FXML private Label Owincond;
+    @FXML private Label Rwincond;
     
 /*
  *  This section of code is for setting up the handles to the central portion of the board.
@@ -170,7 +184,7 @@ int playerindexes[];
         curplayer.rollDice(game);
         Roll.setVisible(false);
         updateDice(false);
-        if(this.curplayer.canContinueReroll()){
+        if(this.curplayer.canRoll(game)){
             this.ReRoll.setVisible(true);
             this.SkipReRoll.setVisible(true);
         }
@@ -209,7 +223,7 @@ int playerindexes[];
         if (Dice5_Hold.getValue()=="Re-Roll"){curplayer.rollDieAtIndex(game,4);}
         this.curplayer.decreaseRerollCount();
         updateDice(true);
-        if(this.curplayer.canContinueReroll()){
+        if(this.curplayer.canRoll(game)){
             this.ReRoll.setVisible(true);
             this.SkipReRoll.setVisible(true);
         }
@@ -239,14 +253,72 @@ int playerindexes[];
        Dice3_Target.setVisible(false);
        Dice4_Target.setVisible(false);
        Dice5_Target.setVisible(false);
-       updatePlayers();
        Action.setVisible(false);
        EndTurn.setVisible(true);
        Roll.setVisible(false);
        ReRoll.setVisible(false);
        
-       
+        if(game.getDice().doesRequireChooseableActionAtIndex(0)){
+            this.curplayer.takeActionOnDieAtIndex(game, 0, Dice1_Target.getSelectionModel().getSelectedIndex());
+        }
+        if(game.getDice().doesRequireChooseableActionAtIndex(1)){
+            this.curplayer.takeActionOnDieAtIndex(game, 1, Dice2_Target.getSelectionModel().getSelectedIndex());
+        }
+        if(game.getDice().doesRequireChooseableActionAtIndex(2)){
+            this.curplayer.takeActionOnDieAtIndex(game, 2, Dice3_Target.getSelectionModel().getSelectedIndex());
+        }
+        if(game.getDice().doesRequireChooseableActionAtIndex(3)){
+            this.curplayer.takeActionOnDieAtIndex(game, 3, Dice4_Target.getSelectionModel().getSelectedIndex());
+        }
+        if(game.getDice().doesRequireChooseableActionAtIndex(4)){
+            this.curplayer.takeActionOnDieAtIndex(game, 4, Dice5_Target.getSelectionModel().getSelectedIndex());
+        }
+        this.curplayer.preformGatlingCheckAndAction(game);
+        updatePlayers();
     }
+    
+    private void setupAction(){  
+        if(this.curplayer.canHaveAction(game)){
+            if(game.getDice().doesRequireChooseableActionAtIndex(0)){
+                Dice1_Target.setVisible(true);
+                Action.setVisible(true);
+                this.Dice1_Target.setItems(observableArrayList(this.curplayer.getTargetForDieAtIndex(game, 0)));
+                this.Dice1_Target.getSelectionModel().select(this.curplayer.getSelectedTargetForDieAtIndex(game, 0));
+            }
+            if(game.getDice().doesRequireChooseableActionAtIndex(1)){
+                Dice2_Target.setVisible(true);
+                Action.setVisible(true);
+                this.Dice2_Target.setItems(observableArrayList(this.curplayer.getTargetForDieAtIndex(game, 1)));
+                this.Dice2_Target.getSelectionModel().select(this.curplayer.getSelectedTargetForDieAtIndex(game, 1));
+            }
+            if(game.getDice().doesRequireChooseableActionAtIndex(2)){
+                Dice3_Target.setVisible(true);
+                Action.setVisible(true);
+                this.Dice3_Target.setItems(observableArrayList(this.curplayer.getTargetForDieAtIndex(game, 2)));
+                this.Dice3_Target.getSelectionModel().select(this.curplayer.getSelectedTargetForDieAtIndex(game, 2));
+            }
+            if(game.getDice().doesRequireChooseableActionAtIndex(3)){
+                Dice4_Target.setVisible(true);
+                Action.setVisible(true);
+                this.Dice4_Target.setItems(observableArrayList(this.curplayer.getTargetForDieAtIndex(game, 3)));
+                this.Dice4_Target.getSelectionModel().select(this.curplayer.getSelectedTargetForDieAtIndex(game, 3));
+            }
+            if(game.getDice().doesRequireChooseableActionAtIndex(4)){
+                Dice5_Target.setVisible(true);
+                Action.setVisible(true);
+                this.Dice5_Target.setItems(observableArrayList(this.curplayer.getTargetForDieAtIndex(game, 4)));
+                this.Dice5_Target.getSelectionModel().select(this.curplayer.getSelectedTargetForDieAtIndex(game, 4));
+            }
+            if(!Action.isVisible()){
+                this.curplayer.preformGatlingCheckAndAction(game);
+                EndTurn.setVisible(true);
+            }
+        }
+        else{
+            EndTurn.setVisible(true);
+        }
+    }
+    
     /*
      *  For the actual players...Fields are tagged as Pos1 (for the actual player) and increment clockwise to Pos2 through Pos8.
      *  If fewer than 8 play, say only 4, it is possible to name Pos3 to Player 2, Pos5 to Player 3, and Pos7 to Player 4.  Could make the TitledPanes for the other positions
@@ -272,15 +344,28 @@ int playerindexes[];
         Dice4_Hold.getSelectionModel().selectFirst();
         Dice5_Hold.getSelectionModel().selectFirst();
         setupAction();
+        updatePlayers();
     }
     
     @FXML
     void EndTurn(ActionEvent event){
-       Action.setVisible(false);
-       EndTurn.setVisible(false);
-       Roll.setVisible(true);
-       ReRoll.setVisible(false);
-       startNextTurn();
+            startNextTurn();
+            updatePlayers();
+    }
+    
+    private void displayEndCondtion(){
+        this.HumanPlayer.setVisible(false);
+        this.ComputerPlayer.setVisible(false);
+        this.gameover.setVisible(true);
+        this.Roll.setVisible(false);
+        this.ReRoll.setVisible(false);
+        this.Action.setVisible(false);
+        this.EndTurn.setVisible(false);
+        this.SkipReRoll.setVisible(false);
+        if(game.getEndCondition() == 1){this.SandDwincond.setVisible(true);}
+        else if(game.getEndCondition() == 2){this.Swincond.setVisible(true);}
+        else if(game.getEndCondition() == 3){this.Rwincond.setVisible(true);}
+        else{this.Owincond.setVisible(true);}
     }
 
     /**
@@ -316,37 +401,25 @@ int playerindexes[];
         else if (!reroll) {Dice5_Hold.getSelectionModel().select("Re-Roll");}
     }
     
-    private void setupAction(){  
-        if(game.getDice().doesRequireChooseableActionAtIndex(0)){
-            Dice1_Target.setVisible(true);
-            Action.setVisible(true);
-        }
-        if(game.getDice().doesRequireChooseableActionAtIndex(1)){
-            Dice2_Target.setVisible(true);
-            Action.setVisible(true);
-        }
-        if(game.getDice().doesRequireChooseableActionAtIndex(2)){
-            Dice3_Target.setVisible(true);
-            Action.setVisible(true);
-        }
-        if(game.getDice().doesRequireChooseableActionAtIndex(3)){
-            Dice4_Target.setVisible(true);
-            Action.setVisible(true);
-        }
-        if(game.getDice().doesRequireChooseableActionAtIndex(4)){
-            Dice5_Target.setVisible(true);
-            Action.setVisible(true);
-        }
-        if(!Action.isVisible()){
-            EndTurn.setVisible(true);
-        }
-    }
-    
     private void startNextTurn(){
         this.curplayer.endTurn(game);
         this.curplayer = game.getCurPlayer();
         updateActivePlayer();
         this.updatePlayers();
+        if(this.curplayer.canRoll(game)){
+            this.Roll.setVisible(true);
+            this.ReRoll.setVisible(false);
+            this.Action.setVisible(false);
+            this.EndTurn.setVisible(false);
+            this.SkipReRoll.setVisible(false);
+        }
+        else{
+            this.Roll.setVisible(false);
+            this.ReRoll.setVisible(false);
+            this.Action.setVisible(false);
+            this.EndTurn.setVisible(true);
+            this.SkipReRoll.setVisible(false);
+        }
     }
     
     private void updateActivePlayer(){
@@ -466,7 +539,7 @@ int playerindexes[];
             playerindexes[6] = 6;
             playerindexes[7] = 7;
         }
-        Pos1_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[0]).getRoleindex()]);
+        Pos1_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[0]).getRoleindex(game)]);
         Pos1_Name.setImage(game.getPlayerAtIndex(playerindexes[0]).getCharacterImage());
         Pos1_ID.setText("You: " + game.getPlayerAtIndex(playerindexes[0]).getcharactername());
         Pos1_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getArrows()));
@@ -475,7 +548,7 @@ int playerindexes[];
         Pos1_LP.setProgress(game.getPlayerAtIndex(playerindexes[0]).getLifeProgress());
         Pos1_ID.setCollapsible(false);
         
-        Pos2_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[1]).getRoleindex()]);
+        Pos2_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[1]).getRoleindex(game)]);
         Pos2_Name.setImage(game.getPlayerAtIndex(playerindexes[1]).getCharacterImage());
         Pos2_ID.setText("Computer Player " + Integer.toString(playerindexes[1]) + ": " + game.getPlayerAtIndex(playerindexes[1]).getcharactername());
         Pos2_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[1]).getArrows()));
@@ -484,7 +557,7 @@ int playerindexes[];
         Pos2_LP.setProgress(game.getPlayerAtIndex(playerindexes[1]).getLifeProgress());
         Pos2_ID.setCollapsible(false);
         
-        Pos3_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[2]).getRoleindex()]);
+        Pos3_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[2]).getRoleindex(game)]);
         Pos3_Name.setImage(game.getPlayerAtIndex(playerindexes[2]).getCharacterImage());
         Pos3_ID.setText("Computer Player " + Integer.toString(playerindexes[2]) + ": " + game.getPlayerAtIndex(playerindexes[2]).getcharactername());
         Pos3_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[2]).getArrows()));
@@ -493,7 +566,7 @@ int playerindexes[];
         Pos3_LP.setProgress(game.getPlayerAtIndex(playerindexes[2]).getLifeProgress());
         Pos3_ID.setCollapsible(false);
         
-        Pos4_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[3]).getRoleindex()]);
+        Pos4_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[3]).getRoleindex(game)]);
         Pos4_Name.setImage(game.getPlayerAtIndex(playerindexes[3]).getCharacterImage());
         Pos4_ID.setText("Computer Player " + Integer.toString(playerindexes[3]) + ": " + game.getPlayerAtIndex(playerindexes[3]).getcharactername());
         Pos4_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[3]).getArrows()));
@@ -502,7 +575,7 @@ int playerindexes[];
         Pos4_LP.setProgress(game.getPlayerAtIndex(playerindexes[3]).getLifeProgress());
         Pos4_ID.setCollapsible(false);
         
-        Pos5_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[4]).getRoleindex()]);
+        Pos5_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[4]).getRoleindex(game)]);
         Pos5_Name.setImage(game.getPlayerAtIndex(playerindexes[4]).getCharacterImage());
         Pos5_ID.setText("Computer Player " + Integer.toString(playerindexes[4]) + ": " + game.getPlayerAtIndex(playerindexes[4]).getcharactername());
         Pos5_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[4]).getArrows()));
@@ -511,7 +584,7 @@ int playerindexes[];
         Pos5_LP.setProgress(game.getPlayerAtIndex(playerindexes[4]).getLifeProgress());
         Pos5_ID.setCollapsible(false);
         
-        Pos6_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[5]).getRoleindex()]);
+        Pos6_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[5]).getRoleindex(game)]);
         Pos6_Name.setImage(game.getPlayerAtIndex(playerindexes[5]).getCharacterImage());
         Pos6_ID.setText("Computer Player " + Integer.toString(playerindexes[5]) + ": " + game.getPlayerAtIndex(playerindexes[5]).getcharactername());
         Pos6_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[5]).getArrows()));
@@ -520,7 +593,7 @@ int playerindexes[];
         Pos6_LP.setProgress(game.getPlayerAtIndex(playerindexes[5]).getLifeProgress());
         Pos6_ID.setCollapsible(false);
         
-        Pos7_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[6]).getRoleindex()]);
+        Pos7_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[6]).getRoleindex(game)]);
         Pos7_Name.setImage(game.getPlayerAtIndex(playerindexes[6]).getCharacterImage());
         Pos7_ID.setText("Computer Player " + Integer.toString(playerindexes[6]) + ": " + game.getPlayerAtIndex(playerindexes[6]).getcharactername());
         Pos7_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[6]).getArrows()));
@@ -529,7 +602,7 @@ int playerindexes[];
         Pos7_LP.setProgress(game.getPlayerAtIndex(playerindexes[6]).getLifeProgress());
         Pos7_ID.setCollapsible(false);
         
-        Pos8_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[7]).getRoleindex()]);
+        Pos8_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[7]).getRoleindex(game)]);
         Pos8_Name.setImage(game.getPlayerAtIndex(playerindexes[7]).getCharacterImage());
         Pos8_ID.setText("Computer Player " + Integer.toString(playerindexes[7]) + ": " + game.getPlayerAtIndex(playerindexes[7]).getcharactername());
         Pos8_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[7]).getArrows()));
@@ -542,55 +615,56 @@ int playerindexes[];
     }
     
     public void updatePlayers(){
-        Pos1_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[0]).getRoleindex()]);
+        Pos1_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[0]).getRoleindex(game)]);
         Pos1_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getArrows()));
         Pos1_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getCurLife()));
         Pos1_LP.setProgress(game.getPlayerAtIndex(playerindexes[0]).getLifeProgress());
         if(game.getPlayerAtIndex(playerindexes[0]).isPlayerDead()) {Pos1_ID.setText("You Are Dead");}
         
-        Pos2_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[1]).getRoleindex()]);
+        Pos2_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[1]).getRoleindex(game)]);
         Pos2_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[1]).getArrows()));
         Pos2_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[1]).getCurLife()));
         Pos2_LP.setProgress(game.getPlayerAtIndex(playerindexes[1]).getLifeProgress());
         if(game.getPlayerAtIndex(playerindexes[1]).isPlayerDead()) {Pos2_ID.setText("Computer Player " + Integer.toString(playerindexes[1]) + " Is Dead");}
         
-        Pos3_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[2]).getRoleindex()]);
+        Pos3_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[2]).getRoleindex(game)]);
         Pos3_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[2]).getArrows()));
         Pos3_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[2]).getCurLife()));
         Pos3_LP.setProgress(game.getPlayerAtIndex(playerindexes[2]).getLifeProgress());
         if(game.getPlayerAtIndex(playerindexes[2]).isPlayerDead()) {Pos3_ID.setText("Computer Player " + Integer.toString(playerindexes[2]) + " Is Dead");}
         
-        Pos4_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[3]).getRoleindex()]);
+        Pos4_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[3]).getRoleindex(game)]);
         Pos4_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[3]).getArrows()));
         Pos4_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[3]).getCurLife()));
         Pos4_LP.setProgress(game.getPlayerAtIndex(playerindexes[3]).getLifeProgress());
         if(game.getPlayerAtIndex(playerindexes[3]).isPlayerDead()) {Pos4_ID.setText("Computer Player " + Integer.toString(playerindexes[3]) + " Is Dead");}
         
-        Pos5_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[4]).getRoleindex()]);
+        Pos5_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[4]).getRoleindex(game)]);
         Pos5_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[4]).getArrows()));
         Pos5_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[4]).getCurLife()));
         Pos5_LP.setProgress(game.getPlayerAtIndex(playerindexes[4]).getLifeProgress());
         if(game.getPlayerAtIndex(playerindexes[4]).isPlayerDead()) {Pos5_ID.setText("Computer Player " + Integer.toString(playerindexes[4]) + " Is Dead");}
         
-        Pos6_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[5]).getRoleindex()]);
+        Pos6_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[5]).getRoleindex(game)]);
         Pos6_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[5]).getArrows()));
         Pos6_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[5]).getCurLife()));
         Pos6_LP.setProgress(game.getPlayerAtIndex(playerindexes[5]).getLifeProgress());
         if(game.getPlayerAtIndex(playerindexes[5]).isPlayerDead()) {Pos6_ID.setText("Computer Player " + Integer.toString(playerindexes[5]) + " Is Dead");}
         
-        Pos7_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[6]).getRoleindex()]);
+        Pos7_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[6]).getRoleindex(game)]);
         Pos7_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[6]).getArrows()));
         Pos7_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[6]).getCurLife()));
         Pos7_LP.setProgress(game.getPlayerAtIndex(playerindexes[6]).getLifeProgress());
         if(game.getPlayerAtIndex(playerindexes[6]).isPlayerDead()) {Pos7_ID.setText("Computer Player " + Integer.toString(playerindexes[6]) + " Is Dead");}
         
-        Pos8_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[7]).getRoleindex()]);
+        Pos8_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[7]).getRoleindex(game)]);
         Pos8_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[7]).getArrows()));
         Pos8_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[7]).getCurLife()));
         Pos8_LP.setProgress(game.getPlayerAtIndex(playerindexes[7]).getLifeProgress());
         if(game.getPlayerAtIndex(playerindexes[7]).isPlayerDead()) {Pos8_ID.setText("Computer Player " + Integer.toString(playerindexes[7]) + " Is Dead");}
         
         arrowpile.setText(Integer.toString(game.getArrowPile()));
+        if(this.game.isEndCondition()){displayEndCondtion();}
     }
     
     /**

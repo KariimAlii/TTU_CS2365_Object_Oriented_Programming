@@ -31,6 +31,7 @@ public class BangGame {
         Random rand;
         rand = new Random(System.currentTimeMillis());
         startingnumberofplayers = currentnumberofplayers = setup.getNumberOfPlayers();
+        numberofbadguys = 0;
         players = new Player[startingnumberofplayers];
         Player templayer2 = this.sheriff = this.curplayer = new HumanPlayer(setup.getCharacter(),setup.getRole());
         players[0] = curplayer;
@@ -42,9 +43,15 @@ public class BangGame {
                 tempplayer = new RandomComputer(setup.getCharacter(),temp);
                 this.sheriff = tempplayer;
             }
-            else if(temp == Role.RENEGADE){tempplayer = new RandomComputer(setup.getCharacter(),temp);}
+            else if(temp == Role.RENEGADE){
+                tempplayer = new RandomComputer(setup.getCharacter(),temp);
+                numberofbadguys++;
+            }
             else if(temp == Role.DEPUTY){tempplayer = new RandomComputer(setup.getCharacter(),temp);}
-            else {tempplayer = new RandomComputer(setup.getCharacter(),temp);}
+            else {
+                tempplayer = new RandomComputer(setup.getCharacter(),temp);
+                numberofbadguys++;
+            }
             //check this iw working properly
             players[i] = tempplayer;
             curplayer.setNextPlayer(tempplayer);
@@ -56,6 +63,14 @@ public class BangGame {
         curplayer = sheriff;
         dice = new BangDice();
         arrowpile = 9;
+    }
+    
+    public void reduceCurrentNumberOfPlayers(){
+        this.currentnumberofplayers--;
+    }
+    
+    public void reduceNumberOfBadGuys(){
+        this.numberofbadguys--;
     }
     
     public BangDice getDice(){
@@ -92,12 +107,12 @@ public class BangGame {
         }
     }
     
-    private void shootGatlingGun(){
-        this.arrowpile = this.curplayer.individualGatlingGunShoot();
-        Player temp = this.curplayer.getNextPlayer();
-        while(temp != this.curplayer){
-            temp.individualGatlingGunShot();
-            temp.getNextPlayer();
+    public void shootGatlingGun(){
+        this.arrowpile += this.curplayer.individualGatlingGunShoot();
+        for (int i = 0; i < players.length; i++){
+            if(!players[i].isPlayerDead() && players[i] != this.curplayer){
+                players[i].individualGatlingGunShot();
+            }
         }
     }
     
@@ -128,4 +143,21 @@ public class BangGame {
         this.curplayer = this.curplayer.getNextPlayer();
         this.curplayer.startTurn();
    }
+    
+    public boolean isEndCondition(){
+        boolean returnvalue = false;
+        if(this.sheriff.isPlayerDead()) returnvalue = true;
+        else if(this.numberofbadguys == 0);
+        return returnvalue;
+    }
+    
+    public int getEndCondition(){
+        int returnvalue = 0;
+        if(this.currentnumberofplayers <= 0) returnvalue = 0;
+        else if (this.sheriff.isPlayerDead() && this.currentnumberofplayers > 1) returnvalue = 0;
+        else if (this.sheriff.isPlayerDead() && this.currentnumberofplayers == 1 && this.curplayer.getRole() == Role.RENEGADE) returnvalue = 3;
+        else if (!this.sheriff.isPlayerDead() && this.startingnumberofplayers > 4 && this.numberofbadguys <= 0) returnvalue = 1;
+        else if (!this.sheriff.isPlayerDead() && this.numberofbadguys <= 0) returnvalue = 2;
+        return returnvalue;
+    }
 }
