@@ -12,7 +12,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bang_gui.BangStartUpController">
+<GridPane gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bang_gui.BangStartUpController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -31,7 +31,7 @@
       </Pane>
       <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
          <children>
-            <VBox layoutX="20.0" layoutY="68.0" prefHeight="131.0" prefWidth="335.0">
+            <VBox fx:id="OldSaloonModules" layoutX="20.0" layoutY="68.0" prefHeight="131.0" prefWidth="335.0">
                <children>
                   <Text fill="#944a09" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Old Saloon expansion modules to add:" wrappingWidth="386.6220703125">
                      <font>
@@ -56,7 +56,7 @@
       </Pane>
       <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
-            <VBox layoutX="12.0" layoutY="68.0" prefHeight="131.0" prefWidth="393.0">
+            <VBox fx:id="UndeadOrAliveModules" layoutX="12.0" layoutY="68.0" prefHeight="131.0" prefWidth="393.0">
                <children>
                   <Text fill="#944a09" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Undead or Alive expansion modules to add:" wrappingWidth="402.6220703125">
                      <font>
