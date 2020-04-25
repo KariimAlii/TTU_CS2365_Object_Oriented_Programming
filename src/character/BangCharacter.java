@@ -93,7 +93,6 @@ public abstract class BangCharacter {
      * @return count: int
      */
     public int gainLife(){
-        System.out.println("Health Before: " + this.curlifepoints);
         int count = 0;
         if((this.curlifepoints < this.maxlifepoints) && !this.isDead()){
             this.curlifepoints++;

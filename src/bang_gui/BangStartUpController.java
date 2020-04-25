@@ -95,7 +95,6 @@ public class BangStartUpController implements Initializable {
         else if (radiobutton5.isSelected()) returnvalue = 6;
         else if (radiobutton6.isSelected()) returnvalue = 7;
         else if (radiobutton7.isSelected()) returnvalue = 8;
-        System.out.println("Number of Starting Players: " + returnvalue);
         return returnvalue;
     }
 }

@@ -25,6 +25,7 @@ public abstract class Player {
     private Target pointsystem[];
     private Player nextPlayer;
     private Player previousPlayer;
+    private boolean setdead;
     
     Player(PlayerType playertype, BangCharacter character, Role setuprole){
         this.playertype = playertype;
@@ -33,6 +34,7 @@ public abstract class Player {
         if (this.role == Role.SHERIFF){character.setSheriff();}
         this.dynamitecount = 0;
         dynamiteexploded = false;
+        this.setdead = false;
         if (this.character.canHaveExtraReroll()) {this.rerollcount = 3;}
         else {this.rerollcount = 2;}
     }
@@ -59,12 +61,20 @@ public abstract class Player {
         this.rerollcount--;
     }
     
-    public int getRoleindex(){
+    public int getRoleindex(BangGame game){
         int returnvalue = 0;
-        if(this.role == Role.SHERIFF){returnvalue = 1;}
-        else if (this.role == Role.RENEGADE && (this.isPlayerDead() || this.playertype == PlayerType.Human)){returnvalue = 2;}
-        else if (this.role == Role.OUTLAW && (this.isPlayerDead() || this.playertype == PlayerType.Human)){returnvalue = 3;}
-        else if (this.role == Role.DEPUTY && (this.isPlayerDead() || this.playertype == PlayerType.Human)){returnvalue = 4;}
+        if(!game.isEndCondition()){
+            if(this.role == Role.SHERIFF){returnvalue = 1;}
+            else if (this.role == Role.RENEGADE && (this.isPlayerDead() || this.playertype == PlayerType.Human)){returnvalue = 2;}
+            else if (this.role == Role.OUTLAW && (this.isPlayerDead() || this.playertype == PlayerType.Human)){returnvalue = 3;}
+            else if (this.role == Role.DEPUTY && (this.isPlayerDead() || this.playertype == PlayerType.Human)){returnvalue = 4;}
+        }
+        else{
+            if(this.role == Role.SHERIFF){returnvalue = 1;}
+            else if (this.role == Role.RENEGADE){returnvalue = 2;}
+            else if (this.role == Role.OUTLAW){returnvalue = 3;}
+            else if (this.role == Role.DEPUTY){returnvalue = 4;}
+        }
         return returnvalue;
     }
     
@@ -93,14 +103,13 @@ public abstract class Player {
         if(game.getDice().getDieAtIndex(index) == DYNAMITE){
             this.dynamitecount--;
         }
+        
         game.getDice().rollDieAtIndex(index);
-        if(this.character.canRerollDynamite()){
-            for(int i = 0; i < game.getDice().getNumberOfDice(); i++){
-                if(game.getDice().getDieAtIndex(i) == DYNAMITE){
-                    game.getDice().makeRerollableAtIndex(i);
-                }
-            }
+        
+        if(game.getDice().getDieAtIndex(index) == DYNAMITE && this.character.canRerollDynamite()){
+            game.getDice().makeRerollableAtIndex(index);
         }
+        
         processArrowsOrDynamite(game);
     }
     
@@ -135,10 +144,19 @@ public abstract class Player {
     
     private void takeDamage(BangGame game){
         this.character.takeDamage();
-        if(this.character.isDead()){
-            game.returnArrows(this.arrows);
-            this.arrows = 0;
+        if(this.character.isDead() && !this.setdead){
+            setDead(game);
         }
+    }
+    
+    private void setDead(BangGame game){
+        this.setdead = true;
+        this.getPreviousPlayer().setNextPlayer(this.nextPlayer);
+        this.getNextPlayer().setPreviousPlayer(this.previousPlayer);
+        game.returnArrows(this.arrows);
+        this.arrows = 0;
+        game.reduceCurrentNumberOfPlayers();
+        if(this.role == Role.OUTLAW || this.role == Role.RENEGADE){game.reduceNumberOfBadGuys();}
     }
     
     private void gainHealth(){
@@ -235,7 +253,9 @@ public abstract class Player {
         Player temp = this.getNextPlayer();
         int i = 1;
         while (temp != this){
-            if (!temp.isPlayerDead()){targets[i] = temp;}
+            if (!temp.isPlayerDead()){
+                targets[i] = temp;
+            }
             temp = temp.getNextPlayer();
             i++;
         }
@@ -266,9 +286,82 @@ public abstract class Player {
         return returnvalue;
     }
     
-    public boolean canContinueReroll(){
+    public boolean canRoll(BangGame game){
         boolean returnvalue = false;
-        if(this.rerollcount > 0 && !this.isPlayerDead()) returnvalue = true;
+        if(this.rerollcount > 0 && !this.isPlayerDead() && !game.isEndCondition()) returnvalue = true;
         return returnvalue;
+    }
+    
+    public boolean canHaveAction(BangGame game){
+        boolean returnvalue = false;
+        if(!this.isPlayerDead() && !game.isEndCondition()){
+            returnvalue = true;
+        }
+        return returnvalue;
+    }
+    
+    public String[] getTargetForDieAtIndex(BangGame game, int index){
+        int checkdie = game.getDice().getDieAtIndex(index);
+        Player targets[];
+        if (checkdie == BULLSEYE1){
+            targets = this.getTargetsB1(game);
+        }
+        else if(checkdie == BULLSEYE2){
+            targets = this.getTargetsB2(game);
+        }
+        else{
+            targets = this.getTargetBeer(game);
+        }
+        
+        String[] returnvalue = new String[targets.length];
+        for(int i = 0; i < targets.length; i++){
+            returnvalue[i] = targets[i].getcharactername();
+        }
+        return returnvalue;
+    }
+    
+    public String getSelectedTargetForDieAtIndex(BangGame game, int index){
+        int checkdie = game.getDice().getDieAtIndex(index);
+        Player temp = getSelectedB1(game);
+        
+        if (checkdie == BULLSEYE1){
+            temp = this.getSelectedB1(game);
+        }
+        else if(checkdie == BULLSEYE2){
+            temp = this.getSelectedB2(game);
+        }
+        else{
+            temp = this.getSelectedBeer();
+        }
+        return temp.getcharactername();
+    }
+    
+    public void takeActionOnDieAtIndex(BangGame game, int dieindex, int targetindex){
+        int checkdie = game.getDice().getDieAtIndex(dieindex);
+        if (checkdie == BULLSEYE1){
+            Player b1targets[] = this.getTargetsB1(game);
+            this.shootTarget(b1targets[targetindex], game);
+        }
+        else if(checkdie == BULLSEYE2){
+            Player b2targets[] = this.getTargetsB2(game);
+            this.shootTarget(b2targets[targetindex], game);
+        }
+        else{
+            Player beertargets[] = this.getTargetBeer(game);
+            this.giveBeer(beertargets[targetindex], game);
+        }
+    }
+    
+    public void preformGatlingCheckAndAction(BangGame game){
+        int gatlingcheck = 0;
+        
+        for(int i = 0; i < game.getDice().getNumberOfDice(); i++){
+            if(game.getDice().getDieAtIndex(i) == GATLING){
+                gatlingcheck++;
+            }
+        }
+        if(gatlingcheck >= this.character.getGatlingNeed()){
+            game.shootGatlingGun();
+        }
     }
 }
