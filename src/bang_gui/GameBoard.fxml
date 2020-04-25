@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -148,6 +149,34 @@
                         <TextArea fx:id="computeroutput" editable="false" prefHeight="190.0" prefWidth="561.0" />
                      </children>
                   </HBox>
+                  <TitledPane fx:id="gameover" animated="false" prefHeight="150.0" prefWidth="542.0" text="Game is over!" visible="false">
+                     <content>
+                        <StackPane prefHeight="118.0" prefWidth="520.0">
+                           <children>
+                              <Label fx:id="SandDwincond" alignment="CENTER" prefHeight="59.0" prefWidth="522.0" text="Sheriff and Deputy Wins" textAlignment="CENTER" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="40.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="Swincond" alignment="CENTER" prefHeight="59.0" prefWidth="522.0" text="Sheriff Wins" textAlignment="CENTER" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="40.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="Owincond" alignment="CENTER" prefHeight="59.0" prefWidth="522.0" text="Outlaw Wins" textAlignment="CENTER" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="40.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="Rwincond" alignment="CENTER" prefHeight="59.0" prefWidth="522.0" text="Renegade Wins" textAlignment="CENTER" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="40.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                     </content>
+                  </TitledPane>
                </children>
             </StackPane>
             <HBox prefHeight="39.0" prefWidth="553.0">
