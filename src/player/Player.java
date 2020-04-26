@@ -23,11 +23,12 @@ public abstract class Player {
     private int dynamitecount;
     private boolean dynamiteexploded;
     private Target pointsystem[];
+    private int highesttargetindex;
     private Player nextPlayer;
     private Player previousPlayer;
     private boolean setdead;
     
-    Player(PlayerType playertype, BangCharacter character, Role setuprole){
+    Player(PlayerType playertype, BangCharacter character, Role setuprole, int startingnumberofplayers){
         this.playertype = playertype;
         this.character = character;
         this.role = setuprole;
@@ -37,6 +38,8 @@ public abstract class Player {
         this.setdead = false;
         if (this.character.canHaveExtraReroll()) {this.rerollcount = 3;}
         else {this.rerollcount = 2;}
+        pointsystem = new Target[startingnumberofplayers];
+        highesttargetindex = -1;
     }
     
     public void startTurn(){
@@ -244,7 +247,12 @@ public abstract class Player {
     public abstract Player getSelectedB2(BangGame game);
     
     public void shootTarget(Player target, BangGame game){
-        target.takeDamage(game);
+        target.takeShot(this, game);
+    }
+    
+    private void takeShot(Player shooter, BangGame game){
+        this.takeDamage(game);
+        this.increaseTarget(shooter);
     }
     
     public Player[] getTargetBeer(BangGame game){
@@ -267,11 +275,12 @@ public abstract class Player {
     }
     
     private void giveBeer(Player target, BangGame game){
-        target.takeBeer();
+        target.takeBeer(this);
     }
     
-    public void takeBeer(){
+    public void takeBeer(Player giver){
         this.gainHealth();
+        if(giver != this) decreaseTarget(giver);
     }
     
     public void individualGatlingGunShot(){
@@ -362,6 +371,69 @@ public abstract class Player {
         }
         if(gatlingcheck >= this.character.getGatlingNeed()){
             game.shootGatlingGun();
+        }
+    }
+    
+    public int getTargetValue(Player target){
+        int returnvalue = 0;
+        if(isTarget(target)){
+            for(int i = 0; i <= this.highesttargetindex; i++){
+                if(this.pointsystem[i].isTarget(target)){
+                    returnvalue = this.pointsystem[i].getTargetPoints();
+                    break;
+                }
+            }
+        }
+        else{
+            this.addTarget(target, true);
+            this.pointsystem[this.highesttargetindex].decreaseTargetPoints();
+        }
+        return returnvalue;
+    }
+    
+    private void addTarget(Player target, boolean increase){
+        this.pointsystem[++this.highesttargetindex] = new Target(target, increase);
+    }
+    
+    private boolean isTarget(Player target){
+        boolean returnvalue = false;
+        if(this.highesttargetindex == -1){returnvalue = false;}
+        else{
+            for(int i = 0; i <= this.highesttargetindex; i++){
+                if(this.pointsystem[i].isTarget(target)){
+                    returnvalue = true;
+                    break;
+                }
+            }
+        }
+        return returnvalue;
+    }
+    
+    private void increaseTarget(Player target){
+        if(isTarget(target)){
+            for(int i = 0; i <= this.highesttargetindex; i++){
+                if(this.pointsystem[i].isTarget(target)){
+                    this.pointsystem[i].increaseTargetPoints();
+                    break;
+                }
+            }
+        }
+        else{
+            this.addTarget(target, true);
+        }
+    }
+    
+    private void decreaseTarget(Player target){
+        if(isTarget(target)){
+            for(int i = 0; i <= this.highesttargetindex; i++){
+                if(this.pointsystem[i].isTarget(target)){
+                    this.pointsystem[i].decreaseTargetPoints();
+                    break;
+                }
+            }
+        }
+        else{
+            this.addTarget(target, false);
         }
     }
 }

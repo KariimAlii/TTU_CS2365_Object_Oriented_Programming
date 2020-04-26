@@ -30,23 +30,23 @@ public class BangGame {
         startingnumberofplayers = currentnumberofplayers = setup.getNumberOfPlayers();
         numberofbadguys = 0;
         players = new Player[startingnumberofplayers];
-        Player templayer2 = this.sheriff = this.curplayer = new HumanPlayer(setup.getCharacter(),setup.getRole());
+        Player templayer2 = this.sheriff = this.curplayer = new HumanPlayer(setup.getCharacter(),setup.getRole(), startingnumberofplayers);
         players[0] = curplayer;
         Role temp;
         Player tempplayer;
         for(int i = 1; i < startingnumberofplayers; i++){
             temp = setup.getRole();
             if(temp == Role.SHERIFF){
-                tempplayer = new RandomComputer(setup.getCharacter(),temp);
+                tempplayer = new RandomComputer(setup.getCharacter(),temp, startingnumberofplayers);
                 this.sheriff = tempplayer;
             }
             else if(temp == Role.RENEGADE){
-                tempplayer = new RandomComputer(setup.getCharacter(),temp);
+                tempplayer = new RandomComputer(setup.getCharacter(),temp, startingnumberofplayers);
                 numberofbadguys++;
             }
-            else if(temp == Role.DEPUTY){tempplayer = new RandomComputer(setup.getCharacter(),temp);}
+            else if(temp == Role.DEPUTY){tempplayer = new RandomComputer(setup.getCharacter(),temp, startingnumberofplayers);}
             else {
-                tempplayer = new RandomComputer(setup.getCharacter(),temp);
+                tempplayer = new RandomComputer(setup.getCharacter(),temp, startingnumberofplayers);
                 numberofbadguys++;
             }
             //check this iw working properly
