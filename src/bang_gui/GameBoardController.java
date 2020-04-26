@@ -187,6 +187,7 @@ public class GameBoardController implements Initializable {
         if(this.curplayer.canRoll(game)){
             this.ReRoll.setVisible(true);
             this.SkipReRoll.setVisible(true);
+            updatePlayers();
         }
         else{
             this.ReRoll.setVisible(false);
@@ -202,10 +203,9 @@ public class GameBoardController implements Initializable {
             Dice3_Hold.getSelectionModel().selectFirst();
             Dice4_Hold.getSelectionModel().selectFirst();
             Dice5_Hold.getSelectionModel().selectFirst();
-            
+            updatePlayers();
             setupAction();
         }
-        updatePlayers();
     } 
 
     
@@ -226,6 +226,7 @@ public class GameBoardController implements Initializable {
         if(this.curplayer.canRoll(game)){
             this.ReRoll.setVisible(true);
             this.SkipReRoll.setVisible(true);
+            updatePlayers();
         }
         else{
             this.ReRoll.setVisible(false);
@@ -241,9 +242,9 @@ public class GameBoardController implements Initializable {
             Dice3_Hold.getSelectionModel().selectFirst();
             Dice4_Hold.getSelectionModel().selectFirst();
             Dice5_Hold.getSelectionModel().selectFirst();
+            updatePlayers();
             setupAction();
         }
-        updatePlayers();
     }    
 
     @FXML
@@ -343,20 +344,21 @@ public class GameBoardController implements Initializable {
         Dice3_Hold.getSelectionModel().selectFirst();
         Dice4_Hold.getSelectionModel().selectFirst();
         Dice5_Hold.getSelectionModel().selectFirst();
-        setupAction();
         updatePlayers();
+        setupAction();
     }
     
     @FXML
     void EndTurn(ActionEvent event){
-            startNextTurn();
-            updatePlayers();
+        updatePlayers();
+        startNextTurn();
     }
     
     private void displayEndCondtion(){
         this.HumanPlayer.setVisible(false);
         this.ComputerPlayer.setVisible(false);
         this.gameover.setVisible(true);
+        this.gameover.setCollapsible(false);
         this.Roll.setVisible(false);
         this.ReRoll.setVisible(false);
         this.Action.setVisible(false);
@@ -404,8 +406,7 @@ public class GameBoardController implements Initializable {
     private void startNextTurn(){
         this.curplayer.endTurn(game);
         this.curplayer = game.getCurPlayer();
-        updateActivePlayer();
-        this.updatePlayers();
+        updatePlayers();
         if(this.curplayer.canRoll(game)){
             this.Roll.setVisible(true);
             this.ReRoll.setVisible(false);
@@ -615,6 +616,7 @@ public class GameBoardController implements Initializable {
     }
     
     public void updatePlayers(){
+        updateActivePlayer();
         Pos1_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[0]).getRoleindex(game)]);
         Pos1_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getArrows()));
         Pos1_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getCurLife()));

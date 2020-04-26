@@ -10,6 +10,6 @@ package player;
  * @author Stephen C. Devaney
  */
 public enum PlayerType {
-    Computer,
-    Human
+    COMPUTER,
+    HUMAN
 }
