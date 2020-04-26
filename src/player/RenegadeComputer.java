@@ -5,10 +5,26 @@
  */
 package player;
 
+import character.BangCharacter;
+
 /**
  *
  * @author raime
  */
-public class RenegadeComputer {
+public class RenegadeComputer extends Player {
     
+    public RenegadeComputer(BangCharacter character, int startingnumberofplayers){
+        super(PlayerType.COMPUTER,character,Role.RENEGADE,startingnumberofplayers);
+    }
+    
+    @Override
+    public void notifySheriff(Player sheriff){
+        this.getTargetValue(sheriff);
+        this.pointsystem[this.highesttargetindex].setMinValue();
+    }
+    
+    @Override
+    public void notifySheriffHelped(Player helper){
+        increaseTarget(helper);
+    }
 }

@@ -17,7 +17,7 @@ import player.*;
 public class BangGame {
     private int startingnumberofplayers;
     private int currentnumberofplayers;
-    private int numberofbadguys;
+    public int numberofbadguys;
     private int arrowpile;
     private Player[] players;
     private Player sheriff;
@@ -31,22 +31,23 @@ public class BangGame {
         numberofbadguys = 0;
         players = new Player[startingnumberofplayers];
         Player templayer2 = this.sheriff = this.curplayer = new HumanPlayer(setup.getCharacter(),setup.getRole(), startingnumberofplayers);
+        if(templayer2.getRole() == Role.OUTLAW || templayer2.getRole() == Role.RENEGADE) numberofbadguys++;
         players[0] = curplayer;
         Role temp;
         Player tempplayer;
         for(int i = 1; i < startingnumberofplayers; i++){
             temp = setup.getRole();
             if(temp == Role.SHERIFF){
-                tempplayer = new RandomComputer(setup.getCharacter(),temp, startingnumberofplayers);
+                tempplayer = new SheriffComputer(setup.getCharacter(),startingnumberofplayers);
                 this.sheriff = tempplayer;
             }
             else if(temp == Role.RENEGADE){
-                tempplayer = new RandomComputer(setup.getCharacter(),temp, startingnumberofplayers);
+                tempplayer = new RenegadeComputer(setup.getCharacter(), startingnumberofplayers);
                 numberofbadguys++;
             }
-            else if(temp == Role.DEPUTY){tempplayer = new RandomComputer(setup.getCharacter(),temp, startingnumberofplayers);}
+            else if(temp == Role.DEPUTY){tempplayer = new DeputyComputer(setup.getCharacter(),startingnumberofplayers);}
             else {
-                tempplayer = new RandomComputer(setup.getCharacter(),temp, startingnumberofplayers);
+                tempplayer = new OutlawComputer(setup.getCharacter(), startingnumberofplayers);
                 numberofbadguys++;
             }
             //check this iw working properly
@@ -56,6 +57,9 @@ public class BangGame {
             tempplayer.setNextPlayer(templayer2);
             templayer2.setPreviousPlayer(tempplayer);
             curplayer = curplayer.getNextPlayer();
+        }
+        for(int i = 0; i < startingnumberofplayers; i++){
+            players[i].notifySheriff(sheriff);
         }
         curplayer = sheriff;
         dice = new BangDice();
@@ -136,15 +140,27 @@ public class BangGame {
         return this.sheriff;
     }
     
+    public void sheriffShot(){
+        for(int i = 0; i <  players.length; i++){
+            players[i].notifySheriffShot(sheriff);
+        }
+    }
+    
+    public void sheriffHelped(){
+        for(int i = 0; i <  players.length; i++){
+            players[i].notifySheriffHelped(sheriff);
+        }
+    }
+    
     public void endTurn(){
         this.curplayer = this.curplayer.getNextPlayer();
-        this.curplayer.startTurn();
+        this.curplayer.startTurn(this);
    }
     
     public boolean isEndCondition(){
         boolean returnvalue = false;
         if(this.sheriff.isPlayerDead()) returnvalue = true;
-        else if(this.numberofbadguys == 0);
+        else if(this.numberofbadguys == 0) returnvalue = true;
         return returnvalue;
     }
     

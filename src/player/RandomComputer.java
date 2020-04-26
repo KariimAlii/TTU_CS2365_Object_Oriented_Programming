@@ -17,7 +17,7 @@ public class RandomComputer extends Player {
     private final Random rand;
     
     public RandomComputer(BangCharacter character, Role role, int numberofplayers){
-        super(PlayerType.Computer, character, role, numberofplayers); // This is constructor logic can keep this
+        super(PlayerType.COMPUTER, character, role, numberofplayers); // This is constructor logic can keep this
         rand = new Random(System.currentTimeMillis());
     }
     

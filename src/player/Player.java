@@ -16,17 +16,18 @@ import javafx.scene.image.Image;
  */
 public abstract class Player {
     private PlayerType playertype;
-    private BangCharacter character;
-    private int rerollcount;
+    protected BangCharacter character;
+    protected int rerollcount;
     private Role role;
     private int arrows;
-    private int dynamitecount;
-    private boolean dynamiteexploded;
-    private Target pointsystem[];
-    private int highesttargetindex;
+    protected int dynamitecount;
+    protected boolean dynamiteexploded;
+    protected Target pointsystem[];
+    protected int highesttargetindex;
     private Player nextPlayer;
     private Player previousPlayer;
     private boolean setdead;
+    protected String turnoutput;
     
     Player(PlayerType playertype, BangCharacter character, Role setuprole, int startingnumberofplayers){
         this.playertype = playertype;
@@ -42,14 +43,25 @@ public abstract class Player {
         highesttargetindex = -1;
     }
     
-    public void startTurn(){
+    public void startTurn(BangGame game){
         if (this.character.canGiveAnyPlayerLife()){
-            this.gainHealth();
+            if(this.getCurLife() >= this.getMaxLife()){
+                Player targets[] = this.getTargetBeer(game);
+                Player lowestvalue = targets[0];
+                for(int i = 0; i < targets.length; i++){
+                    if(getTargetValue(targets[i]) < getTargetValue(lowestvalue)){
+                        lowestvalue = targets[i];
+                    }
+                }
+                lowestvalue.gainHealth();
+            }
+            else{this.gainHealth();}
         }
         if (this.character.canHaveExtraReroll()) {this.rerollcount = 3;}
         else {this.rerollcount = 2;}
         this.dynamitecount = 0;
         dynamiteexploded = false;
+        turnoutput = "";
     }
     
     public void endTurn(BangGame game){
@@ -68,9 +80,9 @@ public abstract class Player {
         int returnvalue = 0;
         if(!game.isEndCondition()){
             if(this.role == Role.SHERIFF){returnvalue = 1;}
-            else if (this.role == Role.RENEGADE && (this.isPlayerDead() || this.playertype == PlayerType.Human)){returnvalue = 2;}
-            else if (this.role == Role.OUTLAW && (this.isPlayerDead() || this.playertype == PlayerType.Human)){returnvalue = 3;}
-            else if (this.role == Role.DEPUTY && (this.isPlayerDead() || this.playertype == PlayerType.Human)){returnvalue = 4;}
+            else if (this.role == Role.RENEGADE && (this.isPlayerDead() || this.playertype == PlayerType.HUMAN)){returnvalue = 2;}
+            else if (this.role == Role.OUTLAW && (this.isPlayerDead() || this.playertype == PlayerType.HUMAN)){returnvalue = 3;}
+            else if (this.role == Role.DEPUTY && (this.isPlayerDead() || this.playertype == PlayerType.HUMAN)){returnvalue = 4;}
         }
         else{
             if(this.role == Role.SHERIFF){returnvalue = 1;}
@@ -145,7 +157,7 @@ public abstract class Player {
         return curlife / maxlife;
     }
     
-    private void takeDamage(BangGame game){
+    protected void takeDamage(BangGame game){
         this.character.takeDamage();
         if(this.character.isDead() && !this.setdead){
             setDead(game);
@@ -162,7 +174,7 @@ public abstract class Player {
         if(this.role == Role.OUTLAW || this.role == Role.RENEGADE){game.reduceNumberOfBadGuys();}
     }
     
-    private void gainHealth(){
+    protected void gainHealth(){
         this.character.gainLife();
     }
     
@@ -228,6 +240,17 @@ public abstract class Player {
         return curtargets;
     }
     
+    public Player getSelectedB1(BangGame game){
+        Player targets[] = this.getTargetsB1(game);
+        Player highesttarget = targets[0];
+        for(int i = 0; i < targets.length; i++){
+            if(getTargetValue(targets[i]) > getTargetValue(highesttarget)){
+                highesttarget = targets[i];
+            }
+        }
+        return highesttarget;
+    }
+    
     public Player[] getTargetsB2(BangGame game){
         Player curtargets[];
         if(game.getCurNumPlayers() > 2) {
@@ -242,43 +265,57 @@ public abstract class Player {
         return curtargets;
     }
     
-    public abstract Player getSelectedB1(BangGame game);
-    
-    public abstract Player getSelectedB2(BangGame game);
+    public Player getSelectedB2(BangGame game){
+        Player targets[] = this.getTargetsB2(game);
+        Player highesttarget = targets[0];
+        for(int i = 0; i < targets.length; i++){
+            if(getTargetValue(targets[i]) > getTargetValue(highesttarget)){
+                highesttarget = targets[i];
+            }
+        }
+        return highesttarget;
+    }
     
     public void shootTarget(Player target, BangGame game){
         target.takeShot(this, game);
     }
     
-    private void takeShot(Player shooter, BangGame game){
+    protected void takeShot(Player shooter, BangGame game){
         this.takeDamage(game);
         this.increaseTarget(shooter);
     }
     
     public Player[] getTargetBeer(BangGame game){
         Player targets[] = new Player[game.getCurNumPlayers()];
-        targets[0] = this;
-        Player temp = this.getNextPlayer();
-        int i = 1;
-        while (temp != this){
-            if (!temp.isPlayerDead()){
-                targets[i] = temp;
+        int targetsindex = 0;
+        for(int i = 0; i < game.getStartingNumPlayers(); i++){
+            if(!game.getPlayerAtIndex(i).isPlayerDead()){
+                targets[targetsindex++] = game.getPlayerAtIndex(i);
             }
-            temp = temp.getNextPlayer();
-            i++;
         }
         return targets;
     }
     
-    public Player getSelectedBeer(){ // Needs to be overwritten by computer players
-        return this;
+    public Player getSelectedBeer(BangGame game){
+        Player returnvalue;
+        if(this.getCurLife() >= this.getMaxLife()){
+            Player targets[] = this.getTargetBeer(game);
+            returnvalue = targets[0];
+            for(int i = 0; i < targets.length; i++){
+                if(getTargetValue(targets[i]) < getTargetValue(returnvalue)){
+                    returnvalue = targets[i];
+                }
+            }
+        }
+        else{returnvalue = this;}
+        return returnvalue;
     }
     
     private void giveBeer(Player target, BangGame game){
-        target.takeBeer(this);
+        target.takeBeer(this, game);
     }
     
-    public void takeBeer(Player giver){
+    protected void takeBeer(Player giver, BangGame game){
         this.gainHealth();
         if(giver != this) decreaseTarget(giver);
     }
@@ -340,7 +377,7 @@ public abstract class Player {
             temp = this.getSelectedB2(game);
         }
         else{
-            temp = this.getSelectedBeer();
+            temp = this.getSelectedBeer(game);
         }
         return temp.getcharactername();
     }
@@ -392,7 +429,7 @@ public abstract class Player {
     }
     
     private void addTarget(Player target, boolean increase){
-        this.pointsystem[++this.highesttargetindex] = new Target(target, increase);
+        if(this != target)this.pointsystem[++this.highesttargetindex] = new Target(target, increase);
     }
     
     private boolean isTarget(Player target){
@@ -409,7 +446,7 @@ public abstract class Player {
         return returnvalue;
     }
     
-    private void increaseTarget(Player target){
+    protected void increaseTarget(Player target){
         if(isTarget(target)){
             for(int i = 0; i <= this.highesttargetindex; i++){
                 if(this.pointsystem[i].isTarget(target)){
@@ -423,7 +460,7 @@ public abstract class Player {
         }
     }
     
-    private void decreaseTarget(Player target){
+    protected void decreaseTarget(Player target){
         if(isTarget(target)){
             for(int i = 0; i <= this.highesttargetindex; i++){
                 if(this.pointsystem[i].isTarget(target)){
@@ -435,5 +472,20 @@ public abstract class Player {
         else{
             this.addTarget(target, false);
         }
+    }
+    
+    public void notifySheriff(Player sheriff){
+        if (sheriff != this){
+            this.getTargetValue(sheriff);
+            this.pointsystem[this.highesttargetindex].setMaxValue();
+        }
+    }
+    
+    public void notifySheriffShot(Player shooter){
+        increaseTarget(shooter);
+    }
+    
+    public void notifySheriffHelped(Player helper){
+        decreaseTarget(helper);
     }
 }
