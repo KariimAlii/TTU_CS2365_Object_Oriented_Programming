@@ -68,14 +68,14 @@ public class BangDie {
      * test case 1: returns the proper string for the die
      * @return String
      */
-     public String dieToStringOldSaloon(){
+     public String dieToStringOldSaloonCoward(){
         String returnString = "";
         switch (this.symbol) {
             case RETURN_ARROW:
                 returnString += "Return Arrow";
                 break;
-            case BULLET:
-                returnString += "Bullet";
+            case DYNAMITE:
+                returnString += "Dynamite";
                 break;
             case BULLSEYE1:
                 returnString += "Bull's Eye 1";
@@ -84,7 +84,7 @@ public class BangDie {
                 returnString += "Bull's Eye 2";
                 break;
             case BEER:
-                returnString += "Beer";
+                returnString += "Double Beer";
                 break;
             case GATLING:
                 returnString += "Gatling";
@@ -96,7 +96,40 @@ public class BangDie {
     }
     
     
-    
+    /**Anamol Acharya 
+     * added a method dietoStringOldSaloon for the expansion 1
+     * dieToString method
+     * new Dice faces- Return arrow and Bullet
+     * DESCRIPTION: the method takes a die and outputs the proper wording for the die in a string to the expansion for oldsaloon
+     * test case 1: returns the proper string for the die
+     * @return String
+     */
+     public String dieToStringOldSaloonLoudMouth(){
+        String returnString = "";
+        switch (this.symbol) {
+            case BULLET:
+                returnString += "Bullet";
+                break;
+            case DYNAMITE:
+                returnString += "Dynamite";
+                break;
+            case BULLSEYE1:
+                returnString += "Double Bull's Eye 1";
+                break;
+            case BULLSEYE2:
+                returnString += "Double Bull's Eye 2";
+                break;
+            case BEER:
+                returnString += "Beer";
+                break;
+            case GATLING:
+                returnString += " Double Gatling";
+                break;
+            default:
+                break;
+        }
+        return returnString;
+    }
     
     
     
