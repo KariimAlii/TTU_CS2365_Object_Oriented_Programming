@@ -9,7 +9,8 @@ package dice;
  * @author Stephen C. Devaney
  */
 public class BangDie {
-    public final static int ARROW = 1, DYNAMITE = 2, BULLSEYE1 = 3, BULLSEYE2 = 4, BEER = 5, GATLING = 6; // constants for the die symbols
+    //Anamol Acharya- Added new dice face for Saloon Dice
+    public final static int ARROW = 1, DYNAMITE = 2, BULLSEYE1 = 3, BULLSEYE2 = 4, BEER = 5, GATLING = 6, BULLET = 7, RETURN_ARROW =8; // constants for the die symbols
     private int symbol; // symbol of the die
     private boolean processedState;
     private boolean rerollable;
@@ -58,6 +59,45 @@ public class BangDie {
         }
         return returnString;
     }
+    
+    /**Anamol Acharya 
+     * added a method dietoStringOldSaloon for the expansion 1
+     * dieToString method
+     * new Dice faces- Return arrow and Bullet
+     * DESCRIPTION: the method takes a die and outputs the proper wording for the die in a string to the expansion for oldsaloon
+     * test case 1: returns the proper string for the die
+     * @return String
+     */
+     public String dieToStringOldSaloon(){
+        String returnString = "";
+        switch (this.symbol) {
+            case RETURN_ARROW:
+                returnString += "Return Arrow";
+                break;
+            case BULLET:
+                returnString += "Bullet";
+                break;
+            case BULLSEYE1:
+                returnString += "Bull's Eye 1";
+                break;
+            case BULLSEYE2:
+                returnString += "Bull's Eye 2";
+                break;
+            case BEER:
+                returnString += "Beer";
+                break;
+            case GATLING:
+                returnString += "Gatling";
+                break;
+            default:
+                break;
+        }
+        return returnString;
+    }
+    
+    
+    
+    
     
     
     /** isEqual method
