@@ -61,7 +61,7 @@ public class BangDie {
     }
     
     /**Anamol Acharya 
-     * added a method dietoStringOldSaloon for the expansion 1
+     * added a method dietoStringOldSaloon coward dice for the expansion 1
      * dieToString method
      * new Dice faces- Return arrow and Bullet
      * DESCRIPTION: the method takes a die and outputs the proper wording for the die in a string to the expansion for oldsaloon
@@ -97,7 +97,7 @@ public class BangDie {
     
     
     /**Anamol Acharya 
-     * added a method dietoStringOldSaloon for the expansion 1
+     * added a method dietoStringOldSaloon loudmouth dice for the expansion 1
      * dieToString method
      * new Dice faces- Return arrow and Bullet
      * DESCRIPTION: the method takes a die and outputs the proper wording for the die in a string to the expansion for oldsaloon
