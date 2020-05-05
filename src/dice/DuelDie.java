@@ -16,10 +16,12 @@ public class DuelDie extends BangDie {
         this.type = DieType.DUEL;
     }
     
+    
     /** dieToString method
      * DESCRIPTION: the method takes a die and outputs the proper wording for the die in a string
      * test case 1: returns the proper string for the die
      * @return String
+     * @author Anamol Acharya
      */
     @Override
     public String dieToString(){
@@ -31,14 +33,11 @@ public class DuelDie extends BangDie {
             case DYNAMITE:
                 returnString += "Dynamite";
                 break;
-            case BULLSEYE1:
-                returnString += "Bull's Eye 1";
+            case WHISKEY_BOTTLE:
+                returnString += "Whiskey Bottle";
                 break;
-            case BULLSEYE2:
-                returnString += "Bull's Eye 2";
-                break;
-            case BEER:
-                returnString += "Beer";
+            case FIGHT_A_DUEL:   //In this case I assume each dice has two fight a duel face
+                returnString += "Fight a duel";
                 break;
             case GATLING:
                 returnString += "Gatling";

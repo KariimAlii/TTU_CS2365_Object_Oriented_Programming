@@ -13,6 +13,8 @@ import java.util.Random;
 public class BangDice {
     private final BangDie dice[]; // an array of Dice to hold all of the dice
     private final Random rand;
+    
+    
     /** BangDice Constructor
      * Declare a BangDice object to be used by the Game class.
      */

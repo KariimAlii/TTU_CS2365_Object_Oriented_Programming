@@ -26,8 +26,8 @@ public class CowardDie extends BangDie {
     public String dieToString(){
         String returnString = "";
         switch (this.symbol) {
-            case ARROW:
-                returnString += "Arrow";
+            case RETURN_ARROW:
+                returnString += "Return Arrow";
                 break;
             case DYNAMITE:
                 returnString += "Dynamite";
@@ -39,7 +39,7 @@ public class CowardDie extends BangDie {
                 returnString += "Bull's Eye 2";
                 break;
             case BEER:
-                returnString += "Beer";
+                returnString += "Double Beer";
                 break;
             case GATLING:
                 returnString += "Gatling";
