@@ -25,10 +25,18 @@ public abstract class BangCharacter {
         curlifepoints = maxlifepoints = life;
     }
     
+    /**
+     * gets image for the characters
+     * @return
+     */
     public Image getImage(){
         return new Image(getImageFileName());
     }
     
+    /**
+     * abstract method to get image file of the character, defined in individual character classes
+     * @return
+     */
     public abstract String getImageFileName();
     
     /**
