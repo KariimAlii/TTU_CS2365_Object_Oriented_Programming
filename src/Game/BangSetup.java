@@ -20,6 +20,7 @@ public class BangSetup {
     private char roles[] = {'S','R','O','O','D','O','D','R'};
     private int characters[] = {0,1,2,3,4,5,6,7};
     private Random rand;
+    private Boolean undeadoralivemodule;
     
     public BangSetup(int numberplayers){
         rand = new Random(System.currentTimeMillis());
@@ -111,4 +112,8 @@ public class BangSetup {
         characterindex++;
         return newCharacter;
     }
+    
+    //public getUndeadOrAlive(){
+        
+    //}
 }

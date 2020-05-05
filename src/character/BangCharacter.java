@@ -13,8 +13,8 @@ import javafx.scene.image.Image;
  * @author Stephen C. Devaney
  */
 public abstract class BangCharacter {
-    private int curlifepoints;
-    private int maxlifepoints;
+    protected int curlifepoints;
+    protected int maxlifepoints;
     
     /**
      * Constructor for bang a character in bang the dice game life points will be passed
