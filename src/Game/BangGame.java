@@ -25,6 +25,8 @@ public class BangGame {
     private Player curplayer;
     private BangDice dice;
     private  int IndianCheifArrow = 1;
+    private Boolean undeadoralivemodule;
+    private Boolean outbreak ;
     
     public BangGame(BangSetup setup){
         Random rand;
@@ -66,6 +68,7 @@ public class BangGame {
         curplayer = sheriff;
         dice = new BangDice();
         arrowpile = 9;
+        outbreak = false;
     }
     
     public void reduceCurrentNumberOfPlayers(){
@@ -195,4 +198,20 @@ public class BangGame {
          }    
         return returnvalue;
     }
+     
+    /**
+     *Returns a boolean for if the module is selected or not
+     * @return
+     */
+    public boolean getUndeadOrAlive(){
+         return undeadoralivemodule;
+     }
+     
+    /**
+     *Returns a boolean for if the outbreak has occurred or not
+     * @return
+     */
+    public boolean getOutbreak(){
+         return outbreak;
+     }
 }
