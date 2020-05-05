@@ -90,9 +90,14 @@ public class BangGame {
         return this.startingnumberofplayers;
     }
     
-    public void takeArrow(){
+    public boolean takeArrow(){
+        boolean returnvalue = false;
         this.arrowpile--;
-        if (this.arrowpile == 0){indianAttack();}
+        if (this.arrowpile == 0){
+            indianAttack();
+            returnvalue = true;
+        }
+        return returnvalue;
     }
     
     public void returnArrows(int arrows){

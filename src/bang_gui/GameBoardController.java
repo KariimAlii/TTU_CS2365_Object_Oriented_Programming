@@ -173,6 +173,36 @@ public class GameBoardController implements Initializable {
         setupPlayers();
        
         updateDice(false);
+        
+        if(this.curplayer.getPlayerType() == PlayerType.HUMAN){
+            this.HumanPlayer.setVisible(true);
+            this.ComputerPlayer.setVisible(false);
+            if(this.curplayer.canRoll(game)){
+                this.Roll.setVisible(true);
+                this.ReRoll.setVisible(false);
+                this.Action.setVisible(false);
+                this.EndTurn.setVisible(false);
+                this.SkipReRoll.setVisible(false);
+            }
+            else{
+                this.Roll.setVisible(false);
+                this.ReRoll.setVisible(false);
+                this.Action.setVisible(false);
+                this.EndTurn.setVisible(true);
+                this.SkipReRoll.setVisible(false);
+            }
+        }
+        else{
+            this.HumanPlayer.setVisible(false);
+            this.ComputerPlayer.setVisible(true);
+            this.Roll.setVisible(false);
+            this.ReRoll.setVisible(false);
+            this.Action.setVisible(false);
+            this.EndTurn.setVisible(true);
+            this.SkipReRoll.setVisible(false);
+            this.computeroutput.setText(this.curplayer.simulateTurn(game));
+            this.updatePlayers();
+        }
     }
     
     /*
@@ -351,6 +381,12 @@ public class GameBoardController implements Initializable {
     @FXML
     void EndTurn(ActionEvent event){
         updatePlayers();
+        this.updateDice(false);
+        Dice1_Hold.setVisible(false);
+        Dice2_Hold.setVisible(false);
+        Dice3_Hold.setVisible(false);
+        Dice4_Hold.setVisible(false);
+        Dice5_Hold.setVisible(false);
         startNextTurn();
     }
     
@@ -407,19 +443,34 @@ public class GameBoardController implements Initializable {
         this.curplayer.endTurn(game);
         this.curplayer = game.getCurPlayer();
         updatePlayers();
-        if(this.curplayer.canRoll(game)){
-            this.Roll.setVisible(true);
-            this.ReRoll.setVisible(false);
-            this.Action.setVisible(false);
-            this.EndTurn.setVisible(false);
-            this.SkipReRoll.setVisible(false);
+        if(this.curplayer.getPlayerType() == PlayerType.HUMAN){
+            this.HumanPlayer.setVisible(true);
+            this.ComputerPlayer.setVisible(false);
+            if(this.curplayer.canRoll(game)){
+                this.Roll.setVisible(true);
+                this.ReRoll.setVisible(false);
+                this.Action.setVisible(false);
+                this.EndTurn.setVisible(false);
+                this.SkipReRoll.setVisible(false);
+            }
+            else{
+                this.Roll.setVisible(false);
+                this.ReRoll.setVisible(false);
+                this.Action.setVisible(false);
+                this.EndTurn.setVisible(true);
+                this.SkipReRoll.setVisible(false);
+            }
         }
         else{
-            this.Roll.setVisible(false);
-            this.ReRoll.setVisible(false);
-            this.Action.setVisible(false);
-            this.EndTurn.setVisible(true);
-            this.SkipReRoll.setVisible(false);
+                this.HumanPlayer.setVisible(false);
+                this.ComputerPlayer.setVisible(true);
+                this.Roll.setVisible(false);
+                this.ReRoll.setVisible(false);
+                this.Action.setVisible(false);
+                this.EndTurn.setVisible(true);
+                this.SkipReRoll.setVisible(false);
+                this.computeroutput.setText(this.curplayer.simulateTurn(game));
+                this.updatePlayers();
         }
     }
     

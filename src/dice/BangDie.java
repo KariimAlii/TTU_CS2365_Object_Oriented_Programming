@@ -16,6 +16,7 @@ public class BangDie {
     private boolean processedState;
     private boolean rerollable;
     private boolean requireschooseableaction;
+    protected DieType type;
     
     
     /** BangDie Base Constructor
@@ -26,6 +27,7 @@ public class BangDie {
         this.processedState = false; 
         this.rerollable = true;
         this.requireschooseableaction = false;
+        this.type = DieType.NORMAL;
     }
     
     
@@ -248,5 +250,10 @@ public class BangDie {
     
     public void makeRerollable(){
         this.rerollable = true;
+    }
+    
+    
+    public DieType getDieType(){
+        return this.type;
     }
 }
