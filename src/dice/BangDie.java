@@ -10,13 +10,13 @@ package dice;
  */
 public class BangDie {
     //Anamol Acharya- Added new dice face for Saloon Dice
-    public final static int ARROW = 1, DYNAMITE = 2, BULLSEYE1 = 3, BULLSEYE2 = 4, BEER = 5, GATLING = 6, BULLET = 7, RETURN_ARROW =8,
-      WHISKEY_BOTTLE =9, FIGHT_A_DUEL = 10; // constants for the die symbols along with new added
-    private int symbol; // symbol of the die
-    private boolean processedState;
-    private boolean rerollable;
-    private boolean requireschooseableaction;
-    protected DieType type;
+
+    /**Constants to designate the sides for the die*/ public final static int ARROW = 1, DYNAMITE = 2, BULLSEYE1 = 3, BULLSEYE2 = 4, BEER = 5, GATLING = 6;
+    /** value to hold which side/symbol of the die is showing */ protected int symbol;
+    /** value to hold weather or not the die has been processed by the player */ protected boolean processedState;
+    /** value to hold if the die is able to be rerolled*/ protected boolean rerollable;
+    /** value to hold if the die is a beer or bulls eye 1 or two and requires the player to make a choice about the die*/ protected boolean requireschooseableaction;
+    /** value to hold what kind of game die the dice is*/ protected DieType type;
     
     
     /** BangDie Base Constructor
@@ -27,7 +27,7 @@ public class BangDie {
         this.processedState = false; 
         this.rerollable = true;
         this.requireschooseableaction = false;
-        this.type = DieType.NORMAL;
+        this.type = DieType.BASIC;
     }
     
     
@@ -71,104 +71,8 @@ public class BangDie {
      * test case 1: returns the proper string for the die
      * @return String
      */
-     public String dieToStringOldSaloonCoward(){
-        String returnString = "";
-        switch (this.symbol) {
-            case RETURN_ARROW:
-                returnString += "Return Arrow";
-                break;
-            case DYNAMITE:
-                returnString += "Dynamite";
-                break;
-            case BULLSEYE1:
-                returnString += "Bull's Eye 1";
-                break;
-            case BULLSEYE2:
-                returnString += "Bull's Eye 2";
-                break;
-            case BEER:
-                returnString += "Double Beer";
-                break;
-            case GATLING:
-                returnString += "Gatling";
-                break;
-            default:
-                break;
-        }
-        return returnString;
-    }
     
     
-    /**Anamol Acharya 
-     * added a method dietoStringOldSaloon loudmouth dice for the expansion 1
-     * dieToString method
-     * new Dice faces- Return arrow and Bullet
-     * DESCRIPTION: the method takes a die and outputs the proper wording for the die in a string to the expansion for oldsaloon
-     * test case 1: returns the proper string for the die
-     * @return String
-     */
-     public String dieToStringOldSaloonLoudMouth(){
-        String returnString = "";
-        switch (this.symbol) {
-            case BULLET:
-                returnString += "Bullet";
-                break;
-            case DYNAMITE:
-                returnString += "Dynamite";
-                break;
-            case BULLSEYE1:
-                returnString += "Double Bull's Eye 1";
-                break;
-            case BULLSEYE2:
-                returnString += "Double Bull's Eye 2";
-                break;
-            case BEER:
-                returnString += "Beer";
-                break;
-            case GATLING:
-                returnString += " Double Gatling";
-                break;
-            default:
-                break;
-        }
-        return returnString;
-    }
-    
-    
-   /**Anamol Acharya 
-     * added a method dietoStringUndeadOrAlive dice for the expansion 2
-     * dieToString method
-     * new Dice faces- Return Whiskey bottle and fight for duel
-     * DESCRIPTION: the method takes a die and outputs the proper wording for the die in a string to the expansion II
-     * test case 1: returns the proper string for the die
-     * @return String
-     */
-     public String dieToStringUndeadOrAlive(){
-        String returnString = "";
-        switch (this.symbol) {
-            case ARROW:
-                returnString += "Arrow";
-                break;
-            case DYNAMITE:
-                returnString += "Dynamite";
-                break;
-            case WHISKEY_BOTTLE:
-                returnString += "Whiskey Bottle";
-                break;
-            case FIGHT_A_DUEL:   //In this case I assume each dice has two fight a duel face
-                returnString += "Fight a duel";
-                break;
-            case GATLING:
-                returnString += "Gatling";
-                break;
-            default:
-                break;
-        }
-        return returnString;
-    }
-      
-     
-     
     
     /** isEqual method
      * DESCRIPTION: compares this die with the second die if this die is equal to the second die true is returned otherwise false is returned
@@ -201,6 +105,10 @@ public class BangDie {
         return this.processedState;
     }
     
+    /**
+     * checks the 
+     * @return
+     */
     public boolean isRerollable(){
         return this.rerollable;
     }
@@ -213,6 +121,10 @@ public class BangDie {
         this.processedState = true;
     }
     
+    /**
+     * checks to see if a die requires a action to be chosen by the player
+     * @return true of false boolean values if the die does require a action to be chosen by the player
+     */
     public boolean doesRequireChooseableAction(){
         return this.requireschooseableaction;
     }
@@ -248,11 +160,17 @@ public class BangDie {
         this.processedState = false;
     }
     
+    /**
+     * makes the die rerollable used for special abilities that allow non rerollable dice to be rerolled
+     */
     public void makeRerollable(){
         this.rerollable = true;
     }
     
-    
+    /**
+     * give what kind of die it is
+     * @return object DieType
+     */
     public DieType getDieType(){
         return this.type;
     }

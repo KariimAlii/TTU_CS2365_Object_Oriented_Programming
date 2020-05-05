@@ -21,34 +21,36 @@ public class LoudmouthDie extends BangDie {
      * DESCRIPTION: the method takes a die and outputs the proper wording for the die in a string
      * test case 1: returns the proper string for the die
      * @return String
+     * @author Anamol Acharya
      */
     @Override
     public String dieToString(){
         String returnString = "";
         switch (this.symbol) {
-            case ARROW:
-                returnString += "Arrow";
+            case BULLET:
+                returnString += "Bullet";
                 break;
             case DYNAMITE:
                 returnString += "Dynamite";
                 break;
             case BULLSEYE1:
-                returnString += "Bull's Eye 1";
+                returnString += "Double Bull's Eye 1";
                 break;
             case BULLSEYE2:
-                returnString += "Bull's Eye 2";
+                returnString += "Double Bull's Eye 2";
                 break;
             case BEER:
                 returnString += "Beer";
                 break;
             case GATLING:
-                returnString += "Gatling";
+                returnString += " Double Gatling";
                 break;
             default:
                 break;
         }
         return returnString;
     }
+    
     
     /** setDieSymbol method
      * DESCRIPTION: sets symbol to the value given

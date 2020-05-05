@@ -10,7 +10,7 @@ package dice;
  * @author Stephen C. Devaney
  */
 public enum DieType {
-    NORMAL,
+    BASIC,
     LOUDMOUTH,
     COWARD,
     DUEL
