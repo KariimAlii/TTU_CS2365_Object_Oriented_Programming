@@ -99,7 +99,7 @@ public class BangDice {
     }
     
     /**
-     *
+     * rerolls die at index
      * @param index
      */
     public void makeRerollableAtIndex(int index){
@@ -107,11 +107,20 @@ public class BangDice {
         else if (0 - dice.length <= index && index <=-1) {dice[dice.length - (0 - index)].makeRerollable();}
     }
     
+    /**
+     * processes the die at index
+     * @param index
+     */
     public void processDieAtIndex(int index){
         if (0 <= index && index < dice.length) {this.dice[index].processDie();}
         else if (0 - dice.length <= index && index <=-1) {dice[dice.length - (0 - index)].processDie();}
     }
     
+    /**
+     * processes the die at index
+     * @param index
+     * @return
+     */
     public boolean isProcessedDieAtIndex(int index){
         boolean returnvalue = false;
         if (0 <= index && index < dice.length) {returnvalue = this.dice[index].getDieState();}
@@ -119,6 +128,11 @@ public class BangDice {
         return returnvalue;
     }
     
+    /**
+     * choose action at index
+     * @param index
+     * @return
+     */
     public boolean doesRequireChooseableActionAtIndex(int index){
         boolean returnvalue = false;
         if (0 <= index && index < dice.length) {returnvalue = this.dice[index].doesRequireChooseableAction();}
