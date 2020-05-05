@@ -184,20 +184,6 @@ public class BangGame {
         return returnvalue;
     }
   
-  
-    /**
-     * Anamol Acharya
-     * Created a boolean method for Indian chief arrow 
-     * @return return value
-     */
-     public boolean hasIndianChiefArrow(){
-         boolean returnvalue = false;
-         this.arrowpile--;
-         if(this.hasindianCheifArrow){
-            returnvalue = true; 
-         }    
-        return returnvalue;
-    }
      
     /**
      *Returns a boolean for if the module is selected or not

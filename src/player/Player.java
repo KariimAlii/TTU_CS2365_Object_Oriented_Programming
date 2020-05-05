@@ -358,7 +358,8 @@ public abstract class Player {
         game.returnArrows(this.arrows);
         this.arrows = 0;
         game.reduceCurrentNumberOfPlayers();
-        game.hasIndianChiefArrow();
+        game.hasindianCheifArrow = true;
+        this.hasIndianChiefArrow = false;
         if(this.role == Role.OUTLAW || this.role == Role.RENEGADE){game.reduceNumberOfBadGuys();}
     }
     
@@ -518,6 +519,11 @@ public abstract class Player {
             }
         }
     }
+    
+    private void takeIndianChiefArrow(BangGame game){
+        game.hasindianCheifArrow = false;
+        this.hasIndianChiefArrow = true;
+    }
 
    /**
      * @Shree Shrestha added indian chief code to this method
@@ -529,7 +535,6 @@ public abstract class Player {
     public int individualIndianAttack(BangGame game){
         int returnvalue = this.arrows;
         if(this.hasIndianChiefArrow && checkMostArrows(game)){
-          return this.getCurLife();
         }
         else{
         for (; this.arrows > 0; this.arrows--){
@@ -543,8 +548,10 @@ public abstract class Player {
             this.character.takeDamage();            
             }
         }
-        this.hasIndianChiefArrow = false;
-        game.hasIndianChiefArrow();
+        if(this.hasIndianChiefArrow){
+            this.hasIndianChiefArrow = false;
+            game.hasindianCheifArrow = true;
+        }
         return returnvalue;
     }
   
