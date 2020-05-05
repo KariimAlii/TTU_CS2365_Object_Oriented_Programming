@@ -24,7 +24,7 @@ public class BangGame {
     private Player sheriff;
     private Player curplayer;
     private BangDice dice;
-    private  int IndianCheifArrow = 1;
+    public  boolean hasindianCheifArrow;
     private Boolean undeadoralivemodule;
     private Boolean outbreak ;
     
@@ -190,10 +190,10 @@ public class BangGame {
      * Created a boolean method for Indian chief arrow 
      * @return return value
      */
-     public boolean IndianChiefArrow(){
+     public boolean hasIndianChiefArrow(){
          boolean returnvalue = false;
          this.arrowpile--;
-         if(this.IndianCheifArrow == 0){
+         if(this.hasindianCheifArrow){
             returnvalue = true; 
          }    
         return returnvalue;

@@ -31,6 +31,7 @@ public abstract class Player {
     private boolean setdead;
     protected String turnoutput;
     private boolean gatlinggunwentoff;
+    private boolean hasIndianChiefArrow;
 
     
     Player(PlayerType playertype, BangCharacter character, Role setuprole, int startingnumberofplayers){
@@ -357,6 +358,7 @@ public abstract class Player {
         game.returnArrows(this.arrows);
         this.arrows = 0;
         game.reduceCurrentNumberOfPlayers();
+        game.hasIndianChiefArrow();
         if(this.role == Role.OUTLAW || this.role == Role.RENEGADE){game.reduceNumberOfBadGuys();}
     }
     
@@ -517,17 +519,49 @@ public abstract class Player {
         }
     }
 
-    /**
-     * DESCRIPTION: when arrow pile is empty Indians attack deal damage based on arrow total
-     * @return
+   /**
+     * @Shree Shrestha added indian chief code to this method
+     * this methods is to resolve the individual Indian attack 
+     * where the damage are taken on needed conditions
+     * @param game
+     * @return returnvalue
      */
-    public int individualIndianAttack(){
+    public int individualIndianAttack(BangGame game){
         int returnvalue = this.arrows;
+        if(this.hasIndianChiefArrow && checkMostArrows(game)){
+          return this.getCurLife();
+        }
+        else{
         for (; this.arrows > 0; this.arrows--){
             if(this.character.canReducedIndianAttack()){
                 this.arrows = 1;
             }
             this.character.takeDamage();
+        }
+        if(this.hasIndianChiefArrow){
+            this.character.takeDamage();
+            this.character.takeDamage();            
+            }
+        }
+        this.hasIndianChiefArrow = false;
+        game.hasIndianChiefArrow();
+        return returnvalue;
+    }
+  
+  
+    /**
+     *@Shree Shrestha
+     * This methods check if any players has the most arrows
+     * @param game
+     * @return return value
+     */
+    private boolean checkMostArrows(BangGame game){
+        boolean returnvalue = false;
+        for(int i = 0; i< game.getStartingNumPlayers(); i++){
+            if(game.getPlayerAtIndex(i).arrows > this.arrows){
+                returnvalue = false;
+                break;
+            }
         }
         return returnvalue;
     }
