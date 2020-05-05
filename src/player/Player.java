@@ -49,16 +49,27 @@ public abstract class Player {
         gatlinggunwentoff = false;
     }
 
-    
+    /**
+     * DESCRIPTION: gets the role for the player
+     * @return
+     */
     public Role getRole(){
         return this.role;
     }
     
+    /**
+     * DESCRIPTION: gets player type for the player
+     * @return
+     */
     public PlayerType getPlayerType(){
         return this.playertype;
     }
 
-    
+    /**
+     * DESCRIPTION: indexes the roles to determine if the player is a human and what role they have
+     * @param game
+     * @return
+     */
     public int getRoleindex(BangGame game){
         int returnvalue = 0;
         if(!game.isEndCondition()){
@@ -76,7 +87,10 @@ public abstract class Player {
         return returnvalue;
     }
     
-    
+    /**
+     * DESCRIPTION: determines if the character given by the game functionality can have a certain number of rerolls
+     * @return
+     */
     public int getRerollCount(){
         if(this.character.canHaveExtraReroll()){
             return 3;
@@ -84,55 +98,87 @@ public abstract class Player {
         else {return 2;}
     }
 
-    
+    /**
+     * DESCRIPTION: finds the characters name given by the game functionality
+     * @return
+     */
     public String getcharactername(){
         return character.getName();
     }
 
-    
+    /**
+     * DESCRIPTION: gets the image of the character
+     * @return
+     */
     public Image getCharacterImage(){
         return character.getImage();
     }
 
-    
+    /**
+     * DESCRIPTION: gets the current life points of the character
+     * @return
+     */
     public int getCurLife(){
         return this.character.getCurLifePoints();
     }
 
-    
+    /**
+     * DESCRIPTION: gets the max life points of the character
+     * @return
+     */
     public int getMaxLife(){
         return this.character.getMaxLifePoints();
     }
 
-    
+    /**
+     * DESCRIPTION: gets the current progress of the characters health pool out of the characters max life pool
+     * @return
+     */
     public double getLifeProgress(){
         double curlife = this.character.getCurLifePoints();
         double maxlife = this.character.getMaxLifePoints();
         return curlife / maxlife;
     }
     
-    
+    /**
+     * DESCRIPTION: gets the player before the current player
+     * @return
+     */
     public Player getPreviousPlayer(){
         return this.previousPlayer;
     }
 
-    
+    /**
+     * DESCRIPTION: gets the player after the current player
+     * @return
+     */
     public Player getNextPlayer(){
         return this.nextPlayer;
     }
     
-    
+    /**
+     * DESCRIPTION: gets the arrows
+     * @return
+     */
     public int getArrows(){
         return arrows;
     }
     
-    
+    /**
+     * DESCRIPTION: selects target for bullseye 1 and gets targets within range of the player
+     * @param game
+     * @return
+     */
     public Player[] getTargetsB1(BangGame game){
         Player curtargets[] = {this.getPreviousPlayer(), this.getNextPlayer()};
         return curtargets;
     }
 
-    
+    /**
+     * DESCRIPTION: gets the selected target for bullseye 1
+     * @param game
+     * @return
+     */
     public Player getSelectedB1(BangGame game){
         Player targets[] = this.getTargetsB1(game);
         Player highesttarget = targets[0];
@@ -144,7 +190,11 @@ public abstract class Player {
         return highesttarget;
     }
 
-    
+    /**
+     * DESCRIPTION: selects target for bullseye 2 and gets targets within range of the play
+     * @param game
+     * @return
+     */
     public Player[] getTargetsB2(BangGame game){
         Player curtargets[];
         if(game.getCurNumPlayers() > 2) {
@@ -159,7 +209,11 @@ public abstract class Player {
         return curtargets;
     }
 
-    
+    /**
+     * DESCRIPTION: gets selected target for bullseye 2
+     * @param game
+     * @return
+     */
     public Player getSelectedB2(BangGame game){
         Player targets[] = this.getTargetsB2(game);
         Player highesttarget = targets[0];
@@ -171,7 +225,11 @@ public abstract class Player {
         return highesttarget;
     }
     
-    
+    /**
+     * DESCRIPTION: gets target for beer
+     * @param game
+     * @return
+     */
     public Player[] getTargetBeer(BangGame game){
         Player targets[] = new Player[game.getCurNumPlayers()];
         int targetsindex = 0;
@@ -183,7 +241,11 @@ public abstract class Player {
         return targets;
     }
 
-    
+    /**
+     * DESCRIPTION: gets target for beer
+     * @param game
+     * @return
+     */
     public Player getSelectedBeer(BangGame game){
         Player returnvalue;
         if(this.getCurLife() >= this.getMaxLife()){
@@ -199,7 +261,12 @@ public abstract class Player {
         return returnvalue;
     }
     
-    
+    /**
+     * DESCRIPTION: gets the targets for the player based on dice rolled
+     * @param game
+     * @param index
+     * @return
+     */
     public String[] getTargetForDieAtIndex(BangGame game, int index){
         int checkdie = game.getDice().getDieAtIndex(index);
         Player targets[];
@@ -220,7 +287,12 @@ public abstract class Player {
         return returnvalue;
     }
 
-    
+    /**
+     * DESCRIPTION: gets targets for dice rolled
+     * @param game
+     * @param index
+     * @return
+     */
     public String getSelectedTargetForDieAtIndex(BangGame game, int index){
         int checkdie = game.getDice().getDieAtIndex(index);
         Player temp = getSelectedB1(game);
@@ -237,7 +309,11 @@ public abstract class Player {
         return temp.getcharactername();
     }
     
-    
+    /**
+     * DESCRIPTION: gets the point values for the target player
+     * @param target
+     * @return
+     */
     public int getTargetValue(Player target){
         int returnvalue = 0;
         if(isTarget(target)){
@@ -255,17 +331,25 @@ public abstract class Player {
         return returnvalue;
     }
 
-    
+    /**
+     * DESCRIPTION: sets the next player (who is next after current player)
+     * @param player
+     */
     public void setNextPlayer(Player player){
         this.nextPlayer = player;
     }
     
-    
+    /**
+     * DESCRIPTION: sets the previous player (who was before the current player)
+     * @param player
+     */
     public void setPreviousPlayer(Player player){
         this.previousPlayer = player;
     }
     
-    
+    /**
+     * DESCRIPTION: sets player to dead if life total is zero reveals roles
+     */
     private void setDead(BangGame game){
         this.setdead = true;
         this.getPreviousPlayer().setNextPlayer(this.nextPlayer);
@@ -276,12 +360,17 @@ public abstract class Player {
         if(this.role == Role.OUTLAW || this.role == Role.RENEGADE){game.reduceNumberOfBadGuys();}
     }
     
-    
+    /**
+     * DESCRIPTION: checks on if the player is dead
+     * @return
+     */
     public boolean isPlayerDead(){
         return character.isDead();
     }
 
-    
+    /**
+     * DESCRIPTION: selected target point systems
+     */
     private boolean isTarget(Player target){
         boolean returnvalue = false;
         if(this.highesttargetindex == -1){returnvalue = false;}
@@ -296,14 +385,22 @@ public abstract class Player {
         return returnvalue;
     }
     
-    
+    /**
+     * DESCRIPTION: checks to see if the player can reroll
+     * @param game
+     * @return
+     */
     public boolean canRoll(BangGame game){
         boolean returnvalue = false;
         if(this.rerollcount > 0 && !this.isPlayerDead() && !game.isEndCondition()) returnvalue = true;
         return returnvalue;
     }
 
-    
+    /**
+     * DESCRIPTION:checks if the player can take an action
+     * @param game
+     * @return
+     */
     public boolean canHaveAction(BangGame game){
         boolean returnvalue = false;
         if(!this.isPlayerDead() && !game.isEndCondition()){
@@ -312,7 +409,10 @@ public abstract class Player {
         return returnvalue;
     }
 
-    
+    /**
+     * DESCRIPTION: sets up the turn for the current player, allows current player to take their turn
+     * @param game
+     */
     public void startTurn(BangGame game){
         if (this.character.canGiveAnyPlayerLife()){
             if(this.getCurLife() >= this.getMaxLife()){
@@ -337,17 +437,25 @@ public abstract class Player {
         turnoutput = "";
     }
 
-    
+    /**
+     * DESCRIPTION: ends the turn of the current player
+     * @param game
+     */
     public void endTurn(BangGame game){
         game.endTurn();
     }
     
-    
+    /**
+     * DESCRIPTION: decrements the amount of rerolls a player can make
+     */
     public void decreaseRerollCount(){
         this.rerollcount--;
     }
     
-    
+    /**
+     * DESCRIPTION: rolls the dice and if a character can reroll dynamite allow them to reroll them
+     * @param game
+     */
     public void rollDice(BangGame game){
         game.getDice().rollDice();
         if(this.character.canRerollDynamite()){
@@ -360,7 +468,11 @@ public abstract class Player {
         processArrowsOrDynamite(game);
     }
 
-    
+    /**
+     * DESCRIPTION: rolls dice and checks if rolled dice have dynamite
+     * @param game
+     * @param index
+     */
     public void rollDieAtIndex(BangGame game, int index){
         if(game.getDice().getDieAtIndex(index) == DYNAMITE){
             this.dynamitecount--;
@@ -375,7 +487,10 @@ public abstract class Player {
         processArrowsOrDynamite(game);
     }
 
-    
+    /**
+     * DESCRIPTION: target character takes damage if selected for attack, checks if character is dead
+     * @param game
+     */
     protected void takeDamage(BangGame game){
         this.character.takeDamage();
         if(this.character.isDead() && !this.setdead){
@@ -383,12 +498,16 @@ public abstract class Player {
         }
     }
 
-    
+    /**
+     * DESCRIPTION: character gains health if targeted to gain health
+     */
     protected void gainHealth(){
         this.character.gainLife();
     }
     
-    
+    /**
+     * DESCRIPTION: character gains an arrow if dice rolled have an arrow
+     */
     private void takeArrow(BangGame game){
             if(!this.character.isDead()){
             this.arrows++;
@@ -398,7 +517,10 @@ public abstract class Player {
         }
     }
 
-    
+    /**
+     * DESCRIPTION: when arrow pile is empty Indians attack deal damage based on arrow total
+     * @return
+     */
     public int individualIndianAttack(){
         int returnvalue = this.arrows;
         for (; this.arrows > 0; this.arrows--){
@@ -410,7 +532,9 @@ public abstract class Player {
         return returnvalue;
     }
 
-    
+    /**
+     * DESCRIPTION: processes arrows and dynamite rolled from dice
+     */
     private void processArrowsOrDynamite(BangGame game){
         for (int i = 0; i < game.getDice().getNumberOfDice();i++){
             if(game.getDice().getDieAtIndex(i) == ARROW && !game.getDice().isProcessedDieAtIndex(i)){
@@ -425,7 +549,9 @@ public abstract class Player {
         checkDynamiteExplodes(game);
     }
 
-    
+    /**
+     * DESCRIPTION: checks if dynamite has exploded
+     */
     private void checkDynamiteExplodes(BangGame game){
         if(this.dynamitecount >= 3 && !dynamiteexploded){
             this.rerollcount = 0;
@@ -434,43 +560,67 @@ public abstract class Player {
         }
     }
 
-    
+    /**
+     * DESCRIPTION: select target to shoot
+     * @param target
+     * @param game
+     */
     public void shootTarget(Player target, BangGame game){
         target.takeShot(this, game);
     }
 
-    
+    /**
+     * DESCRIPTION: shoots the selected target
+     * @param shooter
+     * @param game
+     */
     protected void takeShot(Player shooter, BangGame game){
         this.takeDamage(game);
         this.increaseTarget(shooter);
     }
 
-    
+    /**
+     * DESCRIPTION: select target to give beer
+     */
     private void giveBeer(Player target, BangGame game){
         target.takeBeer(this, game);
     }
 
-    
+    /**
+     * DESCRIPTION: gain health if targeted by beer
+     * @param giver
+     * @param game
+     */
     protected void takeBeer(Player giver, BangGame game){
         this.gainHealth();
         if(giver != this) decreaseTarget(giver);
     }
 
-    
+    /**
+     * DESCRIPTION: checks if character can take damage from gatling
+     */
     public void individualGatlingGunShot(){
         if(!this.character.canHaveGatlingDamageImmunity()){
             this.character.takeDamage();
         }
     }
 
-    
+    /**
+     * DESCRIPTION: shoots gatling
+     * @return
+     */
     public int individualGatlingGunShoot(){
         int returnvalue = this.arrows;
         this.arrows = 0;
         return returnvalue;
     }
 
-    
+    /**
+     * DESCRIPTION: actions preformed by player based on targets and dice rolled
+     * @param game
+     * @param dieindex
+     * @param targetindex
+     */
     public void takeActionOnDieAtIndex(BangGame game, int dieindex, int targetindex){
         int checkdie = game.getDice().getDieAtIndex(dieindex);
         if (checkdie == BULLSEYE1){
@@ -487,7 +637,10 @@ public abstract class Player {
         }
     }
 
-    
+    /**
+     * DESCRIPTION: checks for gatling and shoots gatling if requirements are met
+     * @param game
+     */
     public void preformGatlingCheckAndAction(BangGame game){
         int gatlingcheck = 0;
         
@@ -502,12 +655,17 @@ public abstract class Player {
         }
     }
 
-    
+    /**
+     * DESCRIPTION: sets target for player to shoot
+     */
     private void addTarget(Player target, boolean increase){
         if(this != target)this.pointsystem[++this.highesttargetindex] = new Target(target, increase);
     }
 
-    
+    /**
+     * DESCRIPTION: adds points to threat level
+     * @param target
+     */
     protected void increaseTarget(Player target){
         if(isTarget(target)){
             for(int i = 0; i <= this.highesttargetindex; i++){
@@ -522,7 +680,10 @@ public abstract class Player {
         }
     }
 
-    
+    /**
+     * DESCRIPTION: reduces points to threat level
+     * @param target
+     */
     protected void decreaseTarget(Player target){
         if(isTarget(target)){
             for(int i = 0; i <= this.highesttargetindex; i++){
@@ -537,8 +698,10 @@ public abstract class Player {
         }
     }
 
-
-    
+    /**
+     * DESCRIPTION: notifies sheriff of player threat level
+     * @param sheriff
+     */
     public void notifySheriff(Player sheriff){
         if (sheriff != this){
             this.getTargetValue(sheriff);
@@ -546,17 +709,27 @@ public abstract class Player {
         }
     }
 
-    
+    /**
+     * DESCRIPTION: if player shoots sheriff notify sheriff and raise shooters threat level
+     * @param shooter
+     */
     public void notifySheriffShot(Player shooter){
         increaseTarget(shooter);
     }
 
-    
+    /**
+     * DESCRIPTION: if player helps sheriff notify sheriff and reduce helpers threat level
+     * @param helper
+     */
     public void notifySheriffHelped(Player helper){
         decreaseTarget(helper);
     }
 
-    
+    /**
+     * DESCRIPTION: simulates turn of the player
+     * @param game
+     * @return
+     */
     public String simulateTurn(BangGame game){
         this.turnoutput = "It was " + this.getcharactername() + "'s turn!\n";
         if(this.canRoll(game)){
