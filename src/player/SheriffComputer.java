@@ -13,10 +13,20 @@ import character.*;
  */
 public class SheriffComputer extends Player {
     
+    /**
+     * constructor for SheriffComputer
+     * @param character character selected for the game
+     * @param startingnumberofplayers number of players selected for the game
+     */
     public SheriffComputer(BangCharacter character, int startingnumberofplayers){
         super(PlayerType.COMPUTER,character,Role.SHERIFF,startingnumberofplayers);
     }
     
+    /**
+     * DESCRIPTION: override method for the computer sheriff getting shot 
+     * @param shooter the player shooting the sheriff
+     * @param game overall game functionality
+     */
     @Override
     protected void takeShot(Player shooter, BangGame game){
         this.takeDamage(game);
@@ -24,6 +34,11 @@ public class SheriffComputer extends Player {
         game.sheriffShot();
     }
     
+    /**
+     * DESCRIPTION: override method for the computer sheriff getting helped
+     * @param giver the player giving help to the sheriff
+     * @param game overall game functionality
+     */
     @Override
     protected void takeBeer(Player giver, BangGame game){
         this.gainHealth();

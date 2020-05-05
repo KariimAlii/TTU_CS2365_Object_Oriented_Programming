@@ -14,10 +14,19 @@ import character.BangCharacter;
  */
 public class DeputyComputer extends Player{
     
+    /**
+     * constructor for the DeputyComputer
+     * @param character character for the game
+     * @param startingnumberofplayers number of players in the game
+     */
     public DeputyComputer(BangCharacter character, int startingnumberofplayers){
         super(PlayerType.COMPUTER,character,Role.DEPUTY,startingnumberofplayers);
     }
     
+    /**
+     * DESCRIPTION: override method to check on statues of the sheriff and to help the sheriff
+     * @param game game functionality
+     */
     @Override
     public void startTurn(BangGame game){
         if (this.character.canGiveAnyPlayerLife()){
@@ -35,12 +44,21 @@ public class DeputyComputer extends Player{
         dynamiteexploded = false;
     }
     
+    /**
+     * DESCRIPTION: override method that notifies sheriff of players threat level to the sheriff
+     * @param sheriff the sheriff of the game
+     */
     @Override
     public void notifySheriff(Player sheriff){
         this.getTargetValue(sheriff);
         this.pointsystem[this.highesttargetindex].setMinValue();
     }
     
+    /**
+     * DESCRIPTION: override method to prioritize sheriffs survival over own survival
+     * @param game game functionality
+     * @return
+     */
     @Override
     public Player getSelectedBeer(BangGame game){ 
         Player returnvalue;
