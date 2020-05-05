@@ -9,11 +9,13 @@ package dice;
  * @author Stephen C. Devaney
  */
 public class BangDie {
-    public final static int ARROW = 1, DYNAMITE = 2, BULLSEYE1 = 3, BULLSEYE2 = 4, BEER = 5, GATLING = 6; // constants for the die symbols
-    protected int symbol; // symbol of the die
-    protected boolean processedState;
-    protected boolean rerollable;
-    protected boolean requireschooseableaction;
+    //Anamol Acharya- Added new dice face for Saloon Dice
+    public final static int ARROW = 1, DYNAMITE = 2, BULLSEYE1 = 3, BULLSEYE2 = 4, BEER = 5, GATLING = 6, BULLET = 7, RETURN_ARROW =8,
+      WHISKEY_BOTTLE =9, FIGHT_A_DUEL = 10; // constants for the die symbols along with new added
+    private int symbol; // symbol of the die
+    private boolean processedState;
+    private boolean rerollable;
+    private boolean requireschooseableaction;
     protected DieType type;
     
     
@@ -28,9 +30,6 @@ public class BangDie {
         this.type = DieType.NORMAL;
     }
     
-    public DieType getDieType(){
-        return this.type;
-    }
     
     /** dieToString method
      * DESCRIPTION: the method takes a die and outputs the proper wording for the die in a string
@@ -64,6 +63,112 @@ public class BangDie {
         return returnString;
     }
     
+    /**Anamol Acharya 
+     * added a method dietoStringOldSaloon coward dice for the expansion 1
+     * dieToString method
+     * new Dice faces- Return arrow and Bullet
+     * DESCRIPTION: the method takes a die and outputs the proper wording for the die in a string to the expansion for oldsaloon
+     * test case 1: returns the proper string for the die
+     * @return String
+     */
+     public String dieToStringOldSaloonCoward(){
+        String returnString = "";
+        switch (this.symbol) {
+            case RETURN_ARROW:
+                returnString += "Return Arrow";
+                break;
+            case DYNAMITE:
+                returnString += "Dynamite";
+                break;
+            case BULLSEYE1:
+                returnString += "Bull's Eye 1";
+                break;
+            case BULLSEYE2:
+                returnString += "Bull's Eye 2";
+                break;
+            case BEER:
+                returnString += "Double Beer";
+                break;
+            case GATLING:
+                returnString += "Gatling";
+                break;
+            default:
+                break;
+        }
+        return returnString;
+    }
+    
+    
+    /**Anamol Acharya 
+     * added a method dietoStringOldSaloon loudmouth dice for the expansion 1
+     * dieToString method
+     * new Dice faces- Return arrow and Bullet
+     * DESCRIPTION: the method takes a die and outputs the proper wording for the die in a string to the expansion for oldsaloon
+     * test case 1: returns the proper string for the die
+     * @return String
+     */
+     public String dieToStringOldSaloonLoudMouth(){
+        String returnString = "";
+        switch (this.symbol) {
+            case BULLET:
+                returnString += "Bullet";
+                break;
+            case DYNAMITE:
+                returnString += "Dynamite";
+                break;
+            case BULLSEYE1:
+                returnString += "Double Bull's Eye 1";
+                break;
+            case BULLSEYE2:
+                returnString += "Double Bull's Eye 2";
+                break;
+            case BEER:
+                returnString += "Beer";
+                break;
+            case GATLING:
+                returnString += " Double Gatling";
+                break;
+            default:
+                break;
+        }
+        return returnString;
+    }
+    
+    
+   /**Anamol Acharya 
+     * added a method dietoStringUndeadOrAlive dice for the expansion 2
+     * dieToString method
+     * new Dice faces- Return Whiskey bottle and fight for duel
+     * DESCRIPTION: the method takes a die and outputs the proper wording for the die in a string to the expansion II
+     * test case 1: returns the proper string for the die
+     * @return String
+     */
+     public String dieToStringUndeadOrAlive(){
+        String returnString = "";
+        switch (this.symbol) {
+            case ARROW:
+                returnString += "Arrow";
+                break;
+            case DYNAMITE:
+                returnString += "Dynamite";
+                break;
+            case WHISKEY_BOTTLE:
+                returnString += "Whiskey Bottle";
+                break;
+            case FIGHT_A_DUEL:   //In this case I assume each dice has two fight a duel face
+                returnString += "Fight a duel";
+                break;
+            case GATLING:
+                returnString += "Gatling";
+                break;
+            default:
+                break;
+        }
+        return returnString;
+    }
+      
+     
+     
     
     /** isEqual method
      * DESCRIPTION: compares this die with the second die if this die is equal to the second die true is returned otherwise false is returned
@@ -145,5 +250,10 @@ public class BangDie {
     
     public void makeRerollable(){
         this.rerollable = true;
+    }
+    
+    
+    public DieType getDieType(){
+        return this.type;
     }
 }
