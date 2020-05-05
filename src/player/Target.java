@@ -32,14 +32,22 @@ public class Target {
     }
     
     public void increaseTargetPoints(){
-        points++;
+        if(points != Integer.MAX_VALUE) points++;
     }
     
     public void decreaseTargetPoints(){
-        points--;
+        if(points != Integer.MIN_VALUE) points--;
     }
     
     public boolean isTargetDead(){
         return isdead;
+    }
+    
+    public void setMaxValue(){
+        points = Integer.MAX_VALUE;
+    }
+    
+    public void setMinValue(){
+        points = Integer.MIN_VALUE;
     }
 }

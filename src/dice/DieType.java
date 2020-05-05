@@ -3,13 +3,15 @@
  * AUTHOR: Stephen C. Devaney
  * FOR: CS 2365 Object Oriented Programming Section 001 Spring 2020
  */
-package player;
+package dice;
 
 /**
  *
  * @author Stephen C. Devaney
  */
-public enum PlayerType {
-    COMPUTER,
-    HUMAN
+public enum DieType {
+    NORMAL,
+    LOUDMOUTH,
+    COWARD,
+    DUEL
 }
