@@ -520,7 +520,12 @@ public abstract class Player {
         }
     }
     
-    private void takeIndianChiefArrow(BangGame game){
+    
+    /**
+     * DESCRIPTION: takes an indian chief arrow for the game and give it to the player
+     * @param game
+     */
+    public void takeIndianChiefArrow(BangGame game){
         game.hasindianCheifArrow = false;
         this.hasIndianChiefArrow = true;
     }
