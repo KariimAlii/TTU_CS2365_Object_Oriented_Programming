@@ -1,5 +1,5 @@
 /*
- * TITLE: 
+ * TITLE: Project 3 Bang The Dice Game
  * AUTHOR: Stephen C. Devaney
  * FOR: CS 2365 Object Oriented Programming Section 001 Spring 2020
  */
@@ -62,7 +62,7 @@ public class DuelDie extends BangDie {
                 this.rerollable = false;
                 this.requireschooseableaction = false;
             }
-            else if(symbol == BULLSEYE1 || symbol == BULLSEYE2 || symbol == BEER){
+            else if(symbol == FIGHTADUEL){
                 this.rerollable = true;
                 this.requireschooseableaction = true;
             }
