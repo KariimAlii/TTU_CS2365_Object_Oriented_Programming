@@ -63,15 +63,6 @@ public class BangDie {
         return returnString;
     }
     
-    /**Anamol Acharya 
-     * added a method dietoStringOldSaloon coward dice for the expansion 1
-     * dieToString method
-     * new Dice faces- Return arrow and Bullet
-     * DESCRIPTION: the method takes a die and outputs the proper wording for the die in a string to the expansion for oldsaloon
-     * test case 1: returns the proper string for the die
-     * @return String
-     */
-    
     
     
     /** isEqual method
@@ -106,7 +97,7 @@ public class BangDie {
     }
     
     /**
-     * checks the 
+     * checks if the die is rerollable
      * @return
      */
     public boolean isRerollable(){

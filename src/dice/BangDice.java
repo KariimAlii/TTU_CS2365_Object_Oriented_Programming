@@ -27,6 +27,10 @@ public class BangDice {
 
     }
 
+    /**
+     * get number of dice being used
+     * @return
+     */
     public int getNumberOfDice(){
         return dice.length;
     }
@@ -82,6 +86,11 @@ public class BangDice {
         return returnvalue;
     }
     
+    /**
+     * rerolls die at index
+     * @param index
+     * @return
+     */
     public boolean getRerollableAtIndex(int index){
         boolean returnvalue = true;
         if (0 <= index && index < dice.length) {returnvalue = dice[index].isRerollable();}
@@ -89,6 +98,10 @@ public class BangDice {
         return returnvalue;
     }
     
+    /**
+     *
+     * @param index
+     */
     public void makeRerollableAtIndex(int index){
         if (0 <= index && index < dice.length) {this.dice[index].makeRerollable();}
         else if (0 - dice.length <= index && index <=-1) {dice[dice.length - (0 - index)].makeRerollable();}

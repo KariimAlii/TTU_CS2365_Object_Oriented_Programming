@@ -9,7 +9,7 @@ package dice;
  * @author Stephen C. Devaney
  */
 public class DuelDie extends BangDie {
-    public final static int ARROW = 1, DYNAMITE = 2, BULLSEYE1 = 3, BULLSEYE2 = 4, BEER = 5, GATLING = 6; // constants for the die symbols
+    public final static int WHISKEYBOTTLE = 3, FIGHTADUEL = 4; // constants for the die symbols
     
     public DuelDie(){
         super();
@@ -33,11 +33,11 @@ public class DuelDie extends BangDie {
             case DYNAMITE:
                 returnString += "Dynamite";
                 break;
-            case WHISKEY_BOTTLE:
+            case WHISKEYBOTTLE:
                 returnString += "Whiskey Bottle";
                 break;
-            case FIGHT_A_DUEL:   //In this case I assume each dice has two fight a duel face
-                returnString += "Fight a duel";
+            case FIGHTADUEL:   //In this case I assume each dice has two fight a duel face
+                returnString += "Fight a Duel";
                 break;
             case GATLING:
                 returnString += "Gatling";

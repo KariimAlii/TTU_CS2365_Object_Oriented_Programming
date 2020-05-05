@@ -10,7 +10,7 @@ package dice;
  * @author Stephen C. Devaney
  */
 public class LoudmouthDie extends BangDie {
-    public final static int ARROW = 1, DYNAMITE = 2, BULLSEYE1 = 3, BULLSEYE2 = 4, BEER = 5, GATLING = 6; // constants for the die symbols
+    public final static int BULLET = 5; // constants for the die symbols
     
     public LoudmouthDie(){
         super();
@@ -27,8 +27,8 @@ public class LoudmouthDie extends BangDie {
     public String dieToString(){
         String returnString = "";
         switch (this.symbol) {
-            case BULLET:
-                returnString += "Bullet";
+            case ARROW:
+                returnString += "Arrow";
                 break;
             case DYNAMITE:
                 returnString += "Dynamite";
@@ -39,8 +39,8 @@ public class LoudmouthDie extends BangDie {
             case BULLSEYE2:
                 returnString += "Double Bull's Eye 2";
                 break;
-            case BEER:
-                returnString += "Beer";
+            case BULLET:
+                returnString += "Bullet";
                 break;
             case GATLING:
                 returnString += " Double Gatling";
