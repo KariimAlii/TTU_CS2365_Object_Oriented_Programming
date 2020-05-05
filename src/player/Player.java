@@ -520,7 +520,12 @@ public abstract class Player {
         }
     }
     
-    private void takeIndianChiefArrow(BangGame game){
+    
+    /**
+     * DESCRIPTION: takes an indian chief arrow for the game and give it to the player
+     * @param game
+     */
+    public void takeIndianChiefArrow(BangGame game){
         game.hasindianCheifArrow = false;
         this.hasIndianChiefArrow = true;
     }
@@ -563,8 +568,8 @@ public abstract class Player {
      * @return return value
      */
     private boolean checkMostArrows(BangGame game){
-        boolean returnvalue = false;
-        for(int i = 0; i< game.getStartingNumPlayers(); i++){
+        boolean returnvalue = true;
+        for(int i = 0; i < game.getStartingNumPlayers(); i++){
             if(game.getPlayerAtIndex(i).arrows > this.arrows){
                 returnvalue = false;
                 break;
