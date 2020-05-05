@@ -13,5 +13,6 @@ public enum Role {
     SHERIFF,
     RENEGADE,
     OUTLAW,
-    DEPUTY
+    DEPUTY,
+    ZOMBIE
 }
