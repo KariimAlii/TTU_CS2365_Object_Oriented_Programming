@@ -4,8 +4,6 @@
  * FOR: CS 2365 Object Oriented Programming Section 001 Spring 2020
  */
 
- //test
-
 package Game;
 
 import dice.BangDice;
@@ -26,6 +24,7 @@ public class BangGame {
     private Player sheriff;
     private Player curplayer;
     private BangDice dice;
+    private  int IndianCheifArrow = 1;
     
     public BangGame(BangSetup setup){
         Random rand;
@@ -179,6 +178,21 @@ public class BangGame {
         else if (this.sheriff.isPlayerDead() && this.currentnumberofplayers == 1 && this.curplayer.getRole() == Role.RENEGADE) returnvalue = 3;
         else if (!this.sheriff.isPlayerDead() && this.startingnumberofplayers > 4 && this.numberofbadguys <= 0) returnvalue = 1;
         else if (!this.sheriff.isPlayerDead() && this.numberofbadguys <= 0) returnvalue = 2;
+        return returnvalue;
+    }
+  
+  
+    /**
+     * Anamol Acharya
+     * Created a boolean method for Indian chief arrow 
+     * @return return value
+     */
+     public boolean IndianChiefArrow(){
+         boolean returnvalue = false;
+         this.arrowpile--;
+         if(this.IndianCheifArrow == 0){
+            returnvalue = true; 
+         }    
         return returnvalue;
     }
 }
