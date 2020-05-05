@@ -568,8 +568,8 @@ public abstract class Player {
      * @return return value
      */
     private boolean checkMostArrows(BangGame game){
-        boolean returnvalue = false;
-        for(int i = 0; i< game.getStartingNumPlayers(); i++){
+        boolean returnvalue = true;
+        for(int i = 0; i < game.getStartingNumPlayers(); i++){
             if(game.getPlayerAtIndex(i).arrows > this.arrows){
                 returnvalue = false;
                 break;
