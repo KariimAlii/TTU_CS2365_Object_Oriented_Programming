@@ -88,6 +88,10 @@ public class BangStartUpController implements Initializable {
         stage.show();
     }
     
+    
+    /** 
+     * gets number of players from radio buttons
+     */
     private int getNumberOfPlayers(){
         int returnvalue = 4;
         if (radiobutton3.isSelected()) returnvalue = 4;

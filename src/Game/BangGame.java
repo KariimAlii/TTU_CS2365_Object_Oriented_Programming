@@ -110,10 +110,10 @@ public class BangGame {
     }
     
     private void indianAttack(){
-        this.arrowpile += this.curplayer.individualIndianAttack();
+        this.arrowpile += this.curplayer.individualIndianAttack(this);
         Player temp = this.curplayer.getNextPlayer();
         while(temp != this.curplayer){
-            this.arrowpile += temp.individualIndianAttack();
+            this.arrowpile += temp.individualIndianAttack(this);
             temp = temp.getNextPlayer();
         }
     }

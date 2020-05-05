@@ -10,7 +10,7 @@ package dice;
  * @author Stephen C. Devaney
  */
 public class CowardDie extends BangDie {
-    public final static int ARROW = 1, DYNAMITE = 2, BULLSEYE1 = 3, BULLSEYE2 = 4, BEER = 5, GATLING = 6; // constants for the die symbols
+    public final static int BROKENARROW = 4, DOUBLEBEER = 6; // constants for the die symbols
     
     public CowardDie(){
         super();
@@ -26,8 +26,8 @@ public class CowardDie extends BangDie {
     public String dieToString(){
         String returnString = "";
         switch (this.symbol) {
-            case RETURN_ARROW:
-                returnString += "Return Arrow";
+            case ARROW:
+                returnString += "Arrow";
                 break;
             case DYNAMITE:
                 returnString += "Dynamite";
@@ -35,14 +35,14 @@ public class CowardDie extends BangDie {
             case BULLSEYE1:
                 returnString += "Bull's Eye 1";
                 break;
-            case BULLSEYE2:
-                returnString += "Bull's Eye 2";
+            case BROKENARROW:
+                returnString += "Broken Arrow";
                 break;
             case BEER:
-                returnString += "Double Beer";
+                returnString += "Beer";
                 break;
-            case GATLING:
-                returnString += "Gatling";
+            case DOUBLEBEER:
+                returnString += "Double Beer";
                 break;
             default:
                 break;
@@ -58,13 +58,13 @@ public class CowardDie extends BangDie {
      */
     @Override
     public void setDie(int symbol){
-        if (ARROW <= symbol && symbol <= GATLING){
+        if (ARROW <= symbol && symbol <= DOUBLEBEER){
             this.symbol = symbol;
             if (symbol == DYNAMITE){
                 this.rerollable = false;
                 this.requireschooseableaction = false;
             }
-            else if(symbol == BULLSEYE1 || symbol == BULLSEYE2 || symbol == BEER){
+            else if(symbol == BULLSEYE1 || symbol == DOUBLEBEER || symbol == BEER){
                 this.rerollable = true;
                 this.requireschooseableaction = true;
             }
