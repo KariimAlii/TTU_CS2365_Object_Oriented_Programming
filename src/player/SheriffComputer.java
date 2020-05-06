@@ -8,7 +8,7 @@ import Game.BangGame;
 import character.*;
 
 /**
- *
+ * DESCRIPTION: A class for a computer player with the role of a sheriff
  * @author raime
  */
 public class SheriffComputer extends Player {

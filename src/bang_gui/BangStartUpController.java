@@ -1,6 +1,6 @@
 /*
- * TITLE: 
- * AUTHOR: Stephen C. Devaney
+ * TITLE: Project 3 Bang The Dice Game
+ * AUTHOR: Stephen C Devaney
  * FOR: CS 2365 Object Oriented Programming Section 001 Spring 2020
  */
 package bang_gui;
@@ -26,7 +26,6 @@ import javafx.stage.Stage;
 
 /**
  * FXML Controller class
- *
  * @author Stephen C. Devaney
  */
 public class BangStartUpController implements Initializable {

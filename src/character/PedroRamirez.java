@@ -6,7 +6,7 @@
 package character;
 
 /**
- *
+ * class for pedro ramirez
  * @author Stephen C. Devaney
  */
 public class PedroRamirez extends BangCharacter{
@@ -42,6 +42,10 @@ public class PedroRamirez extends BangCharacter{
         return SPECIAL;
     }
     
+    /**
+     * Method to get the image file name
+     * @return
+     */
     @Override
     public String getImageFileName(){
         return IMAGEFILENAME;

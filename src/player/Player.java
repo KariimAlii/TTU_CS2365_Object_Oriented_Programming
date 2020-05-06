@@ -12,7 +12,7 @@ import static dice.BangDie.*;
 import javafx.scene.image.Image;
 
 /**
- *
+ * DESCRIPTION: Abstract class to represent a player
  * @author Stephen C. Devaney
  */
 public abstract class Player {
@@ -34,7 +34,14 @@ public abstract class Player {
     private boolean hasIndianChiefArrow;
 
     
-    Player(PlayerType playertype, BangCharacter character, Role setuprole, int startingnumberofplayers){
+    /**
+     * DESCRIPTION: Constructor for player
+     * @param playertype
+     * @param character
+     * @param setuprole
+     * @param startingnumberofplayers
+     */
+    public Player(PlayerType playertype, BangCharacter character, Role setuprole, int startingnumberofplayers){
         this.playertype = playertype;
         this.character = character;
         this.role = setuprole;

@@ -6,11 +6,15 @@
 package dice;
 
 /**
+ *  DESCRIPTION: Die class for the duel die
  * @author Stephen C. Devaney
  */
 public class DuelDie extends BangDie {
     public final static int WHISKEYBOTTLE = 3, FIGHTADUEL = 4; // constants for the die symbols
     
+    /**
+     * constructor for a duel die
+     */
     public DuelDie(){
         super();
         this.type = DieType.DUEL;

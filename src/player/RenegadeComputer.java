@@ -8,7 +8,7 @@ package player;
 import character.BangCharacter;
 
 /**
- *
+ * DESCRIPTION: A class for a computer player with the role of a renegade
  * @author raime
  */
 public class RenegadeComputer extends Player {

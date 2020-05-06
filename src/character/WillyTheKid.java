@@ -6,7 +6,7 @@
 package character;
 
 /**
- *
+ * class for willy the kid
  * @author Stephen C. Devaney
  */
 public class WillyTheKid extends BangCharacter{
@@ -42,6 +42,11 @@ public class WillyTheKid extends BangCharacter{
         return SPECIAL;
     }
     
+    
+    /**
+     * Method to get the image file name
+     * @return
+     */
     @Override
     public String getImageFileName(){
         return IMAGEFILENAME;

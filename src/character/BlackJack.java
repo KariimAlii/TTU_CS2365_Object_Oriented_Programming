@@ -6,7 +6,7 @@
 package character;
 
 /**
- *
+ * class for black jack
  * @author Stephen C. Devaney
  */
 public class BlackJack extends BangCharacter {
@@ -43,6 +43,10 @@ public class BlackJack extends BangCharacter {
         return SPECIAL;
     }
     
+    /**
+     * Method to get the image file name
+     * @return
+     */
     @Override
     public String getImageFileName(){
         return IMAGEFILENAME;

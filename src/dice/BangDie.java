@@ -5,12 +5,10 @@
  */
 package dice;
 /**
- *
+ *  DESCRIPTION: Die class for the basic die
  * @author Stephen C. Devaney
  */
 public class BangDie {
-    //Anamol Acharya- Added new dice face for Saloon Dice
-
     /**Constants to designate the sides for the die*/ public final static int ARROW = 1, DYNAMITE = 2, BULLSEYE1 = 3, BULLSEYE2 = 4, BEER = 5, GATLING = 6;
     /** value to hold which side/symbol of the die is showing */ protected int symbol;
     /** value to hold weather or not the die has been processed by the player */ protected boolean processedState;

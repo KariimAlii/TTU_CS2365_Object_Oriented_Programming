@@ -6,7 +6,7 @@
 package character;
 
 /**
- *
+ * class for paul regret
  * @author Stephen C. Devaney
  */
 public class PaulRegret extends BangCharacter{
@@ -40,6 +40,10 @@ public class PaulRegret extends BangCharacter{
         return SPECIAL;
     }
     
+    /**
+     * Method to get the image file name
+     * @return
+     */
     @Override
     public String getImageFileName(){
         return IMAGEFILENAME;
