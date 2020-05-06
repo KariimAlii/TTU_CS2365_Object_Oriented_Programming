@@ -1,6 +1,7 @@
 /*
- * TITLE: 
+ * TITLE: Project 3 Bang The Dice Game
  * AUTHOR: Stephen C. Devaney
+ * COLLABORATORS: Andrew Sena
  * FOR: CS 2365 Object Oriented Programming Section 001 Spring 2020
  */
 package Game;
@@ -10,7 +11,7 @@ import java.util.Random;
 import player.Role;
 
 /**
- *
+ * Provides setup information from a previous scene
  * @author Stephen C. Devaney
  */
 public class BangSetup {
@@ -22,6 +23,9 @@ public class BangSetup {
     private Random rand;
     private Boolean undeadoralivemodule;
     
+    /**
+      constructor for the setup
+     */
     public BangSetup(int numberplayers){
         rand = new Random(System.currentTimeMillis());
         numberofplayers = numberplayers;
@@ -29,6 +33,9 @@ public class BangSetup {
         shuffleCharacters();
     }
     
+    /**
+     * shuffles the roles for the game
+     */
     private void shuffleRoles(){
         char temp;
         for(int i = 0; i < numberofplayers; i++){
@@ -39,6 +46,10 @@ public class BangSetup {
         }    
     }
     
+    
+    /**
+     * shuffles the characters for the game
+     */
     private void shuffleCharacters(){
         int temp;
         for(int i = 0; i < characters.length; i++){
@@ -49,6 +60,10 @@ public class BangSetup {
         }    
     }
     
+    /**
+     * gets the next available role
+     * @return
+     */
     public Role getRole(){
         Role role;
         switch(roles[roleindex]){
@@ -71,10 +86,18 @@ public class BangSetup {
         return role;
     }
     
+    /**
+     * gets the users chosen number of  players
+     * @return
+     */
     public int getNumberOfPlayers(){
         return numberofplayers;
     }
     
+    /**
+     * gets the next available character
+     * @return
+     */
     public BangCharacter getCharacter(){
         BangCharacter newCharacter;
         switch(characters[characterindex]){
@@ -121,6 +144,9 @@ public class BangSetup {
         return newCharacter;
     }
     
+    /**
+     * adds the old saloon characters to the game
+     */
     public void addOldSaloonCharacters(){
         int newarray[] = new int[this.characters.length + 2];
         for(int i = 0; i < this.characters.length; i++){
@@ -132,6 +158,9 @@ public class BangSetup {
         this.shuffleCharacters();
     }
     
+    /**
+     * adds the undead or alive characters to the game
+     */
     public void addUndeadOrAliveCharacters(){
         int newarray[] = new int[this.characters.length + 2];
         for(int i = 0; i < this.characters.length; i++){
@@ -142,8 +171,4 @@ public class BangSetup {
         this.characters = newarray;
         this.shuffleCharacters();
     }
-    
-    //public getUndeadOrAlive(){
-        
-    //}
 }

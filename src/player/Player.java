@@ -1,6 +1,7 @@
 /*
  * TITLE: Project 3 Bang The Dice Game
- * AUTHOR: Stephen C. Devaney
+ * AUTHOR: Stephen Devaney
+ * COLLABORATOR: Anamol Acharya, Andrew Sena, Steven Lowry, Shree Shrestha
  * FOR: CS 2365 Object Oriented Programming Section 001 Spring 2020
  */
 package player;
@@ -531,6 +532,7 @@ public abstract class Player {
     /**
      * DESCRIPTION: takes an indian chief arrow for the game and give it to the player
      * @param game
+     * @author Shree Shrestha
      */
     public void takeIndianChiefArrow(BangGame game){
         game.hasindianCheifArrow = false;
@@ -538,11 +540,12 @@ public abstract class Player {
     }
 
    /**
-     * @Shree Shrestha added indian chief code to this method
      * this methods is to resolve the individual Indian attack 
      * where the damage are taken on needed conditions
      * @param game
      * @return returnvalue
+     * @author Stephen C. Devaney
+     * @author Shree Shrestha added indian chief code to this method
      */
     public int individualIndianAttack(BangGame game){
         int returnvalue = this.arrows;
@@ -569,10 +572,10 @@ public abstract class Player {
   
   
     /**
-     *@Shree Shrestha
      * This methods check if any players has the most arrows
      * @param game
      * @return return value
+     * @author Shree Shrestha
      */
     private boolean checkMostArrows(BangGame game){
         boolean returnvalue = true;

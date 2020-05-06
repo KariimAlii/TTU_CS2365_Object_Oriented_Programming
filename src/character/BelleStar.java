@@ -9,7 +9,6 @@ import javafx.scene.image.Image;
 
 /**
  * class for belle star
- * @author steph
  */
 public class BelleStar extends BangCharacter {
     

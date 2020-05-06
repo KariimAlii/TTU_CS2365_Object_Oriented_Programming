@@ -1,6 +1,7 @@
 /*
  * TITLE: Project 3 Bang The Dice Game
  * AUTHOR: Stephen Devaney
+ * COLLABORATORS: Andrew Sena, Anamol Acharya
  * FOR: CS 2365 Object Oriented Programming Section 001 Spring 2020
  */
 
@@ -12,8 +13,10 @@ import java.util.Random;
 import player.*;
 
 /**
- *
+ * The game class for bang the dice game
  * @author Stephen Devaney
+ * @author Andrew Sena
+ * @author Anamol Acharya
  */
 public class BangGame {
     private int startingnumberofplayers;
@@ -31,6 +34,9 @@ public class BangGame {
     public int frontindex = 0;
     public int topOfDeck;
     
+    /**
+     * base constructor for bang the dice game
+     */
     public BangGame(BangSetup setup){
         Random rand;
         rand = new Random(System.currentTimeMillis());
@@ -74,30 +80,51 @@ public class BangGame {
         outbreak = false;
     }
     
+    /**
+     * reduces the current number of players for after a player dies
+     */
     public void reduceCurrentNumberOfPlayers(){
         this.currentnumberofplayers--;
     }
     
+    /**
+     * reduces the current number of bad guys for after an outlaw or rengade dies if not in exansion zombie if in expansion
+     */
     public void reduceNumberOfBadGuys(){
         this.numberofbadguys--;
     }
     
+    /**
+     * gets the dice for the other classes
+     */
     public BangDice getDice(){
         return this.dice;
     }
     
+    /**
+     * gets the value of the arrow pile
+     */
     public int getArrowPile(){
         return this.arrowpile;
     }
     
+    /**
+     * gets the value of the current number of players
+     */
     public int getCurNumPlayers(){
         return this.currentnumberofplayers;
     }
     
+    /**
+     * gets the starting number of players
+     */
     public int getStartingNumPlayers(){
         return this.startingnumberofplayers;
     }
     
+    /**
+     * takes an arrow from the arrow pile and sets up for indian attack
+     */
     public boolean takeArrow(){
         boolean returnvalue = false;
         this.arrowpile--;
@@ -108,10 +135,16 @@ public class BangGame {
         return returnvalue;
     }
     
+    /**
+     * returns a number of arrows to the arrow pile
+     */
     public void returnArrows(int arrows){
         this.arrowpile += arrows;
     }
     
+    /**
+     * preforms an indian attack on all players
+     */
     private void indianAttack(){
         this.arrowpile += this.curplayer.individualIndianAttack(this);
         Player temp = this.curplayer.getNextPlayer();
@@ -121,6 +154,9 @@ public class BangGame {
         }
     }
     
+    /**
+     * allows a player to shoot the gatling gun damging all other players and discarding his arrows
+     */
     public void shootGatlingGun(){
         this.arrowpile += this.curplayer.individualGatlingGunShoot();
         for (int i = 0; i < players.length; i++){
@@ -130,10 +166,19 @@ public class BangGame {
         }
     }
     
+    /**
+     * Gets the player a specified index in the player array
+     * @param index
+     * @return
+     */
     public Player getPlayerAtIndex(int index){
         return players[index];
     }
     
+    /**
+     * gets the index of the current player in the player array
+     * @return
+     */
     public int getCurPlayerIndex(){
         int returnvalue = 0;
         for(int i = 0; i < this.players.length; i++){
@@ -145,31 +190,52 @@ public class BangGame {
         return returnvalue;
     }
     
+    /**
+     * gets the current player
+     * @return
+     */
     public Player getCurPlayer(){
         return this.curplayer;
     }
     
+    /**
+     * gets the sheriff player
+     * @return
+     */
     public Player getSheriff(){
         return this.sheriff;
     }
     
+    /**
+     * notified all players that the sheriff has been shot
+     */
     public void sheriffShot(){
         for(int i = 0; i <  players.length; i++){
             players[i].notifySheriffShot(sheriff);
         }
     }
     
+    /**
+     * notified all players that the sheriff has been helped
+     */
     public void sheriffHelped(){
         for(int i = 0; i <  players.length; i++){
             players[i].notifySheriffHelped(sheriff);
         }
     }
     
+    /**
+     * gets the next player and setups his next turn
+     */
     public void endTurn(){
         this.curplayer = this.curplayer.getNextPlayer();
         this.curplayer.startTurn(this);
    }
     
+    /**
+     * checks to see if the game has ended
+     * @return
+     */
     public boolean isEndCondition(){
         boolean returnvalue = false;
         if(this.sheriff.isPlayerDead()) returnvalue = true;
@@ -177,6 +243,10 @@ public class BangGame {
         return returnvalue;
     }
     
+    /**
+     * gets the end condition for the GUI
+     * @return
+     */
     public int getEndCondition(){
         int returnvalue = 0;
         if(this.currentnumberofplayers <= 0) returnvalue = 0;
@@ -190,6 +260,7 @@ public class BangGame {
      
     /**
      *Returns a boolean for if the module is selected or not
+     * @author Anamol Archarya
      * @return
      */
     public boolean getUndeadOrAlive(){
@@ -199,13 +270,15 @@ public class BangGame {
     /**
      *Returns a boolean for if the outbreak has occurred or not
      * @return
+     * @author Anamol Archarya
      */
     public boolean getOutbreak(){
          return outbreak;
      }
     
     /**
-     *
+     * shuffles the bone yard deck
+     * @author Andrew Sena
      */
     public void shuffleBoneyardDeck(){
         
@@ -219,7 +292,8 @@ public class BangGame {
     }
     
     /**
-     *
+     * draws a bone yard card
+     * @author Andrew Sena
      * @return
      */
     public int drawBoneyardCard(){

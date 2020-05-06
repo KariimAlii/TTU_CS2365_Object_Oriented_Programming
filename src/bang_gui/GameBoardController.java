@@ -1,6 +1,7 @@
 /*
  * TITLE: Project 3 Bang The Dice Game
  * AUTHOR: Steven Lowry
+ * COLLABORATORS: Stephen Devaney
  * FOR: CS 2365 Object Oriented Programming Section 001 Spring 2020
  */
 package bang_gui;
@@ -155,6 +156,7 @@ public class GameBoardController implements Initializable {
     /**
      * used to pass information from previous scene to this scene
      * @param passedsetup
+     * @author Stephen Devaney
      */
     public void controllerSetup(BangSetup passedsetup){
         game = new BangGame(passedsetup);
@@ -317,6 +319,7 @@ public class GameBoardController implements Initializable {
     
     /**
      * used to provide a setup for the action button
+     * @author Stephen Devaney
      */
     private void setupAction(){  
         if(this.curplayer.canHaveAction(game)){
@@ -394,6 +397,7 @@ public class GameBoardController implements Initializable {
     
     /**
      * button to end the players turn
+     * @author Stephen Devaney
      */
     @FXML
     void EndTurn(ActionEvent event){
@@ -409,6 +413,7 @@ public class GameBoardController implements Initializable {
     
     /**
      * help method to display the end condition of the game
+     * @author Stephen Devaney
      */
     private void displayEndCondtion(){
         this.HumanPlayer.setVisible(false);
@@ -461,6 +466,7 @@ public class GameBoardController implements Initializable {
     
     /**
      *  method to start a players next turn
+     * @author Stephen Devaney
      */
     private void startNextTurn(){
         this.curplayer.endTurn(game);
@@ -499,6 +505,7 @@ public class GameBoardController implements Initializable {
     
     /**
      * method to change the highlighted box to the current active player
+     * @author Stephen Devaney
      */
     private void updateActivePlayer(){
         // Indicates inactive player
@@ -557,6 +564,8 @@ public class GameBoardController implements Initializable {
     
     /**
      * method to setup the players
+     * @author Steven Lowry
+     * @author Stephen Devaney updated after connection game to business logic
      */
     private void setupPlayers(){
         playerindexes = new int[8];
@@ -697,6 +706,7 @@ public class GameBoardController implements Initializable {
     
     /**
      * method to update the player status in the game
+     * @author Stephend Devaney
      */
     public void updatePlayers(){
         updateActivePlayer();

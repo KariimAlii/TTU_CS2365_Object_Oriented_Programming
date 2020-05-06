@@ -1,13 +1,13 @@
 /*
  * TITLE: Project 3 Bang The Dice Game
- * AUTHOR: Stephen C. Devaney
+ * AUTHOR: Anamol Acharya
+ * COLLABORATOR: Shree Shrestha
  * FOR: CS 2365 Object Oriented Programming Section 001 Spring 2020
  */
 package dice;
 
 /**
  * DESCRIPTION: Die class for the loudmouth die
- * @author Stephen C. Devaney
  */
 public class LoudmouthDie extends BangDie {
     public final static int BULLET = 5; // constants for the die symbols
