@@ -36,7 +36,7 @@ public abstract class Player {
     private boolean setdead;
     protected String turnoutput;
     private boolean gatlinggunwentoff;
-    private boolean hasIndianChiefArrow;
+    private boolean IndianChiefArrow;
 
     
     /**
@@ -60,6 +60,7 @@ public abstract class Player {
         highesttargetindex = -1;
         indianattackhappened = 0;
         gatlinggunwentoff = false;
+        IndianChiefArrow = false;
     }
 
     /**
@@ -370,8 +371,8 @@ public abstract class Player {
         game.returnArrows(this.arrows);
         this.arrows = 0;
         game.reduceCurrentNumberOfPlayers();
-        game.hasindianCheifArrow = true;
-        this.hasIndianChiefArrow = false;
+        game.hasindianChiefArrow = true;
+        this.IndianChiefArrow = false;
         if(this.role == Role.OUTLAW || this.role == Role.RENEGADE){game.reduceNumberOfBadGuys();}
     }
     
@@ -539,8 +540,8 @@ public abstract class Player {
      * @author Shree Shrestha
      */
     public void takeIndianChiefArrow(BangGame game){
-        game.hasindianCheifArrow = false;
-        this.hasIndianChiefArrow = true;
+        game.hasindianChiefArrow = false;
+        this.IndianChiefArrow = true;
     }
 
    /**
@@ -553,7 +554,7 @@ public abstract class Player {
      */
     public int individualIndianAttack(BangGame game){
         int returnvalue = this.arrows;
-        if(this.hasIndianChiefArrow && checkMostArrows(game)){
+        if(this.IndianChiefArrow && checkMostArrows(game)){
         }
         else{
         for (; this.arrows > 0; this.arrows--){
@@ -562,14 +563,14 @@ public abstract class Player {
             }
             this.character.takeDamage();
         }
-        if(this.hasIndianChiefArrow){
+        if(this.IndianChiefArrow){
             this.character.takeDamage();
             this.character.takeDamage();            
             }
         }
-        if(this.hasIndianChiefArrow){
-            this.hasIndianChiefArrow = false;
-            game.hasindianCheifArrow = true;
+        if(this.IndianChiefArrow){
+            this.IndianChiefArrow = false;
+            game.hasindianChiefArrow = true;
         }
         return returnvalue;
     }
@@ -931,6 +932,6 @@ public abstract class Player {
      * @return
      */
     public boolean hasIndianChiefArrow(){
-        return this.hasIndianChiefArrow;
+        return this.IndianChiefArrow;
     }
 }

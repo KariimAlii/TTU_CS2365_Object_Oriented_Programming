@@ -27,7 +27,7 @@ public class BangGame {
     private Player sheriff;
     private Player curplayer;
     private BangDice dice;
-    public  boolean hasindianCheifArrow;
+    public  boolean hasindianChiefArrow = false;
     private Boolean undeadoralivemodule;
     private Boolean outbreak ;
     public int boneyardcard[] = {0,0,1,1,1,1,1,1,2,2,2};
@@ -40,6 +40,7 @@ public class BangGame {
     public BangGame(BangSetup setup){
         Random rand;
         rand = new Random(System.currentTimeMillis());
+        this.hasindianChiefArrow = setup.getIndianChiefArrow();
         startingnumberofplayers = currentnumberofplayers = setup.getNumberOfPlayers();
         numberofbadguys = 0;
         players = new Player[startingnumberofplayers];
