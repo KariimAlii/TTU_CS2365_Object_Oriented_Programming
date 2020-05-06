@@ -909,4 +909,12 @@ public abstract class Player {
         this.turnoutput += "\nAfter reading this player's turn output please click End Turn!\n";
         return this.turnoutput;
     }
+    
+    /**
+     * checks if the player has the Indian chief arrow
+     * @return
+     */
+    public boolean hasIndianChiefArrow(){
+        return this.hasIndianChiefArrow;
+    }
 }
