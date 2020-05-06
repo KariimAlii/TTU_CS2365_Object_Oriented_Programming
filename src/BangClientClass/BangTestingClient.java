@@ -34,7 +34,7 @@ public class BangTestingClient {
     
     public void bangDiceTest(){
         System.out.println("Start of Bang Dice Test Cases-------------------------------------------------------------------------------------------------------------------------------------");
-        BangDice dice = new BangDice();
+        BangDice dice = new BangDice(true);
         Random rand = new Random(System.currentTimeMillis());
         System.out.println("Dice when starting: " + dice.diceToString());
         dice.rollDice();
