@@ -9,10 +9,14 @@ import character.*;
 import java.util.Random;
 import player.*;
 /**
- *
+ * Testing class for all individual classes
  * @author Stephen C. Devaney
  */
 public class BangTestingClient {
+
+    /**
+     * Test all of the individual die classes
+     */
     public void bangDieTest(){
         System.out.println("Start of Bang Die Test Cases-------------------------------------------------------------------------------------------------------------------------------------");
         BangDie die1 = new BangDie();
@@ -31,7 +35,9 @@ public class BangTestingClient {
         System.out.println("End of Bang Die Test Cases-------------------------------------------------------------------------------------------------------------------------------------");
     }
     
-    
+    /**
+     * Test the dice class
+     */
     public void bangDiceTest(){
         System.out.println("Start of Bang Dice Test Cases-------------------------------------------------------------------------------------------------------------------------------------");
         BangDice dice = new BangDice(true);
@@ -59,9 +65,12 @@ public class BangTestingClient {
         System.out.println("End of Bang Dice Test Cases-------------------------------------------------------------------------------------------------------------------------------------");
     }
     
-    
-        public static void main(String[] args) {
-            BangTestingClient test = new BangTestingClient();
-            test.bangDiceTest();
+    /**
+     * main method when testing will take place
+     * @param args
+     */
+    public static void main(String[] args) {
+        BangTestingClient test = new BangTestingClient();
+        test.bangDiceTest();
     }
 }
