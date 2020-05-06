@@ -12,7 +12,7 @@ import javafx.scene.image.Image;
  */
 public class BelleStar extends BangCharacter {
     
-     private static final String NAME = "Belle Star";
+    private static final String NAME = "BELLE STAR";
     private static final String SPECIAL = "After each of your dice rolls, you can change one Dynamite to Gatling";
     private static final String IMAGEFILENAME = "/Images/Belle Star.jpg";
 

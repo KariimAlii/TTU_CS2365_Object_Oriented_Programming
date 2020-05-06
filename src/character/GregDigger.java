@@ -10,7 +10,7 @@ package character;
  */
 public class GregDigger extends BangCharacter{
     
-    private static final String NAME = "Greg Digger";
+    private static final String NAME = "GREG DIGGER";
     private static final String SPECIAL = "You may use each whisket bottle you roll twice";
     private static final String IMAGEFILENAME = "/Images/Greg Digger.jpg";
 
