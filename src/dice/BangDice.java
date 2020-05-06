@@ -12,7 +12,6 @@ import java.util.Random;
  */
 public class BangDice {
     private final BangDie dice[]; // an array of Dice to hold all of the dice
-    private final BangDie holddice[]; // an array to hold extra dice
     private final Random rand;
     private int basicdicelastindex;
     
@@ -21,21 +20,18 @@ public class BangDice {
      * Declare a BangDice object to be used by the Game class.
      */
     public BangDice(boolean dueldiceactive) {
-        if(dueldiceactive) {basicdicelastindex = 3;}
-        else {basicdicelastindex = 5;}
+        if(dueldiceactive) {basicdicelastindex = 2;}
+        else {basicdicelastindex = 4;}
         rand = new Random(System.currentTimeMillis());
         dice = new BangDie[5];
-        for(int i = 0; i < basicdicelastindex; i++){
+        for(int i = 0; i <= basicdicelastindex; i++){
             dice[i] = new BangDie();
         }
         if(dueldiceactive){
-            for(int i = basicdicelastindex; i < 5; i++){
+            for(int i = basicdicelastindex+1; i < 5; i++){
                 dice[i] = new DuelDie();
             }
         }
-        holddice = new BangDie[2];
-        holddice[0] = new LoudmouthDie();
-        holddice[1] = new CowardDie();
     }
 
     /**
@@ -149,5 +145,17 @@ public class BangDice {
         if (0 <= index && index < dice.length) {returnvalue = this.dice[index].doesRequireChooseableAction();}
         else if (0 - dice.length <= index && index <=-1) {returnvalue = dice[dice.length - (0 - index)].doesRequireChooseableAction();}
         return returnvalue;
+    }
+    
+    public void exchangeLastDieLoudmouth(){
+        this.dice[this.basicdicelastindex] = new LoudmouthDie();
+    }
+    
+    public void exchangeLastDieCoward(){
+        this.dice[this.basicdicelastindex] = new CowardDie();
+    }
+    
+    public void exchangeLastDieBasic(){
+        this.dice[this.basicdicelastindex] = new BangDie();
     }
 }
