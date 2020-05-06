@@ -6,7 +6,7 @@
 
 package Game;
 
-import dice.BangDice;
+import dice.*;
 import java.util.LinkedList;
 import java.util.Random;
 import player.*;
