@@ -10,7 +10,7 @@ package dice;
  *  DESCRIPTION: Die class for the duel die
  */
 public class DuelDie extends BangDie {
-    public final static int WHISKEYBOTTLE = 3, FIGHTADUEL = 4; // constants for the die symbols
+    public final static int FIGHTADUEL = 3, WHISKEYBOTTLE = 5; // constants for the die symbols
     
     /**
      * constructor for a duel die
@@ -61,12 +61,15 @@ public class DuelDie extends BangDie {
     @Override
     public void setDie(int symbol){
         if (ARROW <= symbol && symbol <= GATLING){
-            this.symbol = symbol;
-            if (symbol == DYNAMITE){
+            
+            if (symbol == BULLSEYE2){this.symbol = FIGHTADUEL;}
+            else {this.symbol = symbol;}
+            
+            if (this.symbol == DYNAMITE){
                 this.rerollable = false;
                 this.requireschooseableaction = false;
             }
-            else if(symbol == FIGHTADUEL){
+            else if(this.symbol == FIGHTADUEL){
                 this.rerollable = true;
                 this.requireschooseableaction = true;
             }
