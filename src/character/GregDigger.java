@@ -7,7 +7,6 @@ package character;
 
 /**
  * class for Greg Digger
- * @author steph
  */
 public class GregDigger extends BangCharacter{
     

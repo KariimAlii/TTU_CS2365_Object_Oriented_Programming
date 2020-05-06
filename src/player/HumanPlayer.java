@@ -1,6 +1,7 @@
 /*
  * TITLE: Project 3 Bang The Dice Game
- * AUTHOR: Anamol Archarya
+ * AUTHOR: Anamol Acharya
+ * COLLABORATOR: Shree Shrestha
  * FOR: CS 2365 Object Oriented Programming Section 001 Spring 2020
  */
 package player;

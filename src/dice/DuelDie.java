@@ -1,13 +1,13 @@
 /*
  * TITLE: Project 3 Bang The Dice Game
- * AUTHOR: Stephen C. Devaney
+ * AUTHOR: Anamol Acharya
+ * COLLABORATOR: Shree Shrestha
  * FOR: CS 2365 Object Oriented Programming Section 001 Spring 2020
  */
 package dice;
 
 /**
  *  DESCRIPTION: Die class for the duel die
- * @author Stephen C. Devaney
  */
 public class DuelDie extends BangDie {
     public final static int WHISKEYBOTTLE = 3, FIGHTADUEL = 4; // constants for the die symbols

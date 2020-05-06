@@ -1,13 +1,14 @@
 /*
  * TITLE: Project 3 Bang The Dice Game
- * AUTHOR: Stephen C. Devaney
+ * AUTHOR: Anamol Acharya
+ * COLLABORATOR: Shree Shrestha
  * FOR: CS 2365 Object Oriented Programming Section 001 Spring 2020
  */
 package dice;
 
 /**
  *  DESCRIPTION: Die class for the coward die
- * @author Stephen C. Devaney
+ * @author Anamol Acharya
  */
 public class CowardDie extends BangDie {
     public final static int BROKENARROW = 4, DOUBLEBEER = 6; // constants for the die symbols
