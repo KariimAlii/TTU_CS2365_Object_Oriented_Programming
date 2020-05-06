@@ -12,19 +12,30 @@ import java.util.Random;
  */
 public class BangDice {
     private final BangDie dice[]; // an array of Dice to hold all of the dice
+    private final BangDie holddice[]; // an array to hold extra dice
     private final Random rand;
+    private int basicdicelastindex;
     
     
     /** BangDice Constructor
      * Declare a BangDice object to be used by the Game class.
      */
-    public BangDice() {
+    public BangDice(boolean dueldiceactive) {
+        if(dueldiceactive) {basicdicelastindex = 3;}
+        else {basicdicelastindex = 5;}
         rand = new Random(System.currentTimeMillis());
         dice = new BangDie[5];
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < basicdicelastindex; i++){
             dice[i] = new BangDie();
         }
-
+        if(dueldiceactive){
+            for(int i = basicdicelastindex; i < 5; i++){
+                dice[i] = new DuelDie();
+            }
+        }
+        holddice = new BangDie[2];
+        holddice[0] = new LoudmouthDie();
+        holddice[1] = new CowardDie();
     }
 
     /**
