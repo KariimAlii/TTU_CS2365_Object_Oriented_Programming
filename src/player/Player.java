@@ -785,15 +785,19 @@ public abstract class Player {
         decreaseTarget(helper);
     }
     
-    public void simulateReroll(BangGame game){
+    public boolean simulateReroll(BangGame game){
+        boolean rerolled = true;
         int individualrerollcount = 0;
         int beercount = 0;
         int gatcount = 0;
-        for(int i = 0; i < game.getDice().getNumberOfDice(); i++){
+        for (int i = 0; i < game.getDice().getNumberOfDice(); i++){
             if(game.getDice().getDieTypeAtIndex(i) == DieType.BASIC){
                 if(game.getDice().getDieAtIndex(i) == BEER) {beercount++;}
                 else if(game.getDice().getDieAtIndex(i) == GATLING) {gatcount++;}
             }
+        }
+        
+        for(int i = 0; i < game.getDice().getNumberOfDice(); i++){
             if(this.rerollStrategy(game, i, beercount, gatcount)){
                 if(game.getDice().getDieTypeAtIndex(i) == DieType.BASIC){
                     if(game.getDice().getDieAtIndex(i) == BEER) {beercount--;}
@@ -808,8 +812,10 @@ public abstract class Player {
         if(individualrerollcount == 0){
             this.turnoutput += "None";
             this.rerollcount = 0;
+            rerolled = false;
         }
         this.turnoutput += "\n";
+        return rerolled;
     }
     
     protected boolean rerollStrategy(BangGame game,int index, int beercount, int gatcount){
@@ -845,9 +851,9 @@ public abstract class Player {
             else if (diesymbol == BEER){
                 if(game.getCurPlayer().getCurLife() + beercount >= game.getCurPlayer().getMaxLife()){returnvalue = true;}
             }
-            else{
-                if(game.getCurNumPlayers() > 3 ){returnvalue = true;}
-                else if(game.getCurNumPlayers() <= 3 && game.getCurPlayer().getArrows()  <= 3){returnvalue = true;}
+            else if(diesymbol == GATLING){
+                if(gatcount < 2 || gatcount > 3){returnvalue = true;}
+                else if(game.getCurNumPlayers() <= 3 && game.getCurPlayer().getArrows() < 3){returnvalue = true;}
             }
         }
         return returnvalue;
@@ -866,8 +872,7 @@ public abstract class Player {
             int temprerollcount = 0;
             while(this.canRoll(game)){
                 this.turnoutput += "On reroll " + ++temprerollcount + ", " + this.getcharactername() + " chose to reroll: ";
-                simulateReroll(game);
-                this.turnoutput += "\nOn reroll " + temprerollcount + ", " + this.getcharactername() + " rolled: " + game.getDice().diceToString() + "\n";
+                if(simulateReroll(game))this.turnoutput += "On reroll " + temprerollcount + ", " + this.getcharactername() + " rolled: " + game.getDice().diceToString() + "\n";
                 this.processArrowsOrDynamite(game);
                 if(this.dynamiteexploded){
                     this.turnoutput += "Dynamite Exploded, " + this.getcharactername() + " lost the rest of their rerolls!\n";
