@@ -129,6 +129,14 @@ public class BangSetup {
                 newCharacter = new WillyTheKid();
                 break;
             }
+            case 8:{
+                newCharacter = new ApacheKid();
+                break;
+            }
+            case 9:{
+                newCharacter = new BillNoface();
+                break;
+            }
             case 10:{
                 newCharacter = new BelleStar();
                 break;
