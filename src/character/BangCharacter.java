@@ -192,4 +192,20 @@ public abstract class BangCharacter {
     public boolean canExchangeOneDynamiteforGatling(){
         return false;
     }
+    
+    /**
+     * This method checks to see if the character has apache kids special ability
+     * @return
+     */
+    public boolean canTakeChiefsArrowFromPlayerWhenRollArrow(){
+        return false;
+    }
+    
+    /**
+     * This method checks to see if the character bill noface's special ability
+     * @return
+     */
+    public boolean canApplyArrowResultsAfterRerolls(){
+        return false;
+    }
 }
