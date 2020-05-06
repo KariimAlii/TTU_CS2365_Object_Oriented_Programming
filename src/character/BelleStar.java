@@ -13,9 +13,9 @@ import javafx.scene.image.Image;
  */
 public class BelleStar extends BangCharacter {
     
-     private static final String NAME = "BelleStar";
+     private static final String NAME = "Belle Star";
     private static final String SPECIAL = "After each of your dice rolls, you can change one Dynamite to Gatling";
-    private static final String IMAGEFILENAME = "   ";
+    private static final String IMAGEFILENAME = "/Images/Belle Star.jpg";
 
     
     /**
@@ -57,6 +57,7 @@ public class BelleStar extends BangCharacter {
      * This method checks to see if the character is able to excange one dynamite for a gatling after each roll
      * @return
      */
+     @Override
     public boolean canExchangeOneDynamiteforGatling(){
         return true;
     }

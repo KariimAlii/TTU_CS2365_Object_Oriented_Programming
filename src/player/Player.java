@@ -788,7 +788,6 @@ public abstract class Player {
         if(this.canRoll(game)){
             this.rollDice(game);
             this.turnoutput += this.getcharactername() + "'s initial roll was: " + game.getDice().diceToString() + "\n";
-            this.processArrowsOrDynamite(game);
             int temprerollcount = 0;
             while(this.canRoll(game)){
                 this.turnoutput += "On reroll " + ++temprerollcount + ", " + this.getcharactername() + " chose to reroll: ";

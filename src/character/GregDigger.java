@@ -11,9 +11,9 @@ package character;
  */
 public class GregDigger extends BangCharacter{
     
-    private static final String NAME = "GregDigger";
+    private static final String NAME = "Greg Digger";
     private static final String SPECIAL = "You may use each whisket bottle you roll twice";
-    private static final String IMAGEFILENAME = "";
+    private static final String IMAGEFILENAME = "/Images/Greg Digger.jpg";
 
     
     /**
@@ -55,6 +55,7 @@ public class GregDigger extends BangCharacter{
      * This method checks to see if the character is able to use whiskey bottles twice for one roll
      * @return
      */
+    @Override
     public boolean canUseWhiskeyTwice(){
         return false;
     }
