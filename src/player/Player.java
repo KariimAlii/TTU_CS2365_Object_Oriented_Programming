@@ -903,7 +903,7 @@ public abstract class Player {
                 }
             }
             if(this.canHaveAction(game)){
-                //TODO Get aciton and process action
+                SimulateActions(game);
                 this.preformGatlingCheckAndAction(game);
                 if(this.gatlinggunwentoff){
                     this.turnoutput += this.getcharactername() + " shot the gatling gun! Their Arrows were returned to the arrow pile and everyone else loses one health!\n";
