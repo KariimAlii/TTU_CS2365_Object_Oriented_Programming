@@ -236,7 +236,7 @@
             </HBox>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ImageView fx:id="Pos9_chiefArrow" fitHeight="24.0" fitWidth="66.0" layoutX="228.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="228.0" AnchorPane.rightAnchor="259.0" AnchorPane.topAnchor="22.0">
+                  <ImageView fx:id="Pos9_ChiefArrow" fitHeight="24.0" fitWidth="66.0" layoutX="228.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="228.0" AnchorPane.rightAnchor="259.0" AnchorPane.topAnchor="22.0">
                      <image>
                         <Image url="@../Images/ChiefArrow.jpg" />
                      </image>

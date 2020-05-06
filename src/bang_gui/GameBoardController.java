@@ -809,7 +809,7 @@ public class GameBoardController implements Initializable {
         Pos8_ChiefArrow.setVisible(game.getPlayerAtIndex(playerindexes[7]).hasIndianChiefArrow());
         if(game.getPlayerAtIndex(playerindexes[7]).isPlayerDead()) {Pos8_ID.setText("Computer Player " + Integer.toString(playerindexes[7]) + " Is Dead");}
         
-        Pos9_ChiefArrow.setVisible(game.hasindianCheifArrow);
+        Pos9_ChiefArrow.setVisible(game.hasindianChiefArrow);
         arrowpile.setText(Integer.toString(game.getArrowPile()));
         if(this.game.isEndCondition()){displayEndCondtion();}
     }
