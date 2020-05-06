@@ -106,11 +106,41 @@ public class BangSetup {
                 newCharacter = new WillyTheKid();
                 break;
             }
+            case 10:{
+                newCharacter = new BelleStar();
+                break;
+            }
+            case 11:{
+                newCharacter = new GregDigger();
+                break;
+            }
             default:
                 newCharacter = new BlackJack();
         }
         characterindex++;
         return newCharacter;
+    }
+    
+    public void addOldSaloonCharacters(){
+        int newarray[] = new int[this.characters.length + 2];
+        for(int i = 0; i < this.characters.length; i++){
+            newarray[i] = this.characters[i];
+        }
+        newarray[this.characters.length] = 8;
+        newarray[this.characters.length + 1] = 9;
+        this.characters = newarray;
+        this.shuffleCharacters();
+    }
+    
+    public void addUndeadOrAliveCharacters(){
+        int newarray[] = new int[this.characters.length + 2];
+        for(int i = 0; i < this.characters.length; i++){
+            newarray[i] = this.characters[i];
+        }
+        newarray[this.characters.length] = 10;
+        newarray[this.characters.length + 1] = 11;
+        this.characters = newarray;
+        this.shuffleCharacters();
     }
     
     //public getUndeadOrAlive(){

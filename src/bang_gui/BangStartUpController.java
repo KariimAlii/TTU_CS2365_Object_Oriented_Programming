@@ -71,6 +71,7 @@ public class BangStartUpController implements Initializable {
      */
     public void startGame(ActionEvent event) throws Exception{
         BangSetup setup = new BangSetup(getNumberOfPlayers());
+        if(this.UndeadOrAliveCharacters.isSelected()){setup.addUndeadOrAliveCharacters();}
         
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("GameBoard.fxml"));
