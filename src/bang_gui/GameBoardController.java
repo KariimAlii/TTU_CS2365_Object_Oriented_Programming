@@ -68,7 +68,12 @@ public class GameBoardController implements Initializable {
     @FXML ComboBox Dice4_Target;
     @FXML ComboBox Dice5_Target;
 
-
+/*
+ * dice selection combo boxes
+ */
+    @FXML ComboBox Dice3_Dice;
+    
+    
     /*
      *  Array for Dice face images.  Array element zero is just the bang logo, used for initialization.
      */
@@ -232,6 +237,7 @@ public class GameBoardController implements Initializable {
                 this.Action.setVisible(false);
                 this.EndTurn.setVisible(false);
                 this.SkipReRoll.setVisible(false);
+                this.Dice3_Dice.setVisible(true);
             }
             else{
                 this.Roll.setVisible(false);
@@ -263,6 +269,7 @@ public class GameBoardController implements Initializable {
         curplayer.rollDice(game);
         Roll.setVisible(false);
         updateDice(false);
+        Dice3_Dice.setVisible(false);
         if(this.curplayer.canRoll(game)){
             this.ReRoll.setVisible(true);
             this.SkipReRoll.setVisible(true);
@@ -287,6 +294,12 @@ public class GameBoardController implements Initializable {
         }
     } 
 
+    @FXML
+    void ChangeDie(ActionEvent event){
+        String temp = Dice3_Dice.getSelectionModel().getSelectedItem().toString();
+        game.getDice().changeDieAtIndex(3,temp);
+        
+    }
     
     /*
      *  Example of randomizing dice and use of imageview boxes.  Replace code
@@ -524,6 +537,7 @@ public class GameBoardController implements Initializable {
                 this.Action.setVisible(false);
                 this.EndTurn.setVisible(false);
                 this.SkipReRoll.setVisible(false);
+                this.Dice3_Dice.setVisible(true);
             }
             else{
                 this.Roll.setVisible(false);
