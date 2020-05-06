@@ -6,7 +6,7 @@
 package character;
 
 /**
- *
+ * class for lucky duke
  * @author Stephen C. Devaney
  */
 public class LuckyDuke extends BangCharacter{
@@ -41,6 +41,10 @@ public class LuckyDuke extends BangCharacter{
         return SPECIAL;
     }
     
+    /**
+     * Method to get the image file name
+     * @return
+     */
     @Override
     public String getImageFileName(){
         return IMAGEFILENAME;

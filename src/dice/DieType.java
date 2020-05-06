@@ -6,7 +6,7 @@
 package dice;
 
 /**
- *
+ *  DESCRIPTION: Die enum type
  * @author Stephen C. Devaney
  */
 public enum DieType {

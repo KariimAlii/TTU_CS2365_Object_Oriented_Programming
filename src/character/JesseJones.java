@@ -6,7 +6,7 @@
 package character;
 
 /**
- *
+ * class for jesse jones
  * @author Stephen C. Devaney
  */
 public class JesseJones extends BangCharacter{
@@ -42,6 +42,10 @@ public class JesseJones extends BangCharacter{
         return SPECIAL;
     }
     
+    /**
+     * Method to get the image file name
+     * @return
+     */
     @Override
     public String getImageFileName(){
         return IMAGEFILENAME;

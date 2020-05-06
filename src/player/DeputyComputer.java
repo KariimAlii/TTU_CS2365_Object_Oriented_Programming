@@ -9,7 +9,7 @@ import Game.BangGame;
 import character.BangCharacter;
 
 /**
- *
+ * DESCRIPTION: A class for a computer player with the role of a outlaw
  * @author raime
  */
 public class DeputyComputer extends Player{

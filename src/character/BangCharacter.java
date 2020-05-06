@@ -176,4 +176,20 @@ public abstract class BangCharacter {
     public int getGatlingNeed(){ // Willy The Kid only
         return 3;
     }
+    
+    /**
+     * This method checks to see if the character is able to use whiskey bottles twice for one roll
+     * @return
+     */
+    public boolean canUseWhiskeyTwice(){
+        return false;
+    }
+    
+    /**
+     * This method checks to see if the character is able to excange one dynamite for a gatling after each roll
+     * @return
+     */
+    public boolean canExchangeOneDynamiteforGatling(){
+        return false;
+    }
 }

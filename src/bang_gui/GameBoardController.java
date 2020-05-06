@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * TITLE: Project 3 Bang The Dice Game
+ * AUTHOR: Steven Lowry
+ * FOR: CS 2365 Object Oriented Programming Section 001 Spring 2020
  */
 package bang_gui;
 
@@ -152,6 +152,10 @@ public class GameBoardController implements Initializable {
     @FXML ProgressBar Pos7_LP;
     @FXML ProgressBar Pos8_LP;
     
+    /**
+     * used to pass information from previous scene to this scene
+     * @param passedsetup
+     */
     public void controllerSetup(BangSetup passedsetup){
         game = new BangGame(passedsetup);
         Dice1_Hold.getItems().addAll("Hold", "Re-Roll");
@@ -277,6 +281,9 @@ public class GameBoardController implements Initializable {
         }
     }    
 
+    /**
+     * Use to take action after the take action button is clicked
+     */
     @FXML
     void TakeAction(ActionEvent event) {
        Dice1_Target.setVisible(false);
@@ -308,6 +315,9 @@ public class GameBoardController implements Initializable {
         updatePlayers();
     }
     
+    /**
+     * used to provide a setup for the action button
+     */
     private void setupAction(){  
         if(this.curplayer.canHaveAction(game)){
             if(game.getDice().doesRequireChooseableActionAtIndex(0)){
@@ -358,6 +368,10 @@ public class GameBoardController implements Initializable {
      *  As a side note...the individual @FXML declarations are required to be on individual lines.  The Scene Builder only recognizes the last element on the line
      */
     
+    
+    /**
+     * button to skip the rest of the players rerolls
+     */
     @FXML
     void SkipReroll(ActionEvent event){
         this.Roll.setVisible(false);
@@ -378,6 +392,9 @@ public class GameBoardController implements Initializable {
         setupAction();
     }
     
+    /**
+     * button to end the players turn
+     */
     @FXML
     void EndTurn(ActionEvent event){
         updatePlayers();
@@ -390,6 +407,9 @@ public class GameBoardController implements Initializable {
         startNextTurn();
     }
     
+    /**
+     * help method to display the end condition of the game
+     */
     private void displayEndCondtion(){
         this.HumanPlayer.setVisible(false);
         this.ComputerPlayer.setVisible(false);
@@ -439,6 +459,9 @@ public class GameBoardController implements Initializable {
         else if (!reroll) {Dice5_Hold.getSelectionModel().select("Re-Roll");}
     }
     
+    /**
+     *  method to start a players next turn
+     */
     private void startNextTurn(){
         this.curplayer.endTurn(game);
         this.curplayer = game.getCurPlayer();
@@ -474,6 +497,9 @@ public class GameBoardController implements Initializable {
         }
     }
     
+    /**
+     * method to change the highlighted box to the current active player
+     */
     private void updateActivePlayer(){
         // Indicates inactive player
         Pos1_ID.setStyle("-fx-border-color: transparent");
@@ -529,6 +555,9 @@ public class GameBoardController implements Initializable {
         }
     }
     
+    /**
+     * method to setup the players
+     */
     private void setupPlayers(){
         playerindexes = new int[8];
         if(game.getStartingNumPlayers() == 4){
@@ -666,6 +695,9 @@ public class GameBoardController implements Initializable {
         updateActivePlayer();
     }
     
+    /**
+     * method to update the player status in the game
+     */
     public void updatePlayers(){
         updateActivePlayer();
         Pos1_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[0]).getRoleindex(game)]);

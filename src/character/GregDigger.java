@@ -5,13 +5,15 @@
  */
 package character;
 
-
+/**
+ * class for Greg Digger
+ * @author steph
+ */
 public class GregDigger extends BangCharacter{
     
     private static final String NAME = "GregDigger";
-    private static final String SPECIAL = "You may use each  whisket bottle to roll twice";
-    // Todo
-    private static final String IMAGEFILENAME = "   ";
+    private static final String SPECIAL = "You may use each whisket bottle you roll twice";
+    private static final String IMAGEFILENAME = "";
 
     
     /**
@@ -40,10 +42,20 @@ public class GregDigger extends BangCharacter{
         return SPECIAL;
     }
     
+    /**
+     * Method to get the image file name
+     * @return
+     */
     @Override
     public String getImageFileName(){
         return IMAGEFILENAME;
     }
     
-    
+    /**
+     * This method checks to see if the character is able to use whiskey bottles twice for one roll
+     * @return
+     */
+    public boolean canUseWhiskeyTwice(){
+        return false;
+    }
 }

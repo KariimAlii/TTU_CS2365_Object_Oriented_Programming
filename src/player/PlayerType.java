@@ -6,7 +6,7 @@
 package player;
 
 /**
- *
+ * DESCRIPTION: Enum to hold player types
  * @author Stephen C. Devaney
  */
 public enum PlayerType {

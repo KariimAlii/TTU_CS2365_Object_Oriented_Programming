@@ -7,12 +7,14 @@ package character;
 
 import javafx.scene.image.Image;
 
-
+/**
+ * class for belle star
+ * @author steph
+ */
 public class BelleStar extends BangCharacter {
     
      private static final String NAME = "BelleStar";
-    private static final String SPECIAL = "After each of your dice rolls, you can change one Dynamite to Gatlings";
-    // Todo
+    private static final String SPECIAL = "After each of your dice rolls, you can change one Dynamite to Gatling";
     private static final String IMAGEFILENAME = "   ";
 
     
@@ -42,11 +44,20 @@ public class BelleStar extends BangCharacter {
         return SPECIAL;
     }
     
+    /**
+     * Method to get the image file name
+     * @return
+     */
     @Override
     public String getImageFileName(){
         return IMAGEFILENAME;
     }
     
-  
-    
+    /**
+     * This method checks to see if the character is able to excange one dynamite for a gatling after each roll
+     * @return
+     */
+    public boolean canExchangeOneDynamiteforGatling(){
+        return true;
+    }
 }

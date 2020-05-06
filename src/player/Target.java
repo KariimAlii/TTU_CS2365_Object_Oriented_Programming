@@ -7,24 +7,24 @@ package player;
 
 
 /**
- *
+ * DESCRIPTION: class to hold targets and their threat levels
  * @author Stephen C. Devaney
  */
 public class Target {
     private final Player player;
-    private int points;
+    private int threatlevel;
     private boolean isdead;
     
     /**
      * constructor for target class
      * @param targetplayer the player being targeted
-     * @param increase increases total points
+     * @param increase increases total threatlevel
      */
     public Target(Player targetplayer, boolean increase){
         isdead = false;
         player = targetplayer;
-        if(increase) {points = 1;}
-        else {points = -1;}
+        if(increase) {threatlevel = 1;}
+        else {threatlevel = -1;}
     }
     
     /**
@@ -37,25 +37,25 @@ public class Target {
     }
     
     /**
-     * DESCRIPTION: gets the targets points (used as threat indicator)
+     * DESCRIPTION: gets the targets threatlevel (used as threat indicator)
      * @return
      */
     public int getTargetPoints(){
-        return this.points;
+        return this.threatlevel;
     }
     
     /**
-     * DESCRIPTION: allows for target to gain points increasing threat level
+     * DESCRIPTION: allows for target to gain threatlevel increasing threat level
      */
     public void increaseTargetPoints(){
-        if(points != Integer.MAX_VALUE) points++;
+        if(threatlevel != Integer.MAX_VALUE) threatlevel++;
     }
     
     /**
-     * DESCRIPTION: allows for target to lose points decreasing threat level
+     * DESCRIPTION: allows for target to lose threatlevel decreasing threat level
      */
     public void decreaseTargetPoints(){
-        if(points != Integer.MIN_VALUE) points--;
+        if(threatlevel != Integer.MIN_VALUE) threatlevel--;
     }
     
     /**
@@ -71,7 +71,7 @@ public class Target {
      * sheriff sets to highest amount (outlaws)
      */
     public void setMaxValue(){
-        points = Integer.MAX_VALUE;
+        threatlevel = Integer.MAX_VALUE;
     }
     
     /**
@@ -79,6 +79,6 @@ public class Target {
      * sheriff sets to lowest amount (deputies)
      */
     public void setMinValue(){
-        points = Integer.MIN_VALUE;
+        threatlevel = Integer.MIN_VALUE;
     }
 }

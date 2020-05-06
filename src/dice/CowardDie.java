@@ -6,12 +6,15 @@
 package dice;
 
 /**
- *
+ *  DESCRIPTION: Die class for the coward die
  * @author Stephen C. Devaney
  */
 public class CowardDie extends BangDie {
     public final static int BROKENARROW = 4, DOUBLEBEER = 6; // constants for the die symbols
     
+    /**
+     * constructor for coward die
+     */
     public CowardDie(){
         super();
         this.type = DieType.COWARD;

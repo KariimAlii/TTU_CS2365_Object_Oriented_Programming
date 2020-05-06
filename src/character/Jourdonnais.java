@@ -6,7 +6,7 @@
 package character;
 
 /**
- *
+ * class for jourdonnais
  * @author Stephen C. Devaney
  */
 public class Jourdonnais extends BangCharacter{
@@ -40,6 +40,10 @@ public class Jourdonnais extends BangCharacter{
         return SPECIAL;
     }
     
+    /**
+     * Method to get the image file name
+     * @return
+     */
     @Override
     public String getImageFileName(){
         return IMAGEFILENAME;

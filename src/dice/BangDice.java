@@ -7,7 +7,7 @@ package dice;
 import java.util.Random;
 
 /**
- *
+ *  DESCRIPTION: Dice class to hold all of the dice
  * @author Stephen C. Devaney
  */
 public class BangDice {

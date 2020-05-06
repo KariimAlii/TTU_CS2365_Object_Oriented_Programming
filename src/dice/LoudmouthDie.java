@@ -6,12 +6,15 @@
 package dice;
 
 /**
- *
+ * DESCRIPTION: Die class for the loudmouth die
  * @author Stephen C. Devaney
  */
 public class LoudmouthDie extends BangDie {
     public final static int BULLET = 5; // constants for the die symbols
     
+    /**
+     * construtctor for loudmouth die
+     */
     public LoudmouthDie(){
         super();
         this.type = DieType.LOUDMOUTH;

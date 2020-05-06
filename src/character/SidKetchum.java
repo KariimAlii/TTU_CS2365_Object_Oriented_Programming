@@ -6,7 +6,7 @@
 package character;
 
 /**
- *
+ * class to for sidketchum
  * @author Stephen C. Devaney
  */
 public class SidKetchum extends BangCharacter{
@@ -41,6 +41,10 @@ public class SidKetchum extends BangCharacter{
         return SPECIAL;
     }
     
+    /**
+     * Method to get the image file name
+     * @return
+     */
     @Override
     public String getImageFileName(){
         return IMAGEFILENAME;
