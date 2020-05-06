@@ -910,6 +910,10 @@ public abstract class Player {
         return this.turnoutput;
     }
     
+    /**
+     * checks if the player has the Indian chief arrow
+     * @return
+     */
     public boolean hasIndianChiefArrow(){
         return this.hasIndianChiefArrow;
     }
