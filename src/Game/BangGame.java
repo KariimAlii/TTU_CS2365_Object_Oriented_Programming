@@ -27,6 +27,9 @@ public class BangGame {
     public  boolean hasindianCheifArrow;
     private Boolean undeadoralivemodule;
     private Boolean outbreak ;
+    public int boneyardcard[] = {0,0,1,1,1,1,1,1,2,2,2};
+    public int frontindex = 0;
+    public int topOfDeck;
     
     public BangGame(BangSetup setup){
         Random rand;
@@ -66,7 +69,7 @@ public class BangGame {
             players[i].notifySheriff(sheriff);
         }
         curplayer = sheriff;
-        dice = new BangDice();
+        dice = new BangDice(false);
         arrowpile = 9;
         outbreak = false;
     }
@@ -200,4 +203,24 @@ public class BangGame {
     public boolean getOutbreak(){
          return outbreak;
      }
+    
+    public void shuffleBoneyardDeck(){
+        for(int i = frontindex; i < boneyardcard.length; i++){
+            Random ran = new Random();
+            int random = ran.nextInt(boneyardcard.length-frontindex)+frontindex;
+            int temp = boneyardcard[i];
+            boneyardcard[i] = boneyardcard[random];
+            boneyardcard[random] = temp;
+        }
+    }
+    
+    public int drawBoneyardCard(){
+        int draw;
+        draw = boneyardcard[frontindex];
+        if(boneyardcard[frontindex] != 0)
+            frontindex++;
+        else
+            shuffleBoneyardDeck();
+        return draw;
+    }
 }
