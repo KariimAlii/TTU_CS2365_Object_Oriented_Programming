@@ -204,7 +204,11 @@ public class BangGame {
          return outbreak;
      }
     
+    /**
+     *
+     */
     public void shuffleBoneyardDeck(){
+        
         for(int i = frontindex; i < boneyardcard.length; i++){
             Random ran = new Random();
             int random = ran.nextInt(boneyardcard.length-frontindex)+frontindex;
@@ -214,13 +218,19 @@ public class BangGame {
         }
     }
     
+    /**
+     *
+     * @return
+     */
     public int drawBoneyardCard(){
-        int draw;
-        draw = boneyardcard[frontindex];
-        if(boneyardcard[frontindex] != 0)
-            frontindex++;
-        else
-            shuffleBoneyardDeck();
+        int draw = 0;
+        if (frontindex != 11){
+            draw = boneyardcard[frontindex];
+            if(boneyardcard[frontindex] != 0)
+                frontindex++;
+            else
+                shuffleBoneyardDeck();
+        }
         return draw;
     }
 }
