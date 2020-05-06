@@ -73,6 +73,7 @@ public class BangStartUpController implements Initializable {
         BangSetup setup = new BangSetup(getNumberOfPlayers());
         if(this.OldSaloonCharacters.isSelected()){setup.addOldSaloonCharacters();}
         if(this.UndeadOrAliveCharacters.isSelected()){setup.addUndeadOrAliveCharacters();}
+        if(this.TheArrowOfTheIndianChief.isSelected()){setup.activeIndianChiefArrow();}
         
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("GameBoard.fxml"));
