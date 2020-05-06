@@ -167,23 +167,11 @@ public class BangDice {
     }
     
     /**
-     * method to exchange the last die for a loudmouth die
-     */
-    public void exchangeLastDieLoudmouth(){
-        this.dice[this.basicdicelastindex] = new LoudmouthDie();
-    }
-    
-    /**
-     * method to exchange the last die for a coward die
-     */
-    public void exchangeLastDieCoward(){
-        this.dice[this.basicdicelastindex] = new CowardDie();
-    }
-    
-    /**
      * method to exchange the last die for a basic die
      */
-    public void exchangeLastDieBasic(){
-        this.dice[this.basicdicelastindex] = new BangDie();
+    public void changeDieAtIndex(int index, String dietype){
+        if(dietype == DieType.LOUDMOUTH.toString()) {this.dice[index] = new LoudmouthDie();}
+        else if(dietype == DieType.COWARD.toString()) {this.dice[index] = new CowardDie();}
+        else {this.dice[index] = new BangDie();}
     }
 }
