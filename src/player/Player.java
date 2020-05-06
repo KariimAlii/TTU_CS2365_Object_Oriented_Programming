@@ -9,7 +9,11 @@ package player;
 import Game.BangGame;
 import bang_gui.GameBoardController;
 import character.BangCharacter;
+import dice.*;
 import static dice.BangDie.*;
+import static dice.CowardDie.*;
+import static dice.DuelDie.*;
+import static dice.LoudmouthDie.BULLET;
 import javafx.scene.image.Image;
 
 /**
@@ -780,6 +784,74 @@ public abstract class Player {
     public void notifySheriffHelped(Player helper){
         decreaseTarget(helper);
     }
+    
+    public void simulateReroll(BangGame game){
+        int individualrerollcount = 0;
+        int beercount = 0;
+        int gatcount = 0;
+        for(int i = 0; i < game.getDice().getNumberOfDice(); i++){
+            if(game.getDice().getDieTypeAtIndex(i) == DieType.BASIC){
+                if(game.getDice().getDieAtIndex(i) == BEER) {beercount++;}
+                else if(game.getDice().getDieAtIndex(i) == GATLING) {gatcount++;}
+            }
+            if(this.rerollStrategy(game, i, beercount, gatcount)){
+                if(game.getDice().getDieTypeAtIndex(i) == DieType.BASIC){
+                    if(game.getDice().getDieAtIndex(i) == BEER) {beercount--;}
+                    else if(game.getDice().getDieAtIndex(i) == GATLING) {gatcount--;}
+                }
+                if (individualrerollcount != 0){this.turnoutput += ", ";}
+                this.turnoutput += game.getDice().getDieStringAtIndex(i);
+                game.getDice().rollDieAtIndex(i);
+                individualrerollcount++;
+            }
+        }
+        if(individualrerollcount == 0){
+            this.turnoutput += "None";
+            this.rerollcount = 0;
+        }
+        this.turnoutput += "\n";
+    }
+    
+    protected boolean rerollStrategy(BangGame game,int index, int beercount, int gatcount){
+        boolean returnvalue = false;
+        int diesymbol = game.getDice().getDieAtIndex(index);
+        DieType dietype = game.getDice().getDieTypeAtIndex(index);
+        
+        if(dietype == DieType.LOUDMOUTH && diesymbol == BULLET){returnvalue = true;}
+        
+        else if (dietype == DieType.COWARD && (diesymbol == BROKENARROW || diesymbol == DOUBLEBEER)){
+            if(diesymbol == BROKENARROW) {returnvalue = true;}
+            else{
+                if(game.getCurPlayer().getCurLife() + beercount >= game.getCurPlayer().getMaxLife()){returnvalue = true;}
+            }
+        }
+        
+        else if(dietype == DieType.DUEL && (diesymbol == WHISKEYBOTTLE || diesymbol == FIGHTADUEL)){
+            if(diesymbol == WHISKEYBOTTLE){
+                if(game.getCurPlayer().getCurLife() + beercount >= game.getCurPlayer().getMaxLife()){returnvalue = true;}
+                else{
+                    if(game.getCurNumPlayers() < 4 && this.getCurLife() < this.getMaxLife()/3 ) {returnvalue = true;}
+                    else if(game.getCurNumPlayers() >= 4 && this.getCurLife() < this.getMaxLife()/2 ) {returnvalue = true;}
+                }
+            }
+        }
+        
+        else{
+            if(diesymbol == ARROW || (diesymbol == DYNAMITE && this.character.canRerollDynamite())) {returnvalue = true;}
+            else if (diesymbol == BULLSEYE1 || diesymbol == BULLSEYE2){
+                if(game.getCurNumPlayers() <= 4 && this.getCurLife() < this.getMaxLife()/3 ) {returnvalue = true;}
+                else if(game.getCurNumPlayers() > 4 && this.getCurLife() < this.getMaxLife()/2 ) {returnvalue = true;}
+            }
+            else if (diesymbol == BEER){
+                if(game.getCurPlayer().getCurLife() + beercount >= game.getCurPlayer().getMaxLife()){returnvalue = true;}
+            }
+            else{
+                if(game.getCurNumPlayers() > 3 ){returnvalue = true;}
+                else if(game.getCurNumPlayers() <= 3 && game.getCurPlayer().getArrows()  <= 3){returnvalue = true;}
+            }
+        }
+        return returnvalue;
+    }
 
     /**
      * DESCRIPTION: simulates turn of the player
@@ -794,7 +866,7 @@ public abstract class Player {
             int temprerollcount = 0;
             while(this.canRoll(game)){
                 this.turnoutput += "On reroll " + ++temprerollcount + ", " + this.getcharactername() + " chose to reroll: ";
-                // TODO rerolls
+                simulateReroll(game);
                 this.turnoutput += "\nOn reroll " + temprerollcount + ", " + this.getcharactername() + " rolled: " + game.getDice().diceToString() + "\n";
                 this.processArrowsOrDynamite(game);
                 if(this.dynamiteexploded){

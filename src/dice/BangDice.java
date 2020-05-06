@@ -93,6 +93,25 @@ public class BangDice {
         return returnvalue;
     }
     
+    public String getDieStringAtIndex(int index){
+        String returnvalue = "Arrow";
+        if (0 <= index && index < dice.length) {returnvalue = dice[index].dieToString();}
+        else if (0 - dice.length <= index && index <=-1) {returnvalue = dice[dice.length - (0 - index)].dieToString();}
+        return returnvalue;
+    }
+    
+    /**
+     *  DESCRIPTION: Gets the Die Type at the given index
+     * @param index
+     * @return
+     */
+    public DieType getDieTypeAtIndex(int index){
+        DieType returnvalue = DieType.BASIC;
+        if (0 <= index && index < dice.length) {returnvalue = dice[index].getDieType();}
+        else if (0 - dice.length <= index && index <=-1) {returnvalue = dice[dice.length - (0 - index)].getDieType();}
+        return returnvalue;
+    }
+    
     /**
      * rerolls die at index
      * @param index
