@@ -791,7 +791,9 @@ public abstract class Player {
         int beercount = 0;
         int gatcount = 0;
         for (int i = 0; i < game.getDice().getNumberOfDice(); i++){
-            if(game.getDice().getDieTypeAtIndex(i) == DieType.BASIC){
+            if(game.getDice().getDieTypeAtIndex(i) == DieType.COWARD && game.getDice().getDieAtIndex(i) == DOUBLEBEER){beercount+=2;}
+            else if(game.getDice().getDieTypeAtIndex(i) == DieType.DUEL && game.getDice().getDieAtIndex(i) == WHISKEYBOTTLE) {beercount++;}
+            else{
                 if(game.getDice().getDieAtIndex(i) == BEER) {beercount++;}
                 else if(game.getDice().getDieAtIndex(i) == GATLING) {gatcount++;}
             }
@@ -799,10 +801,13 @@ public abstract class Player {
         
         for(int i = 0; i < game.getDice().getNumberOfDice(); i++){
             if(this.rerollStrategy(game, i, beercount, gatcount)){
-                if(game.getDice().getDieTypeAtIndex(i) == DieType.BASIC){
+                if(game.getDice().getDieTypeAtIndex(i) == DieType.COWARD && game.getDice().getDieAtIndex(i) == DOUBLEBEER){beercount-=2;}
+                else if(game.getDice().getDieTypeAtIndex(i) == DieType.DUEL && game.getDice().getDieAtIndex(i) == WHISKEYBOTTLE) {beercount--;}
+                else{
                     if(game.getDice().getDieAtIndex(i) == BEER) {beercount--;}
                     else if(game.getDice().getDieAtIndex(i) == GATLING) {gatcount--;}
                 }
+                
                 if (individualrerollcount != 0){this.turnoutput += ", ";}
                 this.turnoutput += game.getDice().getDieStringAtIndex(i);
                 game.getDice().rollDieAtIndex(i);
@@ -858,6 +863,21 @@ public abstract class Player {
         }
         return returnvalue;
     }
+    
+    public void SimulateActions(BangGame game){
+        int b1count = 0;
+        int b2count = 0;
+        int beercount = 0;
+        for(int i = 0; i < game.getDice().getNumberOfDice(); i++){
+            if(game.getDice().getDieTypeAtIndex(i) == DieType.BASIC){
+                if(game.getDice().getDieAtIndex(i) == BULLSEYE1){b1count++;}
+                else if(game.getDice().getDieAtIndex(i) == BULLSEYE2){b2count++;}
+                else if(game.getDice().getDieAtIndex(i) == BEER){beercount++;}
+            }
+        }
+        if(b1count > 0 || b2count > 0){this.turnoutput += this.getcharactername() + " chose to shoot: ";}
+        if(beercount > 0){this.turnoutput += this.getcharactername() + " chose to give beer to: ";}
+    }
 
     /**
      * DESCRIPTION: simulates turn of the player
@@ -883,10 +903,6 @@ public abstract class Player {
             }
             if(this.canHaveAction(game)){
                 //TODO Get aciton and process action
-                this.turnoutput += this.getcharactername() + " chose to shoot: ";
-                this.turnoutput += "\n";
-                this.turnoutput += this.getcharactername() + " chose to give beer to: ";
-                this.turnoutput += "\n";
                 this.preformGatlingCheckAndAction(game);
                 if(this.gatlinggunwentoff){
                     this.turnoutput += this.getcharactername() + " shot the gatling gun! Their Arrows were returned to the arrow pile and everyone else loses one health!\n";
