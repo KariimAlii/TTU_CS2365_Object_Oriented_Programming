@@ -87,12 +87,10 @@ public class GameBoardController implements Initializable {
     Image coward[];
     Image dueldie[];
     
-    
     /*
      *  Array for character role images.
      */
     String[] Character_Roles = {"/Images/bang-back-of-card.jpg","/Images/Sheriff1.jpg","/Images/Renegade.jpg","/Images/Outlaw.jpg", "/Images/Deputy.jpg"};
-    
     Image rolecards[];
     
     
@@ -375,19 +373,19 @@ public class GameBoardController implements Initializable {
        ReRoll.setVisible(false);
        
         if(game.getDice().doesRequireChooseableActionAtIndex(0)){
-            this.curplayer.takeActionOnDieAtIndex(game, 0, Dice1_Target.getSelectionModel().getSelectedIndex());
+            this.curplayer.takeActionOnDieAtIndex(game, 0, Dice1_Target.getSelectionModel().getSelectedItem().toString());
         }
         if(game.getDice().doesRequireChooseableActionAtIndex(1)){
-            this.curplayer.takeActionOnDieAtIndex(game, 1, Dice2_Target.getSelectionModel().getSelectedIndex());
+            this.curplayer.takeActionOnDieAtIndex(game, 1, Dice2_Target.getSelectionModel().getSelectedItem().toString());
         }
         if(game.getDice().doesRequireChooseableActionAtIndex(2)){
-            this.curplayer.takeActionOnDieAtIndex(game, 2, Dice3_Target.getSelectionModel().getSelectedIndex());
+            this.curplayer.takeActionOnDieAtIndex(game, 2, Dice3_Target.getSelectionModel().getSelectedItem().toString());
         }
         if(game.getDice().doesRequireChooseableActionAtIndex(3)){
-            this.curplayer.takeActionOnDieAtIndex(game, 3, Dice4_Target.getSelectionModel().getSelectedIndex());
+            this.curplayer.takeActionOnDieAtIndex(game, 3, Dice4_Target.getSelectionModel().getSelectedItem().toString());
         }
         if(game.getDice().doesRequireChooseableActionAtIndex(4)){
-            this.curplayer.takeActionOnDieAtIndex(game, 4, Dice5_Target.getSelectionModel().getSelectedIndex());
+            this.curplayer.takeActionOnDieAtIndex(game, 4, Dice5_Target.getSelectionModel().getSelectedItem().toString());
         }
         this.curplayer.preformGatlingCheckAndAction(game);
         updatePlayers();
@@ -855,4 +853,3 @@ public class GameBoardController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     }  
 }
-
