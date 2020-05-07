@@ -7,6 +7,7 @@
 package bang_gui;
 
 import Game.*;
+import dice.DieType;
 import java.net.URL;
 import java.util.ResourceBundle;
 import static javafx.collections.FXCollections.observableArrayList;
@@ -510,11 +511,23 @@ public class GameBoardController implements Initializable {
      * @author Stephen Devaney
      */
     private void updateDice(boolean reroll){
-        Die_1.setImage(diefaces[game.getDice().getDieAtIndex(0)]);
+        Die_1.setImage(diefaces[game.getDice().getDieAtIndex(2)]);
         Die_2.setImage(diefaces[game.getDice().getDieAtIndex(1)]);
-        Die_3.setImage(diefaces[game.getDice().getDieAtIndex(2)]);
-        Die_4.setImage(diefaces[game.getDice().getDieAtIndex(3)]);
-        Die_5.setImage(diefaces[game.getDice().getDieAtIndex(4)]);
+        
+        if(game.getDice().getDieTypeAtIndex(2) == DieType.BASIC)Die_3.setImage(diefaces[game.getDice().getDieAtIndex(2)]);
+        else if(game.getDice().getDieTypeAtIndex(2) == DieType.LOUDMOUTH)Die_3.setImage(loudmouth[game.getDice().getDieAtIndex(2)]);
+        else if(game.getDice().getDieTypeAtIndex(2) == DieType.COWARD)Die_3.setImage(coward[game.getDice().getDieAtIndex(2)]);
+        else{Die_3.setImage(dueldie[game.getDice().getDieAtIndex(2)]);}
+        
+        if(game.getDice().getDieTypeAtIndex(3) == DieType.BASIC)Die_4.setImage(diefaces[game.getDice().getDieAtIndex(3)]);
+        else if(game.getDice().getDieTypeAtIndex(3) == DieType.LOUDMOUTH)Die_4.setImage(loudmouth[game.getDice().getDieAtIndex(3)]);
+        else if(game.getDice().getDieTypeAtIndex(3) == DieType.COWARD)Die_4.setImage(coward[game.getDice().getDieAtIndex(3)]);
+        else{Die_4.setImage(dueldie[game.getDice().getDieAtIndex(3)]);}
+        
+        if(game.getDice().getDieTypeAtIndex(4) == DieType.BASIC)Die_5.setImage(diefaces[game.getDice().getDieAtIndex(4)]);
+        else if(game.getDice().getDieTypeAtIndex(4) == DieType.LOUDMOUTH)Die_5.setImage(loudmouth[game.getDice().getDieAtIndex(4)]);
+        else if(game.getDice().getDieTypeAtIndex(4) == DieType.COWARD)Die_5.setImage(coward[game.getDice().getDieAtIndex(4)]);
+        else{Die_5.setImage(dueldie[game.getDice().getDieAtIndex(4)]);}
         
         Dice1_Hold.setVisible(game.getDice().getRerollableAtIndex(0));
         Dice2_Hold.setVisible(game.getDice().getRerollableAtIndex(1));

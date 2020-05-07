@@ -77,7 +77,7 @@ public class BangGame {
             players[i].notifySheriff(sheriff);
         }
         curplayer = sheriff;
-        dice = new BangDice(false);
+        dice = new BangDice(setup.getdueldice());
         arrowpile = 9;
         outbreak = false;
         hasreset = false;
