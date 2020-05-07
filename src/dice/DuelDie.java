@@ -37,11 +37,11 @@ public class DuelDie extends BangDie {
             case DYNAMITE:
                 returnString += "Dynamite";
                 break;
-            case WHISKEYBOTTLE:
-                returnString += "Whiskey Bottle";
-                break;
             case FIGHTADUEL:   //In this case I assume each dice has two fight a duel face
                 returnString += "Fight a Duel";
+                break;
+            case WHISKEYBOTTLE:
+                returnString += "Whiskey Bottle";
                 break;
             case GATLING:
                 returnString += "Gatling";

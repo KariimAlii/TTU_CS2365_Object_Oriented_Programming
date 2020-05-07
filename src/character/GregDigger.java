@@ -56,6 +56,6 @@ public class GregDigger extends BangCharacter{
      */
     @Override
     public boolean canUseWhiskeyTwice(){
-        return false;
+        return true;
     }
 }
