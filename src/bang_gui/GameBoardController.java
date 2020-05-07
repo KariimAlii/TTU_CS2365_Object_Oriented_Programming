@@ -79,12 +79,20 @@ public class GameBoardController implements Initializable {
      */
     String [] diefacefilenames = {"/Images/bang .jpg","/Images/Bang-dice-1.jpg","/Images/Bang-dice-2.jpg","/Images/Bang-dice-3.jpg","/Images/Bang-dice-4.jpg",
                            "/Images/Bang-dice-5.jpg", "Images/Bang-dice-6.jpg"};
+    String [] loudmouthfilenames = {"/Images/bang .jpg","/Images/Arrow.jpg", "/Images/Dynamite.jpg","/Images/BullsEyeDouble1.jpg","/Images/BullsEyeDouble2.jpg","/Images/Bullet.jpg", "/Images/Whiskey.jpg" };
+    String [] cowardfilenames = {"/Images/bang .jpg","/Images/Arrow.jpg", "/Images/Dynamite.jpg","/Images/Bang-dice-3.jpg","/Images/RetrunArrow.jpg","/Images/Bang-dice-5.jpg", "/Images/DoubleBeer.jpg" };
+   String [] dueldiefilenames = {"/Images/bang .jpg","/Images/BlackArrow.jpg", "/Images/BlackDynamite.jpg","/Images/FightADuel.jpg","/Images/FightADuel.jpg","/Images/Whiskey.jpg", "/Images/BlackGatlingGuns.jpg" };
     Image diefaces[];
+    Image loudmouth[];
+    Image coward[];
+    Image dueldie[];
+    
     
     /*
      *  Array for character role images.
      */
     String[] Character_Roles = {"/Images/bang-back-of-card.jpg","/Images/Sheriff1.jpg","/Images/Renegade.jpg","/Images/Outlaw.jpg", "/Images/Deputy.jpg"};
+    
     Image rolecards[];
     
     
@@ -217,6 +225,18 @@ public class GameBoardController implements Initializable {
         diefaces = new Image[7];
         for(int i = 0; i < diefaces.length; i++){
            diefaces[i] = new Image(diefacefilenames[i]);
+        }
+        loudmouth = new Image[7];
+        for(int i = 0; i < loudmouth.length; i++){
+           loudmouth[i] = new Image(loudmouthfilenames[i]);
+        }
+        coward = new Image[7];
+        for(int i = 0; i < coward.length; i++){
+           coward[i] = new Image(cowardfilenames[i]);
+        }
+        dueldie = new Image[7];
+        for(int i = 0; i < dueldie.length; i++){
+           dueldie[i] = new Image(dueldiefilenames[i]);
         }
        
         rolecards = new Image[5];
