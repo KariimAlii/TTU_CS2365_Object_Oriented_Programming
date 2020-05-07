@@ -72,15 +72,15 @@ public class DeputyComputer extends Player{
      * @return
      */
     @Override
-    public Player getSelectedBeer(BangGame game){ 
-        Player returnvalue;
+    public String getSelectedBeer(BangGame game){ 
+        String returnvalue;
         int deputyscurlife = this.getCurLife();
         int sheriffcurlife = game.getSheriff().getCurLife();
         int sheriffmaxlife = game.getSheriff().getMaxLife();
         if(deputyscurlife <= sheriffcurlife && sheriffcurlife < sheriffmaxlife){
-            returnvalue = game.getSheriff();
+            returnvalue = game.getSheriff().getcharactername();
         }
-        else {returnvalue = this;}
+        else {returnvalue = this.getcharactername();}
         return returnvalue;
     }
     

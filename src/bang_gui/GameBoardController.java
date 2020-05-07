@@ -355,19 +355,19 @@ public class GameBoardController implements Initializable {
        ReRoll.setVisible(false);
        
         if(game.getDice().doesRequireChooseableActionAtIndex(0)){
-            this.curplayer.takeActionOnDieAtIndex(game, 0, Dice1_Target.getSelectionModel().getSelectedIndex());
+            this.curplayer.takeActionOnDieAtIndex(game, 0, Dice1_Target.getSelectionModel().getSelectedItem().toString());
         }
         if(game.getDice().doesRequireChooseableActionAtIndex(1)){
-            this.curplayer.takeActionOnDieAtIndex(game, 1, Dice2_Target.getSelectionModel().getSelectedIndex());
+            this.curplayer.takeActionOnDieAtIndex(game, 1, Dice2_Target.getSelectionModel().getSelectedItem().toString());
         }
         if(game.getDice().doesRequireChooseableActionAtIndex(2)){
-            this.curplayer.takeActionOnDieAtIndex(game, 2, Dice3_Target.getSelectionModel().getSelectedIndex());
+            this.curplayer.takeActionOnDieAtIndex(game, 2, Dice3_Target.getSelectionModel().getSelectedItem().toString());
         }
         if(game.getDice().doesRequireChooseableActionAtIndex(3)){
-            this.curplayer.takeActionOnDieAtIndex(game, 3, Dice4_Target.getSelectionModel().getSelectedIndex());
+            this.curplayer.takeActionOnDieAtIndex(game, 3, Dice4_Target.getSelectionModel().getSelectedItem().toString());
         }
         if(game.getDice().doesRequireChooseableActionAtIndex(4)){
-            this.curplayer.takeActionOnDieAtIndex(game, 4, Dice5_Target.getSelectionModel().getSelectedIndex());
+            this.curplayer.takeActionOnDieAtIndex(game, 4, Dice5_Target.getSelectionModel().getSelectedItem().toString());
         }
         this.curplayer.preformGatlingCheckAndAction(game);
         updatePlayers();
