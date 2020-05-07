@@ -36,7 +36,8 @@ public abstract class Player {
     private boolean setdead;
     protected String turnoutput;
     private boolean gatlinggunwentoff;
-    private boolean hasIndianChiefArrow;
+    private boolean IndianChiefArrow;
+    private GameBoardController gui;
 
     
     /**
@@ -60,6 +61,7 @@ public abstract class Player {
         highesttargetindex = -1;
         indianattackhappened = 0;
         gatlinggunwentoff = false;
+        IndianChiefArrow = false;
     }
 
     /**
@@ -179,63 +181,66 @@ public abstract class Player {
     
     /**
      * DESCRIPTION: selects target for bullseye 1 and gets targets within range of the player
-     * @param game
+     * @param doubleshot
      * @return
      */
-    public Player[] getTargetsB1(BangGame game){
-        Player curtargets[] = {this.getPreviousPlayer(), this.getNextPlayer()};
+    public String[] getTargetsB1(boolean doubleshot){
+        String curtargets[];
+        if(doubleshot){
+            curtargets = new String[3];
+            curtargets[2] = "both";
+        }
+        else {curtargets = new String[2];}
+        curtargets[0] = "right";
+        curtargets[1] = "left";
         return curtargets;
     }
 
     /**
      * DESCRIPTION: gets the selected target for bullseye 1
-     * @param game
+     * @param doubleshot
      * @return
      */
-    public Player getSelectedB1(BangGame game){
-        Player targets[] = this.getTargetsB1(game);
-        Player highesttarget = targets[0];
-        for(int i = 0; i < targets.length; i++){
-            if(getTargetValue(targets[i]) > getTargetValue(highesttarget)){
-                highesttarget = targets[i];
-            }
+    public String getSelectedB1(boolean doubleshot){
+        String returnvalue;
+        if(doubleshot && getTargetValue(this.nextPlayer) == getTargetValue(this.getPreviousPlayer())){returnvalue = "both";}
+        else{
+            if(getTargetValue(this.nextPlayer) > getTargetValue(this.getPreviousPlayer())) {returnvalue = "left";}
+            else {returnvalue = "right";}
         }
-        return highesttarget;
+        return returnvalue;
     }
 
     /**
      * DESCRIPTION: selects target for bullseye 2 and gets targets within range of the play
-     * @param game
+     * @param doubleshot
      * @return
      */
-    public Player[] getTargetsB2(BangGame game){
-        Player curtargets[];
-        if(game.getCurNumPlayers() > 2) {
-            curtargets = new Player[2];
-            curtargets[0] = this.getPreviousPlayer().getPreviousPlayer();
-            curtargets[1] = this.getNextPlayer().getNextPlayer();
+    public String[] getTargetsB2(boolean doubleshot){
+        String curtargets[];
+        if(doubleshot){
+            curtargets = new String[3];
+            curtargets[2] = "both";
         }
-        else{
-            curtargets = new Player[1];
-            curtargets[0] = this.getNextPlayer();
-        }
+        else {curtargets = new String[2];}
+        curtargets[0] = "right";
+        curtargets[1] = "left";
         return curtargets;
     }
 
     /**
      * DESCRIPTION: gets selected target for bullseye 2
-     * @param game
+     * @param doubleshot
      * @return
      */
-    public Player getSelectedB2(BangGame game){
-        Player targets[] = this.getTargetsB2(game);
-        Player highesttarget = targets[0];
-        for(int i = 0; i < targets.length; i++){
-            if(getTargetValue(targets[i]) > getTargetValue(highesttarget)){
-                highesttarget = targets[i];
-            }
+    public String getSelectedB2(boolean doubleshot){
+        String returnvalue;
+        if(doubleshot && getTargetValue(this.nextPlayer) == getTargetValue(this.getPreviousPlayer())){returnvalue = "both";}
+        else{
+            if(getTargetValue(this.nextPlayer) > getTargetValue(this.getPreviousPlayer())) {returnvalue = "left";}
+            else {returnvalue = "right";}
         }
-        return highesttarget;
+        return returnvalue;
     }
     
     /**
@@ -243,12 +248,12 @@ public abstract class Player {
      * @param game
      * @return
      */
-    public Player[] getTargetBeer(BangGame game){
-        Player targets[] = new Player[game.getCurNumPlayers()];
+    public String[] getTargetBeer(BangGame game){
+        String targets[] = new String[game.getCurNumPlayers()];
         int targetsindex = 0;
         for(int i = 0; i < game.getStartingNumPlayers(); i++){
             if(!game.getPlayerAtIndex(i).isPlayerDead()){
-                targets[targetsindex++] = game.getPlayerAtIndex(i);
+                targets[targetsindex++] = game.getPlayerAtIndex(i).getcharactername();
             }
         }
         return targets;
@@ -259,18 +264,19 @@ public abstract class Player {
      * @param game
      * @return
      */
-    public Player getSelectedBeer(BangGame game){
-        Player returnvalue;
-        if(this.getCurLife() >= this.getMaxLife()){
-            Player targets[] = this.getTargetBeer(game);
-            returnvalue = targets[0];
-            for(int i = 0; i < targets.length; i++){
-                if(getTargetValue(targets[i]) < getTargetValue(returnvalue)){
-                    returnvalue = targets[i];
+    public String getSelectedBeer(BangGame game){
+        String returnvalue = this.getcharactername();
+        if(this.getCurLife() <= this.getMaxLife()){
+            Player lowestvalue = this.getNextPlayer();
+            for(int i = 0; i < game.getStartingNumPlayers(); i++){
+                if(!game.getPlayerAtIndex(i).isPlayerDead()){
+                    if(getTargetValue(game.getPlayerAtIndex(i)) > getTargetValue(lowestvalue)){
+                        lowestvalue = game.getPlayerAtIndex(i);
+                    }
                 }
             }
+            returnvalue = lowestvalue.getcharactername();
         }
-        else{returnvalue = this;}
         return returnvalue;
     }
     
@@ -282,22 +288,30 @@ public abstract class Player {
      */
     public String[] getTargetForDieAtIndex(BangGame game, int index){
         int checkdie = game.getDice().getDieAtIndex(index);
-        Player targets[];
-        if (checkdie == BULLSEYE1){
-            targets = this.getTargetsB1(game);
+        String targets[]  = {"right", "left"};
+        if(game.getDice().getDieTypeAtIndex(index) == DieType.LOUDMOUTH && (checkdie == BULLSEYE1 || checkdie == BULLSEYE2)){
+            if (checkdie == BULLSEYE1){
+                targets = this.getTargetsB1(true);
+            }
+            else if(checkdie == BULLSEYE2){
+                targets = this.getTargetsB2(true);
+            }
         }
-        else if(checkdie == BULLSEYE2){
-            targets = this.getTargetsB2(game);
-        }
-        else{
+        else if(game.getDice().getDieTypeAtIndex(index) == DieType.DUEL && checkdie == FIGHTADUEL){
             targets = this.getTargetBeer(game);
         }
-        
-        String[] returnvalue = new String[targets.length];
-        for(int i = 0; i < targets.length; i++){
-            returnvalue[i] = targets[i].getcharactername();
+        else{
+            if (checkdie == BULLSEYE1){
+                targets = this.getTargetsB1(false);
+            }
+            else if(checkdie == BULLSEYE2){
+                targets = this.getTargetsB2(false);
+            }
+            else{
+                targets = this.getTargetBeer(game);
+            }
         }
-        return returnvalue;
+        return targets;
     }
 
     /**
@@ -308,18 +322,37 @@ public abstract class Player {
      */
     public String getSelectedTargetForDieAtIndex(BangGame game, int index){
         int checkdie = game.getDice().getDieAtIndex(index);
-        Player temp = getSelectedB1(game);
+        String temp = getSelectedB1(false);
         
-        if (checkdie == BULLSEYE1){
-            temp = this.getSelectedB1(game);
+        if(game.getDice().getDieTypeAtIndex(index) == DieType.LOUDMOUTH && (checkdie == BULLSEYE1 || checkdie == BULLSEYE2)){
+            if (checkdie == BULLSEYE1){
+                temp = this.getSelectedB1(false);
+            }
+            else if(checkdie == BULLSEYE2){
+                temp = this.getSelectedB2(false);
+            }
         }
-        else if(checkdie == BULLSEYE2){
-            temp = this.getSelectedB2(game);
+        else if(game.getDice().getDieTypeAtIndex(index) == DieType.LOUDMOUTH && checkdie == FIGHTADUEL){
+            Player highestvalue = this.getNextPlayer();
+            for(int i = 0; i < game.getStartingNumPlayers(); i++){
+                if(this.getTargetValue(game.getPlayerAtIndex(i)) > this.getTargetValue(highestvalue)){
+                    highestvalue = game.getPlayerAtIndex(i);
+                }
+            }
+            temp = highestvalue.getcharactername();
         }
         else{
-            temp = this.getSelectedBeer(game);
+            if (checkdie == BULLSEYE1){
+                temp = this.getSelectedB1(false);
+            }
+            else if(checkdie == BULLSEYE2){
+                temp = this.getSelectedB2(false);
+            }
+            else{
+                temp = this.getSelectedBeer(game);
+            }
         }
-        return temp.getcharactername();
+        return temp;
     }
     
     /**
@@ -363,16 +396,12 @@ public abstract class Player {
     /**
      * DESCRIPTION: sets player to dead if life total is zero reveals roles
      */
-    private void setDead(BangGame game){
+    public void setDead(BangGame game){
         this.setdead = true;
-        this.getPreviousPlayer().setNextPlayer(this.nextPlayer);
-        this.getNextPlayer().setPreviousPlayer(this.previousPlayer);
         game.returnArrows(this.arrows);
         this.arrows = 0;
-        game.reduceCurrentNumberOfPlayers();
-        game.hasindianCheifArrow = true;
-        this.hasIndianChiefArrow = false;
-        if(this.role == Role.OUTLAW || this.role == Role.RENEGADE){game.reduceNumberOfBadGuys();}
+        game.hasindianChiefArrow = true;
+        this.IndianChiefArrow = false;
     }
     
     /**
@@ -431,11 +460,10 @@ public abstract class Player {
     public void startTurn(BangGame game){
         if (this.character.canGiveAnyPlayerLife()){
             if(this.getCurLife() >= this.getMaxLife()){
-                Player targets[] = this.getTargetBeer(game);
-                Player lowestvalue = targets[0];
-                for(int i = 0; i < targets.length; i++){
-                    if(getTargetValue(targets[i]) < getTargetValue(lowestvalue)){
-                        lowestvalue = targets[i];
+                Player lowestvalue = this.getNextPlayer();
+                for(int i = 0; i < game.getStartingNumPlayers(); i++){
+                    if(getTargetValue(game.getPlayerAtIndex(i)) < getTargetValue(lowestvalue)){
+                        lowestvalue = game.getPlayerAtIndex(i);
                     }
                 }
                 lowestvalue.gainHealth();
@@ -508,9 +536,6 @@ public abstract class Player {
      */
     protected void takeDamage(BangGame game){
         this.character.takeDamage();
-        if(this.character.isDead() && !this.setdead){
-            setDead(game);
-        }
     }
 
     /**
@@ -539,8 +564,8 @@ public abstract class Player {
      * @author Shree Shrestha
      */
     public void takeIndianChiefArrow(BangGame game){
-        game.hasindianCheifArrow = false;
-        this.hasIndianChiefArrow = true;
+        game.hasindianChiefArrow = false;
+        this.IndianChiefArrow = true;
     }
 
    /**
@@ -553,7 +578,7 @@ public abstract class Player {
      */
     public int individualIndianAttack(BangGame game){
         int returnvalue = this.arrows;
-        if(this.hasIndianChiefArrow && checkMostArrows(game)){
+        if(this.IndianChiefArrow && checkMostArrows(game)){
         }
         else{
         for (; this.arrows > 0; this.arrows--){
@@ -562,14 +587,14 @@ public abstract class Player {
             }
             this.character.takeDamage();
         }
-        if(this.hasIndianChiefArrow){
+        if(this.IndianChiefArrow){
             this.character.takeDamage();
             this.character.takeDamage();            
             }
         }
-        if(this.hasIndianChiefArrow){
-            this.hasIndianChiefArrow = false;
-            game.hasindianCheifArrow = true;
+        if(this.IndianChiefArrow){
+            this.IndianChiefArrow = false;
+            game.hasindianChiefArrow = true;
         }
         return returnvalue;
     }
@@ -679,21 +704,79 @@ public abstract class Player {
      * DESCRIPTION: actions preformed by player based on targets and dice rolled
      * @param game
      * @param dieindex
-     * @param targetindex
+     * @param value
      */
-    public void takeActionOnDieAtIndex(BangGame game, int dieindex, int targetindex){
+    public void takeActionOnDieAtIndex(BangGame game, int dieindex, String value){
         int checkdie = game.getDice().getDieAtIndex(dieindex);
-        if (checkdie == BULLSEYE1){
-            Player b1targets[] = this.getTargetsB1(game);
-            this.shootTarget(b1targets[targetindex], game);
+        if(game.getDice().getDieTypeAtIndex(dieindex) == DieType.LOUDMOUTH && (checkdie == BULLSEYE1 || checkdie == BULLSEYE2 || checkdie == BULLET)){
+            if(checkdie == BULLSEYE1){
+                if(value.equals("left")){
+                    this.shootTarget(this.nextPlayer, game);
+                }
+                else if(value.equals("right")) {this.shootTarget(this.previousPlayer, game);}
+                else{
+                    this.shootTarget(this.nextPlayer, game);
+                    this.shootTarget(this.previousPlayer, game);
+                }
+            }
+            else if(checkdie == BULLSEYE2){
+                if(value.equals("left")){
+                    this.shootTarget(this.nextPlayer.nextPlayer, game);
+                }
+                else if(value.equals("right")) {this.shootTarget(this.previousPlayer.previousPlayer, game);}
+                else if (value.equals("both")){
+                    this.shootTarget(this.nextPlayer.nextPlayer, game);
+                    this.shootTarget(this.previousPlayer.previousPlayer, game);
+                }
+            }
         }
-        else if(checkdie == BULLSEYE2){
-            Player b2targets[] = this.getTargetsB2(game);
-            this.shootTarget(b2targets[targetindex], game);
+        else if(game.getDice().getDieTypeAtIndex(dieindex) == DieType.LOUDMOUTH && (checkdie == BROKENARROW || checkdie == DOUBLEBEER )){
+            if(checkdie == DOUBLEBEER){
+                Player target = this;
+                    for(int i = 0; i < game.getStartingNumPlayers(); i++){
+                       if(game.getPlayerAtIndex(i).getcharactername().equals(value)){
+                           target = game.getPlayerAtIndex(i);
+                       }
+                    }
+                    this.giveBeer(target, game);
+                    if(this.playertype == PlayerType.COMPUTER){
+                        this.giveBeer(target, game);
+                    }
+                    else{
+                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////TODO code interrupt
+                    }
+            }
+        }
+        else if(game.getDice().getDieTypeAtIndex(dieindex) == DieType.DUEL && (checkdie == WHISKEYBOTTLE ||checkdie == FIGHTADUEL)){
+            if(checkdie == WHISKEYBOTTLE){
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////TODO code interrupt
+            }
+            else if(checkdie == FIGHTADUEL){
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////TODO code interrupt
+            }
         }
         else{
-            Player beertargets[] = this.getTargetBeer(game);
-            this.giveBeer(beertargets[targetindex], game);
+            if(checkdie == BULLSEYE1){
+                if(value.equals("left")){
+                    this.shootTarget(this.nextPlayer, game);
+                }
+                else if(value.equals("right")) {this.shootTarget(this.previousPlayer, game);}
+            }
+            else if(checkdie == BULLSEYE2){
+                if(value.equals("left")){
+                    this.shootTarget(this.nextPlayer.nextPlayer, game);
+                }
+                else {this.shootTarget(this.previousPlayer.previousPlayer, game);}
+            }
+            else{
+                Player target = this;
+                    for(int i = 0; i < game.getStartingNumPlayers(); i++){
+                       if(game.getPlayerAtIndex(i).getcharactername().equals(value)){
+                           target = game.getPlayerAtIndex(i);
+                       }
+                    }
+                    this.giveBeer(target, game);
+            }
         }
     }
 
@@ -791,7 +874,9 @@ public abstract class Player {
         int beercount = 0;
         int gatcount = 0;
         for (int i = 0; i < game.getDice().getNumberOfDice(); i++){
-            if(game.getDice().getDieTypeAtIndex(i) == DieType.BASIC){
+            if(game.getDice().getDieTypeAtIndex(i) == DieType.COWARD && game.getDice().getDieAtIndex(i) == DOUBLEBEER){beercount+=2;}
+            else if(game.getDice().getDieTypeAtIndex(i) == DieType.DUEL && game.getDice().getDieAtIndex(i) == WHISKEYBOTTLE) {beercount++;}
+            else{
                 if(game.getDice().getDieAtIndex(i) == BEER) {beercount++;}
                 else if(game.getDice().getDieAtIndex(i) == GATLING) {gatcount++;}
             }
@@ -799,10 +884,13 @@ public abstract class Player {
         
         for(int i = 0; i < game.getDice().getNumberOfDice(); i++){
             if(this.rerollStrategy(game, i, beercount, gatcount)){
-                if(game.getDice().getDieTypeAtIndex(i) == DieType.BASIC){
+                if(game.getDice().getDieTypeAtIndex(i) == DieType.COWARD && game.getDice().getDieAtIndex(i) == DOUBLEBEER){beercount-=2;}
+                else if(game.getDice().getDieTypeAtIndex(i) == DieType.DUEL && game.getDice().getDieAtIndex(i) == WHISKEYBOTTLE) {beercount--;}
+                else{
                     if(game.getDice().getDieAtIndex(i) == BEER) {beercount--;}
                     else if(game.getDice().getDieAtIndex(i) == GATLING) {gatcount--;}
                 }
+                
                 if (individualrerollcount != 0){this.turnoutput += ", ";}
                 this.turnoutput += game.getDice().getDieStringAtIndex(i);
                 game.getDice().rollDieAtIndex(i);
@@ -858,6 +946,41 @@ public abstract class Player {
         }
         return returnvalue;
     }
+    
+    public void SimulateActions(BangGame game){
+        int b1count = 0;
+        int b2count = 0;
+        int beercount = 0;
+        int duelcount = 0;
+        int whiskeycount = 0;
+        for(int i = 0; i < game.getDice().getNumberOfDice(); i++){
+            if(game.getDice().getDieTypeAtIndex(i) == DieType.LOUDMOUTH){
+                if(game.getDice().getDieAtIndex(i) == BULLSEYE1){b1count+=2;}
+                else if(game.getDice().getDieAtIndex(i) == BULLSEYE2){b2count+=2;}
+            }
+            else if(game.getDice().getDieTypeAtIndex(i) == DieType.COWARD && game.getDice().getDieAtIndex(i) == DOUBLEBEER){beercount+=2;}
+            else if(game.getDice().getDieTypeAtIndex(i) == DieType.DUEL){
+                if(game.getDice().getDieAtIndex(i) == FIGHTADUEL){duelcount++;}
+                else if(game.getDice().getDieAtIndex(i) == WHISKEYBOTTLE){
+                    whiskeycount++;
+                    this.DrinkWhiskey();
+                }
+            }
+            else{
+                if(game.getDice().getDieAtIndex(i) == BULLSEYE1){b1count++;}
+                else if(game.getDice().getDieAtIndex(i) == BULLSEYE2){b2count++;}
+                else if(game.getDice().getDieAtIndex(i) == BEER){beercount++;}
+            }
+        }
+        if(b1count > 0 || b2count > 0){this.turnoutput += this.getcharactername() + " chose to shoot: ";}
+        if(beercount > 0){this.turnoutput += this.getcharactername() + " chose to give beer to: ";}
+        if(whiskeycount > 0){this.turnoutput += this.getcharactername() + "Drank " + whiskeycount + " bottles of whiskey\n";}
+    }
+    
+    public void DrinkWhiskey(){
+        this.gainHealth();
+        //TODO discard a duel wound token;
+    }
 
     /**
      * DESCRIPTION: simulates turn of the player
@@ -882,11 +1005,7 @@ public abstract class Player {
                 }
             }
             if(this.canHaveAction(game)){
-                //TODO Get aciton and process action
-                this.turnoutput += this.getcharactername() + " chose to shoot: ";
-                this.turnoutput += "\n";
-                this.turnoutput += this.getcharactername() + " chose to give beer to: ";
-                this.turnoutput += "\n";
+                SimulateActions(game);
                 this.preformGatlingCheckAndAction(game);
                 if(this.gatlinggunwentoff){
                     this.turnoutput += this.getcharactername() + " shot the gatling gun! Their Arrows were returned to the arrow pile and everyone else loses one health!\n";
@@ -908,5 +1027,13 @@ public abstract class Player {
         
         this.turnoutput += "\nAfter reading this player's turn output please click End Turn!\n";
         return this.turnoutput;
+    }
+    
+    /**
+     * checks if the player has the Indian chief arrow
+     * @return
+     */
+    public boolean hasIndianChiefArrow(){
+        return this.IndianChiefArrow;
     }
 }

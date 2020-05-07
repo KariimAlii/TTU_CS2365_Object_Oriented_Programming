@@ -21,13 +21,16 @@ public class BangSetup {
     private char roles[] = {'S','R','O','O','D','O','D','R'};
     private int characters[] = {0,1,2,3,4,5,6,7};
     private Random rand;
-    private Boolean undeadoralivemodule;
+    private boolean undeadoralivemodule;
+    private boolean indianchiefarrowmodule;
     
     /**
       constructor for the setup
      */
     public BangSetup(int numberplayers){
         rand = new Random(System.currentTimeMillis());
+        this.indianchiefarrowmodule = false;
+        this.undeadoralivemodule = false;
         numberofplayers = numberplayers;
         shuffleRoles();
         shuffleCharacters();
@@ -178,5 +181,13 @@ public class BangSetup {
         newarray[this.characters.length + 1] = 11;
         this.characters = newarray;
         this.shuffleCharacters();
+    }
+    
+    public void activeIndianChiefArrow(){
+        this.indianchiefarrowmodule = true;
+    }
+    
+    public boolean getIndianChiefArrow(){
+        return this.indianchiefarrowmodule;
     }
 }

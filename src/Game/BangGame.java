@@ -27,9 +27,10 @@ public class BangGame {
     private Player sheriff;
     private Player curplayer;
     private BangDice dice;
-    public  boolean hasindianCheifArrow;
-    private Boolean undeadoralivemodule;
-    private Boolean outbreak ;
+    public  boolean hasindianChiefArrow = false;
+    private boolean undeadoralivemodule;
+    private boolean outbreak ;
+    private boolean hasreset;
     public int boneyardcard[] = {0,0,1,1,1,1,1,1,2,2,2};
     public int frontindex = 0;
     public int topOfDeck;
@@ -40,6 +41,7 @@ public class BangGame {
     public BangGame(BangSetup setup){
         Random rand;
         rand = new Random(System.currentTimeMillis());
+        this.hasindianChiefArrow = setup.getIndianChiefArrow();
         startingnumberofplayers = currentnumberofplayers = setup.getNumberOfPlayers();
         numberofbadguys = 0;
         players = new Player[startingnumberofplayers];
@@ -78,6 +80,7 @@ public class BangGame {
         dice = new BangDice(false);
         arrowpile = 9;
         outbreak = false;
+        hasreset = false;
     }
     
     /**
@@ -228,6 +231,7 @@ public class BangGame {
      * gets the next player and setups his next turn
      */
     public void endTurn(){
+        this.resetPlayerPointers();
         this.curplayer = this.curplayer.getNextPlayer();
         this.curplayer.startTurn(this);
    }
@@ -239,7 +243,8 @@ public class BangGame {
     public boolean isEndCondition(){
         boolean returnvalue = false;
         if(this.sheriff.isPlayerDead()) returnvalue = true;
-        else if(this.numberofbadguys == 0) returnvalue = true;
+        else if(this.numberofbadguys <= 0) returnvalue = true;
+        else if(this.currentnumberofplayers <= 1) returnvalue = true;
         return returnvalue;
     }
     
@@ -248,6 +253,9 @@ public class BangGame {
      * @return
      */
     public int getEndCondition(){
+        this.resetPlayerPointers();
+        System.out.println("Current number of players: " +  this.currentnumberofplayers);
+        System.out.println("number of bad guys: " + this.numberofbadguys);
         int returnvalue = 0;
         if(this.currentnumberofplayers <= 0) returnvalue = 0;
         else if (this.sheriff.isPlayerDead() && this.currentnumberofplayers > 1) returnvalue = 0;
@@ -306,5 +314,44 @@ public class BangGame {
                 shuffleBoneyardDeck();
         }
         return draw;
+    }
+    
+    public void resetPlayerPointers(){
+        if(this.currentnumberofplayers >= 0){
+            if(this.undeadoralivemodule && this.outbreak && !this.hasreset)
+                for(int i = 0; i < this.getStartingNumPlayers(); i++){
+                    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////TODO zombie outbreak
+                }
+            else {
+                Player firstplayer = this.players[0];
+                Player lastplayer = this.players[0];
+                this.currentnumberofplayers = 0;
+                this.numberofbadguys = 0;
+                for(int i = 0;  i < this.getStartingNumPlayers(); i++){
+                    if(firstplayer.isPlayerDead()){
+                        if(!this.players[i].isPlayerDead()){
+                            firstplayer = lastplayer = this.players[i];
+                            this.currentnumberofplayers++;
+                            if(this.players[i].getRole() == Role.RENEGADE || this.players[i].getRole() == Role.OUTLAW){
+                                this.numberofbadguys++;
+                            }
+                        }
+                    }
+                    else{
+                        if(!players[i].isPlayerDead()){
+                            lastplayer.setNextPlayer(players[i]);
+                            players[i].setPreviousPlayer(lastplayer);
+                            lastplayer = players[i];
+                            this.currentnumberofplayers++;
+                            if(this.players[i].getRole() == Role.RENEGADE || this.players[i].getRole() == Role.OUTLAW){
+                                this.numberofbadguys++;
+                            }
+                        }
+                    }
+                }
+                lastplayer.setNextPlayer(firstplayer);
+                firstplayer.setPreviousPlayer(lastplayer);
+            }
+        }
     }
 }

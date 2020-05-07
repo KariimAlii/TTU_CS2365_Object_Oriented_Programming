@@ -68,7 +68,12 @@ public class GameBoardController implements Initializable {
     @FXML ComboBox Dice4_Target;
     @FXML ComboBox Dice5_Target;
 
-
+/*
+ * dice selection combo boxes
+ */
+    @FXML ComboBox Dice3_Dice;
+    
+    
     /*
      *  Array for Dice face images.  Array element zero is just the bang logo, used for initialization.
      */
@@ -119,7 +124,50 @@ public class GameBoardController implements Initializable {
     @FXML ImageView Pos6_Name;
     @FXML ImageView Pos7_Name;
     @FXML ImageView Pos8_Name;
+    @FXML ImageView Pos1_ChiefArrow;
+    @FXML ImageView Pos2_ChiefArrow;
+    @FXML ImageView Pos3_ChiefArrow;
+    @FXML ImageView Pos4_ChiefArrow;
+    @FXML ImageView Pos5_ChiefArrow;
+    @FXML ImageView Pos6_ChiefArrow;
+    @FXML ImageView Pos7_ChiefArrow;
+    @FXML ImageView Pos8_ChiefArrow;
+    @FXML ImageView Pos9_ChiefArrow;
+    @FXML ImageView Pos1_wound_1;
+    @FXML ImageView Pos1_wound_2;
+    @FXML ImageView Pos1_wound_beer;
+    @FXML ImageView Pos1_wound_dynamite;
+    @FXML ImageView Pos2_wound_1;
+    @FXML ImageView Pos2_wound_2;
+    @FXML ImageView Pos2_wound_beer;
+    @FXML ImageView Pos2_wound_dynamite;
+    @FXML ImageView Pos3_wound_1;
+    @FXML ImageView Pos3_wound_2;
+    @FXML ImageView Pos3_wound_beer;
+    @FXML ImageView Pos3_wound_dynamite;
+    @FXML ImageView Pos4_wound_1;
+    @FXML ImageView Pos4_wound_2;
+    @FXML ImageView Pos4_wound_beer;
+    @FXML ImageView Pos4_wound_dynamite;
+    @FXML ImageView Pos5_wound_1;
+    @FXML ImageView Pos5_wound_2;
+    @FXML ImageView Pos5_wound_beer;
+    @FXML ImageView Pos5_wound_dynamite;
+    @FXML ImageView Pos6_wound_1;
+    @FXML ImageView Pos6_wound_2;
+    @FXML ImageView Pos6_wound_beer;
+    @FXML ImageView Pos6_wound_dynamite;
+    @FXML ImageView Pos7_wound_1;
+    @FXML ImageView Pos7_wound_2;
+    @FXML ImageView Pos7_wound_beer;
+    @FXML ImageView Pos7_wound_dynamite;
+    @FXML ImageView Pos8_wound_1;
+    @FXML ImageView Pos8_wound_2;
+    @FXML ImageView Pos8_wound_beer;
+    @FXML ImageView Pos8_wound_dynamite;
     @FXML Label arrowpile;
+    @FXML Label zombiehand;
+    @FXML Label dueltokens;
     @FXML Label Pos1_Cur_Arrow;
     @FXML Label Pos2_Cur_Arrow;
     @FXML Label Pos3_Cur_Arrow;
@@ -189,6 +237,7 @@ public class GameBoardController implements Initializable {
                 this.Action.setVisible(false);
                 this.EndTurn.setVisible(false);
                 this.SkipReRoll.setVisible(false);
+                this.Dice3_Dice.setVisible(true);
             }
             else{
                 this.Roll.setVisible(false);
@@ -220,6 +269,7 @@ public class GameBoardController implements Initializable {
         curplayer.rollDice(game);
         Roll.setVisible(false);
         updateDice(false);
+        Dice3_Dice.setVisible(false);
         if(this.curplayer.canRoll(game)){
             this.ReRoll.setVisible(true);
             this.SkipReRoll.setVisible(true);
@@ -244,6 +294,12 @@ public class GameBoardController implements Initializable {
         }
     } 
 
+    @FXML
+    void ChangeDie(ActionEvent event){
+        String temp = Dice3_Dice.getSelectionModel().getSelectedItem().toString();
+        game.getDice().changeDieAtIndex(3,temp);
+        
+    }
     
     /*
      *  Example of randomizing dice and use of imageview boxes.  Replace code
@@ -299,19 +355,19 @@ public class GameBoardController implements Initializable {
        ReRoll.setVisible(false);
        
         if(game.getDice().doesRequireChooseableActionAtIndex(0)){
-            this.curplayer.takeActionOnDieAtIndex(game, 0, Dice1_Target.getSelectionModel().getSelectedIndex());
+            this.curplayer.takeActionOnDieAtIndex(game, 0, Dice1_Target.getSelectionModel().getSelectedItem().toString());
         }
         if(game.getDice().doesRequireChooseableActionAtIndex(1)){
-            this.curplayer.takeActionOnDieAtIndex(game, 1, Dice2_Target.getSelectionModel().getSelectedIndex());
+            this.curplayer.takeActionOnDieAtIndex(game, 1, Dice2_Target.getSelectionModel().getSelectedItem().toString());
         }
         if(game.getDice().doesRequireChooseableActionAtIndex(2)){
-            this.curplayer.takeActionOnDieAtIndex(game, 2, Dice3_Target.getSelectionModel().getSelectedIndex());
+            this.curplayer.takeActionOnDieAtIndex(game, 2, Dice3_Target.getSelectionModel().getSelectedItem().toString());
         }
         if(game.getDice().doesRequireChooseableActionAtIndex(3)){
-            this.curplayer.takeActionOnDieAtIndex(game, 3, Dice4_Target.getSelectionModel().getSelectedIndex());
+            this.curplayer.takeActionOnDieAtIndex(game, 3, Dice4_Target.getSelectionModel().getSelectedItem().toString());
         }
         if(game.getDice().doesRequireChooseableActionAtIndex(4)){
-            this.curplayer.takeActionOnDieAtIndex(game, 4, Dice5_Target.getSelectionModel().getSelectedIndex());
+            this.curplayer.takeActionOnDieAtIndex(game, 4, Dice5_Target.getSelectionModel().getSelectedItem().toString());
         }
         this.curplayer.preformGatlingCheckAndAction(game);
         updatePlayers();
@@ -481,6 +537,7 @@ public class GameBoardController implements Initializable {
                 this.Action.setVisible(false);
                 this.EndTurn.setVisible(false);
                 this.SkipReRoll.setVisible(false);
+                this.Dice3_Dice.setVisible(true);
             }
             else{
                 this.Roll.setVisible(false);
@@ -714,50 +771,59 @@ public class GameBoardController implements Initializable {
         Pos1_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getArrows()));
         Pos1_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[0]).getCurLife()));
         Pos1_LP.setProgress(game.getPlayerAtIndex(playerindexes[0]).getLifeProgress());
+        Pos1_ChiefArrow.setVisible(game.getPlayerAtIndex(playerindexes[0]).hasIndianChiefArrow());
         if(game.getPlayerAtIndex(playerindexes[0]).isPlayerDead()) {Pos1_ID.setText("You Are Dead");}
         
         Pos2_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[1]).getRoleindex(game)]);
         Pos2_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[1]).getArrows()));
         Pos2_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[1]).getCurLife()));
         Pos2_LP.setProgress(game.getPlayerAtIndex(playerindexes[1]).getLifeProgress());
+        Pos2_ChiefArrow.setVisible(game.getPlayerAtIndex(playerindexes[1]).hasIndianChiefArrow());
         if(game.getPlayerAtIndex(playerindexes[1]).isPlayerDead()) {Pos2_ID.setText("Computer Player " + Integer.toString(playerindexes[1]) + " Is Dead");}
         
         Pos3_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[2]).getRoleindex(game)]);
         Pos3_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[2]).getArrows()));
         Pos3_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[2]).getCurLife()));
         Pos3_LP.setProgress(game.getPlayerAtIndex(playerindexes[2]).getLifeProgress());
+        Pos3_ChiefArrow.setVisible(game.getPlayerAtIndex(playerindexes[2]).hasIndianChiefArrow());
         if(game.getPlayerAtIndex(playerindexes[2]).isPlayerDead()) {Pos3_ID.setText("Computer Player " + Integer.toString(playerindexes[2]) + " Is Dead");}
         
         Pos4_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[3]).getRoleindex(game)]);
         Pos4_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[3]).getArrows()));
         Pos4_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[3]).getCurLife()));
         Pos4_LP.setProgress(game.getPlayerAtIndex(playerindexes[3]).getLifeProgress());
+        Pos4_ChiefArrow.setVisible(game.getPlayerAtIndex(playerindexes[3]).hasIndianChiefArrow());
         if(game.getPlayerAtIndex(playerindexes[3]).isPlayerDead()) {Pos4_ID.setText("Computer Player " + Integer.toString(playerindexes[3]) + " Is Dead");}
         
         Pos5_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[4]).getRoleindex(game)]);
         Pos5_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[4]).getArrows()));
         Pos5_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[4]).getCurLife()));
         Pos5_LP.setProgress(game.getPlayerAtIndex(playerindexes[4]).getLifeProgress());
+        Pos5_ChiefArrow.setVisible(game.getPlayerAtIndex(playerindexes[4]).hasIndianChiefArrow());
         if(game.getPlayerAtIndex(playerindexes[4]).isPlayerDead()) {Pos5_ID.setText("Computer Player " + Integer.toString(playerindexes[4]) + " Is Dead");}
         
         Pos6_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[5]).getRoleindex(game)]);
         Pos6_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[5]).getArrows()));
         Pos6_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[5]).getCurLife()));
         Pos6_LP.setProgress(game.getPlayerAtIndex(playerindexes[5]).getLifeProgress());
+        Pos6_ChiefArrow.setVisible(game.getPlayerAtIndex(playerindexes[5]).hasIndianChiefArrow());
         if(game.getPlayerAtIndex(playerindexes[5]).isPlayerDead()) {Pos6_ID.setText("Computer Player " + Integer.toString(playerindexes[5]) + " Is Dead");}
         
         Pos7_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[6]).getRoleindex(game)]);
         Pos7_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[6]).getArrows()));
         Pos7_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[6]).getCurLife()));
         Pos7_LP.setProgress(game.getPlayerAtIndex(playerindexes[6]).getLifeProgress());
+        Pos7_ChiefArrow.setVisible(game.getPlayerAtIndex(playerindexes[6]).hasIndianChiefArrow());
         if(game.getPlayerAtIndex(playerindexes[6]).isPlayerDead()) {Pos7_ID.setText("Computer Player " + Integer.toString(playerindexes[6]) + " Is Dead");}
         
         Pos8_Role.setImage(rolecards[game.getPlayerAtIndex(playerindexes[7]).getRoleindex(game)]);
         Pos8_Cur_Arrow.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[7]).getArrows()));
         Pos8_Cur_LP.setText(Integer.toString(game.getPlayerAtIndex(playerindexes[7]).getCurLife()));
         Pos8_LP.setProgress(game.getPlayerAtIndex(playerindexes[7]).getLifeProgress());
+        Pos8_ChiefArrow.setVisible(game.getPlayerAtIndex(playerindexes[7]).hasIndianChiefArrow());
         if(game.getPlayerAtIndex(playerindexes[7]).isPlayerDead()) {Pos8_ID.setText("Computer Player " + Integer.toString(playerindexes[7]) + " Is Dead");}
         
+        Pos9_ChiefArrow.setVisible(game.hasindianChiefArrow);
         arrowpile.setText(Integer.toString(game.getArrowPile()));
         if(this.game.isEndCondition()){displayEndCondtion();}
     }
