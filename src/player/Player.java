@@ -266,11 +266,11 @@ public abstract class Player {
      */
     public String getSelectedBeer(BangGame game){
         String returnvalue = this.getcharactername();
-        if(this.getCurLife() <= this.getMaxLife()){
+        if(this.getCurLife() >= this.getMaxLife()){
             Player lowestvalue = this.getNextPlayer();
             for(int i = 0; i < game.getStartingNumPlayers(); i++){
                 if(!game.getPlayerAtIndex(i).isPlayerDead()){
-                    if(getTargetValue(game.getPlayerAtIndex(i)) > getTargetValue(lowestvalue)){
+                    if(getTargetValue(game.getPlayerAtIndex(i)) < getTargetValue(lowestvalue)){
                         lowestvalue = game.getPlayerAtIndex(i);
                     }
                 }
@@ -868,6 +868,11 @@ public abstract class Player {
         decreaseTarget(helper);
     }
     
+    /**
+     * simulates a reroll
+     * @param game
+     * @return
+     */
     public boolean simulateReroll(BangGame game){
         boolean rerolled = true;
         int individualrerollcount = 0;
@@ -906,6 +911,14 @@ public abstract class Player {
         return rerolled;
     }
     
+    /**
+     * reroll strategy for simulated players
+     * @param game
+     * @param index
+     * @param beercount
+     * @param gatcount
+     * @return
+     */
     protected boolean rerollStrategy(BangGame game,int index, int beercount, int gatcount){
         boolean returnvalue = false;
         int diesymbol = game.getDice().getDieAtIndex(index);
@@ -947,12 +960,17 @@ public abstract class Player {
         return returnvalue;
     }
     
+    /**
+     * simulates die action choices
+     * @param game
+     */
     public void SimulateActions(BangGame game){
         int b1count = 0;
         int b2count = 0;
         int beercount = 0;
         int duelcount = 0;
         int whiskeycount = 0;
+        boolean first = true;
         for(int i = 0; i < game.getDice().getNumberOfDice(); i++){
             if(game.getDice().getDieTypeAtIndex(i) == DieType.LOUDMOUTH){
                 if(game.getDice().getDieAtIndex(i) == BULLSEYE1){b1count+=2;}
@@ -972,11 +990,72 @@ public abstract class Player {
                 else if(game.getDice().getDieAtIndex(i) == BEER){beercount++;}
             }
         }
-        if(b1count > 0 || b2count > 0){this.turnoutput += this.getcharactername() + " chose to shoot: ";}
-        if(beercount > 0){this.turnoutput += this.getcharactername() + " chose to give beer to: ";}
-        if(whiskeycount > 0){this.turnoutput += this.getcharactername() + "Drank " + whiskeycount + " bottles of whiskey\n";}
+        
+        if(b1count > 0 || b2count > 0){
+            this.turnoutput += this.getcharactername() + " chose to shoot: ";
+            for(int i = 0; i < b1count; i++){
+                if(!first){
+                    this.turnoutput += ", ";
+                }
+                else {first = false;}
+                if("left".equals(this.getSelectedB1(false))){
+                    this.turnoutput += this.nextPlayer.getcharactername();
+                    this.shootTarget(this.nextPlayer, game);
+                }
+                else{
+                    this.turnoutput += this.previousPlayer.getcharactername();
+                    this.shootTarget(this.previousPlayer, game);
+                }
+            }
+            
+            for(int i = 0; i < b2count; i++){
+                if(!first){
+                    this.turnoutput += ", ";
+                }
+                else {first = false;}
+                if("left".equals(this.getSelectedB1(false))){
+                    this.turnoutput += this.nextPlayer.nextPlayer.getcharactername();
+                    this.shootTarget(this.nextPlayer.nextPlayer, game);
+                }
+                else{
+                    this.turnoutput += this.previousPlayer.previousPlayer.getcharactername();
+                    this.shootTarget(this.previousPlayer.previousPlayer, game);
+                }
+            }
+        }
+        
+        turnoutput += "\n";
+        first = true;
+        if(beercount > 0){
+            this.turnoutput += this.getcharactername() + " chose to give beer to: ";
+            for(int i = 0; i < beercount; i++){
+                if(!first){
+                    this.turnoutput += ", ";
+                }
+                else{first = false;}
+                Player target = this;
+                String targetname = this.getSelectedBeer(game);
+                this.turnoutput += targetname;
+                for(int j = 0; j < game.getStartingNumPlayers(); j++){
+                    if(targetname.equals(game.getPlayerAtIndex(j).getcharactername())){
+                        target = game.getPlayerAtIndex(j);
+                        break;
+                    }
+                }
+                this.giveBeer(target, game);
+            }
+        }
+        if(whiskeycount > 0){
+            for(int i = 0; i < whiskeycount; i++){
+                DrinkWhiskey();
+            }
+            this.turnoutput += this.getcharactername() + "Drank " + whiskeycount + " bottles of whiskey\n";
+        }
     }
     
+    /**
+     * a player drinks the whiskey when the die is rolled
+     */
     public void DrinkWhiskey(){
         this.gainHealth();
         //TODO discard a duel wound token;
