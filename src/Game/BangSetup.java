@@ -23,6 +23,8 @@ public class BangSetup {
     private Random rand;
     private boolean undeadoralivemodule;
     private boolean indianchiefarrowmodule;
+    private boolean loudmouthandcoward;
+    private boolean dueldice;
     
     /**
       constructor for the setup
@@ -31,6 +33,8 @@ public class BangSetup {
         rand = new Random(System.currentTimeMillis());
         this.indianchiefarrowmodule = false;
         this.undeadoralivemodule = false;
+        dueldice = false;
+        loudmouthandcoward = false;
         numberofplayers = numberplayers;
         shuffleRoles();
         shuffleCharacters();
@@ -183,11 +187,48 @@ public class BangSetup {
         this.shuffleCharacters();
     }
     
+    /**
+     * activates the chief arrow for the game
+     */
     public void activeIndianChiefArrow(){
         this.indianchiefarrowmodule = true;
     }
     
+    /**
+     * gets the chief arrow for start up
+     * @return
+     */
     public boolean getIndianChiefArrow(){
         return this.indianchiefarrowmodule;
+    }
+    
+    /**
+     * activates the loudmouth and the coward for the game
+     */
+    public void activeloudmouthandcoward(){
+        this.loudmouthandcoward = true;
+    }
+    
+    /**
+     * gets the loudmouth and the coward for start up
+     * @return
+     */
+    public boolean getloudmouthandcoward(){
+        return this.loudmouthandcoward;
+    }
+    
+    /**
+     * activates the dueldice for the game
+     */
+    public void activatedueldice(){
+        this.dueldice = true;
+    }
+    
+    /**
+     * gets the dueldice for start up
+     * @return
+     */
+    public boolean getdueldice(){
+        return this.dueldice;
     }
 }
